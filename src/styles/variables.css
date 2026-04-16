@@ -1,0 +1,18 @@
+:root {
+  /* COLORS */
+  --background: #0a0a0a;
+  --foreground: #eaeaea;
+
+  --muted: #a1a1a1;
+  --border: rgba(255, 255, 255, 0.08);
+
+  --accent: #d6d6d6;
+  --accent-soft: rgba(255, 255, 255, 0.1);
+
+  /* TYPOGRAPHY */
+  --font-heading: "ClashDisplay", sans-serif;
+  --font-body: "Satoshi", sans-serif;
+
+  /* SPACING */
+  --section-padding: 6rem;
+}
