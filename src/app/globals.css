@@ -1,14 +1,14 @@
 @import "../styles/variables.css";
 @import "tailwindcss";
 
-
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-body);
@@ -18,10 +18,16 @@ html, body {
 /* Smooth text */
 body {
   -webkit-font-smoothing: antialiased;
+  cursor: none;
 }
 
 /* Headings */
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: var(--font-heading);
   letter-spacing: -0.02em;
 }
@@ -31,6 +37,14 @@ section {
   padding: var(--section-padding) 0;
 }
 
+::selection {
+  background: #111;
+  color: #fff;
+}
+
+.bg-soft {
+  background: linear-gradient(to bottom, #f7f7f5, #f1f1ef);
+}
 /* Image default */
 img {
   max-width: 100%;

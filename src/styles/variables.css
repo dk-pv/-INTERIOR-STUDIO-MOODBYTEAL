@@ -1,13 +1,13 @@
 :root {
   /* COLORS */
-  --background: #0a0a0a;
-  --foreground: #eaeaea;
+  --background: #f7f7f5;        /* soft white (NOT pure white) */
+  --foreground: #0a0a0a;        /* rich black */
 
-  --muted: #a1a1a1;
-  --border: rgba(255, 255, 255, 0.08);
+  --muted: #6b6b6b;             /* soft gray text */
+  --border: rgba(0, 0, 0, 0.08);
 
-  --accent: #d6d6d6;
-  --accent-soft: rgba(255, 255, 255, 0.1);
+  --accent: #111111;            /* strong black accent */
+  --accent-soft: rgba(0, 0, 0, 0.05);
 
   /* TYPOGRAPHY */
   --font-heading: "ClashDisplay", sans-serif;

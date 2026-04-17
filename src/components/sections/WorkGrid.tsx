@@ -25,16 +25,15 @@ export default function WorkGrid() {
         stagger: 0.15,
         duration: 1,
         ease: "power3.out",
-      }
+      },
     );
   }, []);
 
   return (
-    <section className="px-6 md:px-12 py-24">
+    <section className="px-6 md:px-12 py-24 bg-background">
       <div className="max-w-7xl mx-auto">
-
         {/* Title */}
-        <h2 className="text-3xl md:text-5xl font-heading mb-16">
+        <h2 className="text-3xl md:text-5xl font-heading mb-16 text-foreground">
           Selected Work
         </h2>
 
@@ -47,7 +46,7 @@ export default function WorkGrid() {
             <Link
               key={project.id}
               href={`/work/${project.id}`}
-              className="card group relative overflow-hidden rounded-xl"
+              className="card group relative overflow-hidden rounded-xl bg-white"
             >
               {/* Image */}
               <div className="overflow-hidden relative">
@@ -59,15 +58,15 @@ export default function WorkGrid() {
               </div>
 
               {/* Overlay */}
-              <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition duration-500" />
+              <div className="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition duration-500" />
 
               {/* Text */}
-              <div className="absolute bottom-6 left-6">
-                <h3 className="text-lg font-heading translate-y-6 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition duration-500">
+              <div className="absolute bottom-6 left-6 z-10">
+                <h3 className="text-lg font-heading font-semibold text-white translate-y-6 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition duration-500">
                   {project.title}
                 </h3>
 
-                <p className="text-sm text-gray-300 mt-1 translate-y-6 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition duration-700">
+                <p className="text-sm text-white/80 mt-1 translate-y-6 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition duration-700">
                   {project.category}
                 </p>
               </div>
