@@ -11,8 +11,6 @@ const EXPO = [0.16, 1, 0.3, 1] as const;
 export default function StudioPage() {
   return (
     <main style={{ backgroundColor: "#f9f8f6", color: "#0a0a0a" }}>
-
-      {/* ── HERO ─────────────────────────────────────────────────────────────── */}
       <section
         style={{
           minHeight: "100dvh",
@@ -54,7 +52,8 @@ export default function StudioPage() {
         {/* Grain */}
         <div
           style={{
-            position: "absolute", inset: 0,
+            position: "absolute",
+            inset: 0,
             backgroundImage: "url('/noise.jpg')",
             backgroundRepeat: "repeat",
             opacity: 0.03,
@@ -76,7 +75,14 @@ export default function StudioPage() {
             gap: 10,
           }}
         >
-          <div style={{ width: 20, height: 1, backgroundColor: "#0a0a0a", opacity: 0.3 }} />
+          <div
+            style={{
+              width: 20,
+              height: 1,
+              backgroundColor: "#0a0a0a",
+              opacity: 0.3,
+            }}
+          />
           <span
             style={{
               fontFamily: "var(--font-body)",
@@ -152,7 +158,8 @@ export default function StudioPage() {
                   lineHeight: 1.04,
                   letterSpacing: "-0.035em",
                   color: "#0a0a0a",
-                  fontStyle: "italic",       /* ← italic line for typographic contrast */
+                  fontStyle:
+                    "italic" /* ← italic line for typographic contrast */,
                   willChange: "transform",
                 }}
               >
@@ -216,8 +223,8 @@ export default function StudioPage() {
                 letterSpacing: "0.01em",
               }}
             >
-              MOODBYTEAL blends emotion, architecture, and minimal luxury — crafting
-              environments that resonate on a deeper level.
+              MOODBYTEAL blends emotion, architecture, and minimal luxury —
+              crafting environments that resonate on a deeper level.
             </motion.p>
 
             {/* UAE / IND tag */}
@@ -282,10 +289,18 @@ export default function StudioPage() {
           >
             <motion.div
               animate={{ x: ["-100%", "100%"] }}
-              transition={{ duration: 1.4, repeat: Infinity, ease: "easeInOut", repeatDelay: 0.4 }}
+              transition={{
+                duration: 1.4,
+                repeat: Infinity,
+                ease: "easeInOut",
+                repeatDelay: 0.4,
+              }}
               style={{
-                position: "absolute", top: 0, left: 0,
-                width: "50%", height: "100%",
+                position: "absolute",
+                top: 0,
+                left: 0,
+                width: "50%",
+                height: "100%",
                 backgroundColor: "rgba(0,0,0,0.55)",
               }}
             />
@@ -308,7 +323,6 @@ export default function StudioPage() {
       <About />
       <Founder />
       <Team />
-
     </main>
   );
 }

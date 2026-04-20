@@ -12,7 +12,7 @@ const navLinks = [
   { name: "Work", href: "/work" },
 ];
 
-const CTA_LINK = { name: "Step In", href: "/step-in" };
+const CTA_LINK = { name: "Step In", href: "/contact" };
 
 function useMagnetic(ref: React.RefObject<HTMLElement | null>, strength = 0.18) {
   useEffect(() => {
