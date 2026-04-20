@@ -1,12 +1,11 @@
 :root {
   /* COLORS */
-  --background: #f7f7f5;        /* soft white (NOT pure white) */
-  --foreground: #0a0a0a;        /* rich black */
-
-  --muted: #6b6b6b;             /* soft gray text */
+  --background: #0a0a0a;
+  --foreground: #ffffff;
+  --muted: rgba(255, 255, 255, 0.6); /* soft gray text */
   --border: rgba(0, 0, 0, 0.08);
 
-  --accent: #111111;            /* strong black accent */
+  --accent: #111111; /* strong black accent */
   --accent-soft: rgba(0, 0, 0, 0.05);
 
   /* TYPOGRAPHY */
