@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence, useInView } from "framer-motion";
 import gsap from "gsap";
 import { projects } from "@/data/projects";
+import Link from "next/link";
 
 const categories = [
   "All",
@@ -16,7 +17,6 @@ const categories = [
 const EXPO = [0.16, 1, 0.3, 1] as const;
 const SILK = [0.22, 1, 0.36, 1] as const;
 
-// ─── Cursor — single element, CSS transitions only, no RAF loop ───────────────
 function Cursor() {
   const ref = useRef<HTMLDivElement>(null);
 
@@ -284,209 +284,214 @@ function ProjectCard({
   };
 
   return (
-    <motion.div
-      ref={ref}
-      layout
-      variants={clipVariants}
-      initial="hidden"
-      animate={inView ? "visible" : "hidden"}
-      exit={{ opacity: 0, scale: 0.97, transition: { duration: 0.25 } }}
-      onHoverStart={() => setHovered(true)}
-      onHoverEnd={() => setHovered(false)}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      data-cursor="view"
-      style={{
-        backgroundColor: "#ffffff",
-        cursor: "none",
-        overflow: "hidden",
-        transformStyle: "preserve-3d",
-        willChange: "transform",
-        borderRadius: 2,
-        /* ✅ Card separation: subtle shadow instead of borders */
-        boxShadow: hovered
-          ? "0 12px 40px rgba(0,0,0,0.13), 0 2px 8px rgba(0,0,0,0.06)"
-          : "0 2px 12px rgba(0,0,0,0.06), 0 1px 3px rgba(0,0,0,0.04)",
-        transition: "box-shadow 0.35s ease",
-      }}
-    >
-      {/* ── Image ── */}
-      <div
+    <Link href={`/work/${project.id}`} style={{ display: "block" }}>
+      <motion.div
+        ref={ref}
+        layout
+        variants={clipVariants}
+        initial="hidden"
+        animate={inView ? "visible" : "hidden"}
+        exit={{ opacity: 0, scale: 0.97, transition: { duration: 0.25 } }}
+        onHoverStart={() => setHovered(true)}
+        onHoverEnd={() => setHovered(false)}
+        onMouseMove={handleMouseMove}
+        onMouseLeave={handleMouseLeave}
+        data-cursor="view"
         style={{
-          position: "relative",
+          backgroundColor: "#ffffff",
+          cursor: "none",
           overflow: "hidden",
-          aspectRatio: "4 / 3",
-          backgroundColor: "#e8e6e1",
+          transformStyle: "preserve-3d",
+          willChange: "transform",
+          borderRadius: 2,
+          /* ✅ Card separation: subtle shadow instead of borders */
+          boxShadow: hovered
+            ? "0 12px 40px rgba(0,0,0,0.13), 0 2px 8px rgba(0,0,0,0.06)"
+            : "0 2px 12px rgba(0,0,0,0.06), 0 1px 3px rgba(0,0,0,0.04)",
+          transition: "box-shadow 0.35s ease",
         }}
       >
-        {/* Placeholder gradient */}
+        {/* ── Image ── */}
         <div
           style={{
-            position: "absolute",
-            inset: 0,
-            background: "linear-gradient(135deg, #e8e6e1 0%, #d0cdc7 100%)",
-            zIndex: 0,
-          }}
-        />
-
-        <motion.img
-          ref={imageRef}
-          src={project.image}
-          alt={project.title}
-          animate={{ scale: hovered ? 1.07 : 1 }}
-          transition={{ duration: 0.75, ease: SILK }}
-          onError={(e) => {
-            (e.target as HTMLImageElement).style.opacity = "0";
-          }}
-          style={{
-            position: "absolute",
-            inset: 0,
-            width: "100%",
-            height: "100%",
-            objectFit: "cover",
-            zIndex: 1,
-            willChange: "transform",
-          }}
-        />
-
-        {/* Dark overlay on hover */}
-        <motion.div
-          animate={{ opacity: hovered ? 0.5 : 0 }}
-          transition={{ duration: 0.4 }}
-          style={{
-            position: "absolute",
-            inset: 0,
-            background:
-              "linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.05) 55%)",
-            zIndex: 2,
-          }}
-        />
-
-        {/* Category chip */}
-        <motion.span
-          initial={{ opacity: 0, x: -14 }}
-          animate={inView ? { opacity: 1, x: 0 } : {}}
-          transition={{
-            duration: 0.5,
-            delay: 0.35 + (index % 3) * 0.08,
-            ease: SILK,
-          }}
-          style={{
-            position: "absolute",
-            top: 14,
-            left: 14,
-            zIndex: 4,
-            padding: "5px 10px",
-            backgroundColor: "rgba(255,255,255,0.92)",
-            backdropFilter: "blur(4px)",
-            color: "#0a0a0a",
-            fontSize: 9,
-            fontWeight: 700,
-            letterSpacing: "0.15em",
-            textTransform: "uppercase",
-            fontFamily: "'DM Sans', sans-serif",
+            position: "relative",
+            overflow: "hidden",
+            aspectRatio: "4 / 3",
+            backgroundColor: "#e8e6e1",
           }}
         >
-          {project.category}
-        </motion.span>
+          {/* Placeholder gradient */}
+          <div
+            style={{
+              position: "absolute",
+              inset: 0,
+              background: "linear-gradient(135deg, #e8e6e1 0%, #d0cdc7 100%)",
+              zIndex: 0,
+            }}
+          />
 
-        {/* Bottom hover reveal */}
-        <motion.div
-          animate={{ y: hovered ? 0 : 16, opacity: hovered ? 1 : 0 }}
-          transition={{ duration: 0.35, ease: SILK }}
+          <motion.img
+            ref={imageRef}
+            src={project.image}
+            alt={project.title}
+            animate={{ scale: hovered ? 1.07 : 1 }}
+            transition={{ duration: 0.75, ease: SILK }}
+            onError={(e) => {
+              (e.target as HTMLImageElement).style.opacity = "0";
+            }}
+            style={{
+              position: "absolute",
+              inset: 0,
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              zIndex: 1,
+              willChange: "transform",
+            }}
+          />
+
+          {/* Dark overlay on hover */}
+          <motion.div
+            animate={{ opacity: hovered ? 0.5 : 0 }}
+            transition={{ duration: 0.4 }}
+            style={{
+              position: "absolute",
+              inset: 0,
+              background:
+                "linear-gradient(to top, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.05) 55%)",
+              zIndex: 2,
+            }}
+          />
+
+          {/* Category chip */}
+          <motion.span
+            initial={{ opacity: 0, x: -14 }}
+            animate={inView ? { opacity: 1, x: 0 } : {}}
+            transition={{
+              duration: 0.5,
+              delay: 0.35 + (index % 3) * 0.08,
+              ease: SILK,
+            }}
+            style={{
+              position: "absolute",
+              top: 14,
+              left: 14,
+              zIndex: 4,
+              padding: "5px 10px",
+              backgroundColor: "rgba(255,255,255,0.92)",
+              backdropFilter: "blur(4px)",
+              color: "#0a0a0a",
+              fontSize: 9,
+              fontWeight: 700,
+              letterSpacing: "0.15em",
+              textTransform: "uppercase",
+              fontFamily: "'DM Sans', sans-serif",
+            }}
+          >
+            {project.category}
+          </motion.span>
+
+          {/* Bottom hover reveal */}
+          <motion.div
+            animate={{ y: hovered ? 0 : 16, opacity: hovered ? 1 : 0 }}
+            transition={{ duration: 0.35, ease: SILK }}
+            style={{
+              position: "absolute",
+              bottom: 14,
+              left: 14,
+              right: 14,
+              zIndex: 4,
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+            }}
+          >
+            <span
+              style={{
+                fontFamily: "'Cormorant Garamond', serif",
+                fontSize: 19,
+                fontWeight: 600,
+                color: "#ffffff",
+                letterSpacing: "-0.01em",
+              }}
+            >
+              {project.title}
+            </span>
+            <div
+              style={{
+                width: 34,
+                height: 34,
+                backgroundColor: "rgba(255,255,255,0.12)",
+                backdropFilter: "blur(8px)",
+                border: "1px solid rgba(255,255,255,0.25)",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                flexShrink: 0,
+              }}
+            >
+              <svg width="13" height="13" viewBox="0 0 14 14" fill="none">
+                <path
+                  d="M2 12L12 2M12 2H5M12 2V9"
+                  stroke="white"
+                  strokeWidth="1.4"
+                  strokeLinecap="square"
+                />
+              </svg>
+            </div>
+          </motion.div>
+        </div>
+
+        {/* ── Card Footer ── */}
+        <div
           style={{
-            position: "absolute",
-            bottom: 14,
-            left: 14,
-            right: 14,
-            zIndex: 4,
+            padding: "15px 18px",
+            /* ✅ Soft top border — much lighter than before */
+            borderTop: "1px solid #ebebeb",
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
+            gap: 12,
+            backgroundColor: "#ffffff",
           }}
         >
-          <span
+          <h3
             style={{
               fontFamily: "'Cormorant Garamond', serif",
-              fontSize: 19,
+              fontSize: 16,
               fontWeight: 600,
-              color: "#ffffff",
+              color: "#0a0a0a",
+              margin: 0,
+              lineHeight: 1.25,
               letterSpacing: "-0.01em",
             }}
           >
             {project.title}
-          </span>
-          <div
-            style={{
-              width: 34,
-              height: 34,
-              backgroundColor: "rgba(255,255,255,0.12)",
-              backdropFilter: "blur(8px)",
-              border: "1px solid rgba(255,255,255,0.25)",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              flexShrink: 0,
+          </h3>
+
+          {/* Expanding line indicator */}
+          <motion.div
+            animate={{
+              width: hovered ? 40 : 16,
+              opacity: hovered ? 0.7 : 0.18,
             }}
-          >
-            <svg width="13" height="13" viewBox="0 0 14 14" fill="none">
-              <path
-                d="M2 12L12 2M12 2H5M12 2V9"
-                stroke="white"
-                strokeWidth="1.4"
-                strokeLinecap="square"
-              />
-            </svg>
-          </div>
-        </motion.div>
-      </div>
+            transition={{ duration: 0.35, ease: SILK }}
+            style={{ height: 1, backgroundColor: "#0a0a0a", flexShrink: 0 }}
+          />
+        </div>
 
-      {/* ── Card Footer ── */}
-      <div
-        style={{
-          padding: "15px 18px",
-          /* ✅ Soft top border — much lighter than before */
-          borderTop: "1px solid #ebebeb",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          gap: 12,
-          backgroundColor: "#ffffff",
-        }}
-      >
-        <h3
-          style={{
-            fontFamily: "'Cormorant Garamond', serif",
-            fontSize: 16,
-            fontWeight: 600,
-            color: "#0a0a0a",
-            margin: 0,
-            lineHeight: 1.25,
-            letterSpacing: "-0.01em",
-          }}
-        >
-          {project.title}
-        </h3>
-
-        {/* Expanding line indicator */}
+        {/* ✅ Bottom accent bar — only visible on hover, softer */}
         <motion.div
-          animate={{ width: hovered ? 40 : 16, opacity: hovered ? 0.7 : 0.18 }}
+          animate={{ scaleX: hovered ? 1 : 0, opacity: hovered ? 1 : 0 }}
           transition={{ duration: 0.35, ease: SILK }}
-          style={{ height: 1, backgroundColor: "#0a0a0a", flexShrink: 0 }}
+          style={{
+            height: 2,
+            background: "linear-gradient(90deg, #0a0a0a 0%, #555 100%)",
+            transformOrigin: "left",
+          }}
         />
-      </div>
-
-      {/* ✅ Bottom accent bar — only visible on hover, softer */}
-      <motion.div
-        animate={{ scaleX: hovered ? 1 : 0, opacity: hovered ? 1 : 0 }}
-        transition={{ duration: 0.35, ease: SILK }}
-        style={{
-          height: 2,
-          background: "linear-gradient(90deg, #0a0a0a 0%, #555 100%)",
-          transformOrigin: "left",
-        }}
-      />
-    </motion.div>
+      </motion.div>
+    </Link>
   );
 }
 
@@ -530,13 +535,12 @@ export default function ProjectShowcase() {
         button { background: none; border: none; }
       `}</style>
 
-      {/* ✅ Custom cursor — mounted outside section so it covers full page */}
       <Cursor />
 
       <section
         style={{
           minHeight: "100vh",
-          backgroundColor: "#f9f8f6" /* ✅ Warm off-white — not harsh #fff */,
+          backgroundColor: "#f9f8f6",
           padding: "80px 60px 100px",
           cursor: "none",
         }}

@@ -14,7 +14,6 @@ const navLinks = [
 
 const CTA_LINK = { name: "Step In", href: "/step-in" };
 
-// ─── Magnetic hook ────────────────────────────────────────────────────────────
 function useMagnetic(ref: React.RefObject<HTMLElement | null>, strength = 0.18) {
   useEffect(() => {
     const el = ref.current;
@@ -45,7 +44,7 @@ function useMagnetic(ref: React.RefObject<HTMLElement | null>, strength = 0.18) 
   }, [strength]);
 }
 
-// ─── Split-text hover link ─────────────────────────────────────────────────────
+
 function NavLink({
   href,
   children,
