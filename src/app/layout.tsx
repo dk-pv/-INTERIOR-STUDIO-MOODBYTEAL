@@ -5,7 +5,7 @@ import PageTransition from "@/components/layout/PageTransition";
 import CustomCursor from "@/components/ui/CustomCursor";
 import IntroLoader from "@/components/layout/IntroLoader";
 import Navbar from "@/components/layout/Navbar";
-
+import Footer from "@/components/layout/Footer";
 export default function RootLayout({
   children,
 }: {
@@ -19,6 +19,7 @@ export default function RootLayout({
           <SmoothScrollProvider>
             <Navbar />
             <PageTransition>{children}</PageTransition>
+            <Footer />
           </SmoothScrollProvider>
         </IntroLoader>
       </body>
