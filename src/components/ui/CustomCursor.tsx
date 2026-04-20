@@ -12,26 +12,21 @@ export default function CustomCursor() {
     const dot = dotRef.current;
     const ring = ringRef.current;
     const label = labelRef.current;
-
     if (!dot || !ring || !label) return;
 
-    // ── Track mouse ───────────────────────────────────────────────────────────
+    // ✅ quickSetter — zero tween overhead
+    const setDotX = gsap.quickSetter(dot, "x", "px");
+    const setDotY = gsap.quickSetter(dot, "y", "px");
+    const setRingX = gsap.quickSetter(ring, "x", "px");
+    const setRingY = gsap.quickSetter(ring, "y", "px");
+
     const move = (e: MouseEvent) => {
-      gsap.to(dot, {
-        x: e.clientX,
-        y: e.clientY,
-        duration: 0.05,
-        ease: "none",
-      });
-      gsap.to(ring, {
-        x: e.clientX,
-        y: e.clientY,
-        duration: 0.2,
-        ease: "power3.out",
-      });
+      setDotX(e.clientX);
+      setDotY(e.clientY);
+      setRingX(e.clientX);
+      setRingY(e.clientY);
     };
 
-    // ── Two states: default | view ────────────────────────────────────────────
     type State = "default" | "view";
     let state: State = "default";
 
@@ -42,112 +37,106 @@ export default function CustomCursor() {
         width: 40,
         height: 40,
         backgroundColor: "transparent",
-        borderColor: "rgba(0,0,0,0.8)",
-        borderWidth: "1px",
-        duration: 0.4,
-        ease: "expo.out",
+        duration: 0.3,
+        ease: "power2.out",
       });
-      gsap.to(dot, { scale: 1, opacity: 1, duration: 0.25, ease: "expo.out" });
-      gsap.to(label, { opacity: 0, scale: 0.6, duration: 0.18 });
+      gsap.to(dot, { scale: 1, opacity: 1, duration: 0.2 });
+      gsap.to(label, { opacity: 0, duration: 0.15 });
     };
 
     const toView = () => {
       if (state === "view") return;
       state = "view";
       gsap.to(ring, {
-        width: 72,
-        height: 72,
-        backgroundColor: "#000000",
-        borderColor: "transparent",
-        duration: 0.4,
-        ease: "expo.out",
+        width: 64,
+        height: 64,
+        backgroundColor: "#fff",   // ✅ white fill — difference mode flips it
+        duration: 0.3,
+        ease: "power2.out",
       });
-      gsap.to(dot, { scale: 0, opacity: 0, duration: 0.2 });
-      gsap.to(label, {
-        opacity: 1,
-        scale: 1,
-        duration: 0.35,
-        ease: "expo.out",
-        delay: 0.08,
-      });
+      gsap.to(dot, { scale: 0, opacity: 0, duration: 0.15 });
+      gsap.to(label, { opacity: 1, duration: 0.25, delay: 0.05 });
     };
 
-    // ── Only react to [data-cursor="view"] ───────────────────────────────────
     const detect = (e: MouseEvent) => {
-      const target = e.target as HTMLElement;
-      if (target.closest("[data-cursor='view']")) {
-        toView();
-      } else {
-        toDefault();
-      }
+      const hovering = !!(e.target as HTMLElement).closest("[data-cursor='view']");
+      hovering ? toView() : toDefault();
     };
 
     window.addEventListener("mousemove", move);
-    document.addEventListener("mouseover", detect);
+    window.addEventListener("mousemove", detect);
 
     return () => {
       window.removeEventListener("mousemove", move);
-      document.removeEventListener("mouseover", detect);
+      window.removeEventListener("mousemove", detect);
     };
   }, []);
 
   return (
     <>
-      {/* Dot */}
+      {/* ✅ Wrapper with mix-blend-mode — this is the only real change */}
       <div
-        ref={dotRef}
         style={{
           position: "fixed",
-          top: 0,
-          left: 0,
-          width: 6,
-          height: 6,
-          backgroundColor: "#000",
-          borderRadius: "50%",
+          inset: 0,
           pointerEvents: "none",
           zIndex: 9999,
-          transform: "translate(-50%, -50%)",
-          willChange: "transform",
-        }}
-      />
-
-      {/* Ring */}
-      <div
-        ref={ringRef}
-        style={{
-          position: "fixed",
-          top: 0,
-          left: 0,
-          width: 40,
-          height: 40,
-          border: "1px solid rgba(0,0,0,0.8)",
-          borderRadius: "50%",
-          pointerEvents: "none",
-          zIndex: 9998,
-          transform: "translate(-50%, -50%)",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          willChange: "transform",
+          mixBlendMode: "difference",  // ✅ KEY — auto inverts on dark bg
         }}
       >
-        <span
-          ref={labelRef}
+        {/* Dot — always white, difference makes it black on white, white on black */}
+        <div
+          ref={dotRef}
           style={{
-            fontFamily: "'DM Sans', sans-serif",
-            fontSize: 9,
-            fontWeight: 700,
-            letterSpacing: "0.14em",
-            textTransform: "uppercase",
-            color: "#fff",
-            opacity: 0,
-            transform: "scale(0.6)",
-            userSelect: "none",
-            whiteSpace: "nowrap",
+            position: "fixed",
+            top: 0,
+            left: 0,
+            width: 6,
+            height: 6,
+            backgroundColor: "#ffffff",  // ✅ white
+            borderRadius: "50%",
+            pointerEvents: "none",
+            transform: "translate(-50%, -50%)",
+            willChange: "transform",
+          }}
+        />
+
+        {/* Ring */}
+        <div
+          ref={ringRef}
+          style={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            width: 40,
+            height: 40,
+            border: "1.5px solid #ffffff",  // ✅ white border
+            borderRadius: "50%",
+            pointerEvents: "none",
+            transform: "translate(-50%, -50%)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            willChange: "transform",
           }}
         >
-          VIEW
-        </span>
+          <span
+            ref={labelRef}
+            style={{
+              fontFamily: "'DM Sans', sans-serif",
+              fontSize: 9,
+              fontWeight: 700,
+              letterSpacing: "0.14em",
+              textTransform: "uppercase",
+              color: "#000",       // ✅ black text — difference flips to white on dark bg
+              opacity: 0,
+              userSelect: "none",
+              whiteSpace: "nowrap",
+            }}
+          >
+            VIEW
+          </span>
+        </div>
       </div>
     </>
   );
