@@ -13,9 +13,11 @@ const navLinks = [
 
 const CTA_LINK = { name: "Step In", href: "/contact" };
 
-
 // ✅ PERFORMANCE MAGNETIC (NO GSAP)
-function useMagnetic(ref: React.RefObject<HTMLElement | null>, strength = 0.18) {
+function useMagnetic(
+  ref: React.RefObject<HTMLElement | null>,
+  strength = 0.18,
+) {
   const frame = useRef<number | null>(null);
 
   useEffect(() => {
@@ -44,10 +46,10 @@ function useMagnetic(ref: React.RefObject<HTMLElement | null>, strength = 0.18) 
     return () => {
       el.removeEventListener("mousemove", move);
       el.removeEventListener("mouseleave", leave);
+      if (frame.current) cancelAnimationFrame(frame.current); // ✅ FIX
     };
   }, [ref, strength]);
 }
-
 
 // ─── NavLink ─────────────────────────────────────────
 function NavLink({ href, children, active, isLight, id, onHover }: any) {
@@ -62,8 +64,8 @@ function NavLink({ href, children, active, isLight, id, onHover }: any) {
       ref={ref}
       href={href}
       id={id}
-      onMouseEnter={() => onHover(id)}
-      onMouseLeave={() => onHover(null)}
+      onMouseEnter={() => onHover?.(id ?? null)}   // ✅ FIX (no crash)
+      onMouseLeave={() => onHover?.(null)}        // ✅ FIX
       style={{
         fontFamily: "'DM Mono', monospace",
         fontSize: "0.7rem",
@@ -73,7 +75,8 @@ function NavLink({ href, children, active, isLight, id, onHover }: any) {
         padding: "4px 0",
         whiteSpace: "nowrap",
         cursor: "none",
-        transform: "translateZ(0)",
+        transform: "translateZ(0)", // ✅ GPU
+        willChange: "transform",    // ✅ smoother
       }}
     >
       {children}
@@ -97,7 +100,6 @@ function NavLink({ href, children, active, isLight, id, onHover }: any) {
   );
 }
 
-
 // ─── CTA ─────────────────────────────────────────
 function CtaButton({ isLight }: { isLight: boolean }) {
   const ref = useRef<HTMLAnchorElement>(null);
@@ -115,8 +117,10 @@ function CtaButton({ isLight }: { isLight: boolean }) {
         borderRadius: 999,
         fontSize: "0.65rem",
         letterSpacing: "0.2em",
-        border: isLight ? "1px solid rgba(0,0,0,0.2)" : "1px solid rgba(255,255,255,0.2)",
-        color: hover ? (isLight ? "#fff" : "#000") : (isLight ? "#000" : "#fff"),
+        border: isLight
+          ? "1px solid rgba(0,0,0,0.2)"
+          : "1px solid rgba(255,255,255,0.2)",
+        color: hover ? (isLight ? "#fff" : "#000") : isLight ? "#000" : "#fff",
         background: hover ? (isLight ? "#000" : "#fff") : "transparent",
         transition: "all 0.3s ease",
         cursor: "none",
@@ -127,50 +131,57 @@ function CtaButton({ isLight }: { isLight: boolean }) {
   );
 }
 
-
 // ─── MAIN NAVBAR ─────────────────────────────────────────
 export default function Navbar() {
   const pathname = usePathname();
   const [isLight, setIsLight] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
-  const frame = useRef<number | null>(null);
+  const frameRef = useRef<number | null>(null); // ✅ FIX
 
-  // ✅ OPTIMIZED SCROLL
   useEffect(() => {
-    const sections = document.querySelectorAll("[data-theme]");
+    const sections = Array.from(document.querySelectorAll("[data-theme]"));
 
     const onScroll = () => {
-      if (frame.current) cancelAnimationFrame(frame.current);
+      if (frameRef.current) cancelAnimationFrame(frameRef.current);
 
-      frame.current = requestAnimationFrame(() => {
-        setScrolled(window.scrollY > 20);
+      frameRef.current = requestAnimationFrame(() => {
+        const scrollY = window.scrollY;
+
+        // ✅ prevent unnecessary re-renders
+        setScrolled((prev) => (prev !== (scrollY > 20) ? scrollY > 20 : prev));
 
         let theme = "dark";
 
-        for (const el of sections) {
-          const rect = (el as HTMLElement).getBoundingClientRect();
+        for (let i = 0; i < sections.length; i++) {
+          const rect = (sections[i] as HTMLElement).getBoundingClientRect();
+
           if (rect.top <= 80 && rect.bottom >= 80) {
-            theme = el.getAttribute("data-theme") || "dark";
+            theme = sections[i].getAttribute("data-theme") || "dark";
             break;
           }
         }
 
-        setIsLight(theme === "light");
+        setIsLight((prev) => (prev !== (theme === "light") ? theme === "light" : prev));
       });
     };
 
     window.addEventListener("scroll", onScroll, { passive: true });
     onScroll();
 
-    return () => window.removeEventListener("scroll", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      if (frameRef.current) cancelAnimationFrame(frameRef.current); // ✅ FIX
+    };
   }, []);
 
-
   const bg = isLight
-    ? scrolled ? "rgba(255,255,255,0.82)" : "rgba(255,255,255,0.55)"
-    : scrolled ? "rgba(14,14,14,0.82)" : "rgba(20,20,20,0.52)";
-
+    ? scrolled
+      ? "rgba(255,255,255,0.82)"
+      : "rgba(255,255,255,0.55)"
+    : scrolled
+      ? "rgba(14,14,14,0.82)"
+      : "rgba(20,20,20,0.52)";
 
   return (
     <div
@@ -203,6 +214,7 @@ export default function Navbar() {
           alignItems: "center",
           justifyContent: "space-between",
           padding: "0 36px",
+          transform: "translateZ(0)", // ✅ GPU
         }}
       >
         {/* LINKS */}
