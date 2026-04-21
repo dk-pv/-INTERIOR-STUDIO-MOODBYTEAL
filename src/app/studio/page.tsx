@@ -5,7 +5,6 @@ import About from "@/components/sections/About";
 import Founder from "@/components/sections/Founder";
 import Team from "@/components/sections/Team";
 
-// ── Shared easing ─────────────────────────────────────────────────────────────
 const EXPO = [0.16, 1, 0.3, 1] as const;
 
 export default function StudioPage() {
@@ -13,17 +12,17 @@ export default function StudioPage() {
     <main style={{ backgroundColor: "#f9f8f6", color: "#0a0a0a" }}>
       <section
         style={{
-          minHeight: "100dvh",
+          minHeight: "100vh", // ✅ fallback
+          height: "100dvh",
           display: "flex",
           flexDirection: "column",
           justifyContent: "flex-end",
           padding: "0 clamp(24px, 6vw, 96px) clamp(52px, 8vw, 88px)",
           position: "relative",
           overflow: "hidden",
-          backgroundColor: "#f9f8f6",
         }}
       >
-        {/* Ghost watermark — "STUDIO" large behind content */}
+        {/* Ghost watermark */}
         <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -58,10 +57,11 @@ export default function StudioPage() {
             backgroundRepeat: "repeat",
             opacity: 0.03,
             pointerEvents: "none",
+            willChange: "opacity",
           }}
         />
 
-        {/* Top bar — page index */}
+        {/* Top bar */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -96,20 +96,18 @@ export default function StudioPage() {
           </span>
         </motion.div>
 
-        {/* Main content — bottom-anchored editorial layout */}
+        {/* MAIN GRID */}
         <div
           style={{
             position: "relative",
             zIndex: 2,
             display: "grid",
-            gridTemplateColumns: "1fr auto",
-            alignItems: "flex-end",
-            gap: "clamp(32px, 5vw, 80px)",
+            gridTemplateColumns: "1fr",
+            rowGap: "40px",
           }}
         >
-          {/* LEFT — heading block */}
+          {/* LEFT */}
           <div>
-            {/* Label */}
             <motion.p
               initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
@@ -126,7 +124,7 @@ export default function StudioPage() {
               A Design + Curation Studio
             </motion.p>
 
-            {/* Heading — mix upright + italic for editorial feel */}
+            {/* H1 */}
             <div style={{ overflow: "hidden" }}>
               <motion.h1
                 initial={{ y: "105%", opacity: 0 }}
@@ -138,16 +136,16 @@ export default function StudioPage() {
                   fontWeight: 700,
                   lineHeight: 1.04,
                   letterSpacing: "-0.035em",
-                  color: "#0a0a0a",
-                  willChange: "transform",
+                  transform: "translateZ(0)",
                 }}
               >
                 We design spaces
               </motion.h1>
             </div>
 
+            {/* H2 */}
             <div style={{ overflow: "hidden" }}>
-              <motion.h1
+              <motion.h2
                 initial={{ y: "105%", opacity: 0 }}
                 animate={{ y: "0%", opacity: 1 }}
                 transition={{ delay: 0.27, duration: 1.1, ease: EXPO }}
@@ -155,20 +153,18 @@ export default function StudioPage() {
                   fontFamily: "var(--font-heading)",
                   fontSize: "clamp(2.6rem, 6.5vw, 5.8rem)",
                   fontWeight: 700,
+                  fontStyle: "italic",
                   lineHeight: 1.04,
                   letterSpacing: "-0.035em",
-                  color: "#0a0a0a",
-                  fontStyle:
-                    "italic" /* ← italic line for typographic contrast */,
-                  willChange: "transform",
                 }}
               >
                 that feel
-              </motion.h1>
+              </motion.h2>
             </div>
 
+            {/* H2 */}
             <div style={{ overflow: "hidden" }}>
-              <motion.h1
+              <motion.h2
                 initial={{ y: "105%", opacity: 0 }}
                 animate={{ y: "0%", opacity: 1 }}
                 transition={{ delay: 0.39, duration: 1.1, ease: EXPO }}
@@ -178,33 +174,29 @@ export default function StudioPage() {
                   fontWeight: 700,
                   lineHeight: 1.04,
                   letterSpacing: "-0.035em",
-                  color: "#0a0a0a",
-                  willChange: "transform",
                 }}
               >
                 before they function
-              </motion.h1>
+              </motion.h2>
             </div>
           </div>
 
-          {/* RIGHT — caption + draw line */}
+          {/* RIGHT */}
           <div
             style={{
               maxWidth: 260,
+              width: "100%",
               display: "flex",
               flexDirection: "column",
               gap: 20,
-              paddingBottom: 6,
-              flexShrink: 0,
             }}
           >
-            {/* Vertical draw line */}
             <motion.div
               initial={{ scaleY: 0 }}
               animate={{ scaleY: 1 }}
               transition={{ delay: 0.8, duration: 1, ease: EXPO }}
               style={{
-                width: 1,
+                width: "1.5px",
                 height: 48,
                 backgroundColor: "rgba(0,0,0,0.2)",
                 transformOrigin: "top",
@@ -214,20 +206,18 @@ export default function StudioPage() {
             <motion.p
               initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.0, duration: 0.9, ease: EXPO }}
+              transition={{ delay: 1, duration: 0.9, ease: EXPO }}
               style={{
                 fontFamily: "var(--font-body)",
                 fontSize: "clamp(0.82rem, 1.1vw, 0.95rem)",
                 lineHeight: 1.75,
                 color: "rgba(0,0,0,0.45)",
-                letterSpacing: "0.01em",
               }}
             >
               MOODBYTEAL blends emotion, architecture, and minimal luxury —
               crafting environments that resonate on a deeper level.
             </motion.p>
 
-            {/* UAE / IND tag */}
             <motion.p
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -245,7 +235,7 @@ export default function StudioPage() {
           </div>
         </div>
 
-        {/* Horizontal bottom rule */}
+        {/* Bottom rule */}
         <motion.div
           initial={{ scaleX: 0 }}
           animate={{ scaleX: 1 }}
@@ -258,7 +248,6 @@ export default function StudioPage() {
             height: 1,
             backgroundColor: "rgba(0,0,0,0.1)",
             transformOrigin: "left",
-            zIndex: 1,
           }}
         />
 
@@ -276,7 +265,6 @@ export default function StudioPage() {
             alignItems: "center",
             gap: 10,
           }}
-          aria-hidden="true"
         >
           <div
             style={{
@@ -292,13 +280,10 @@ export default function StudioPage() {
               transition={{
                 duration: 1.4,
                 repeat: Infinity,
-                ease: "easeInOut",
-                repeatDelay: 0.4,
+                ease: [0.4, 0, 0.2, 1],
               }}
               style={{
                 position: "absolute",
-                top: 0,
-                left: 0,
                 width: "50%",
                 height: "100%",
                 backgroundColor: "rgba(0,0,0,0.55)",
@@ -319,7 +304,6 @@ export default function StudioPage() {
         </motion.div>
       </section>
 
-      {/* ── SECTIONS ─────────────────────────────────────────────────────────── */}
       <About />
       <Founder />
       <Team />

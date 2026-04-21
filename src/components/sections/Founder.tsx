@@ -2,72 +2,39 @@
 
 import Image from "next/image";
 import { useEffect, useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-gsap.registerPlugin(ScrollTrigger);
-
 
 export default function Founder() {
   const sectionRef = useRef<HTMLElement>(null);
-  const imageWrapRef = useRef<HTMLDivElement>(null);
-  const lineRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!sectionRef.current) return;
+    const elements = sectionRef.current?.querySelectorAll(".reveal");
 
-    const ctx = gsap.context(() => {
-      // ── Image: clip-path reveal (same pattern as WorkGrid cards) ────────────
-      gsap.fromTo(
-        imageWrapRef.current,
-        { clipPath: "inset(100% 0% 0% 0%)" },
-        {
-          clipPath: "inset(0% 0% 0% 0%)",
-          duration: 1.1,
-          ease: "expo.out",
-          scrollTrigger: {
-            trigger: imageWrapRef.current,
-            start: "top 80%",
-          },
-        },
-      );
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry, i) => {
+          if (entry.isIntersecting) {
+            entry.target.animate(
+              [
+                { opacity: 0, transform: "translateY(40px)", filter: "blur(6px)" },
+                { opacity: 1, transform: "translateY(0px)", filter: "blur(0px)" },
+              ],
+              {
+                duration: 700,
+                delay: i * 80,
+                easing: "ease-out",
+                fill: "forwards",
+              }
+            );
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.2 }
+    );
 
-      // ── Divider line draw ────────────────────────────────────────────────────
-      gsap.fromTo(
-        lineRef.current,
-        { scaleX: 0 },
-        {
-          scaleX: 1,
-          duration: 1,
-          ease: "expo.out",
-          transformOrigin: "left",
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top 80%",
-          },
-        },
-      );
+    elements?.forEach((el) => observer.observe(el));
 
-      // ── Text stagger: label → heading → body lines ──────────────────────────
-      gsap.fromTo(
-        ".founder-text",
-        { opacity: 0, y: 40, filter: "blur(6px)" },
-        {
-          opacity: 1,
-          y: 0,
-          filter: "blur(0px)",
-          stagger: 0.12,
-          duration: 0.9,
-          ease: "expo.out",
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top 75%",
-          },
-        },
-      );
-    }, sectionRef);
-
-    return () => ctx.revert();
+    return () => observer.disconnect();
   }, []);
 
   return (
@@ -79,32 +46,25 @@ export default function Founder() {
         overflow: "hidden",
       }}
     >
-      {/* ── Section label + rule ─────────────────────────────────────────────── */}
-      <div style={{ marginBottom: 64, overflow: "hidden" }}>
-        <p
-          className="founder-text"
-          style={{
-            fontFamily: "var(--font-body)",
-            fontSize: 10,
-            letterSpacing: "0.32em",
-            textTransform: "uppercase",
-            color: "#b0a99a",
-            marginBottom: 14,
-          }}
-        >
+      {/* Label */}
+      <div style={{ marginBottom: 64 }}>
+        <p className="reveal" style={{
+          fontSize: 10,
+          letterSpacing: "0.32em",
+          textTransform: "uppercase",
+          color: "#b0a99a",
+          marginBottom: 14,
+        }}>
           Founder
         </p>
-        <div
-          ref={lineRef}
-          style={{
-            height: 1,
-            backgroundColor: "#e8e6e1",
-            width: "100%",
-          }}
-        />
+
+        <div className="reveal" style={{
+          height: 1,
+          backgroundColor: "#e8e6e1",
+          width: "100%",
+        }} />
       </div>
 
-      {/* ── Two-column layout ────────────────────────────────────────────────── */}
       <div
         style={{
           maxWidth: 1280,
@@ -118,187 +78,82 @@ export default function Founder() {
       >
         {/* IMAGE */}
         <div
-          ref={imageWrapRef}
+          className="reveal"
           style={{
             position: "relative",
             width: "100%",
             aspectRatio: "3 / 4",
-            backgroundColor: "#e8e6e1",
             overflow: "hidden",
           }}
         >
           <Image
             src="/images/founder.jpg"
-            alt="Sahil Haneefa — Founder & CEO"
+            alt="Founder"
             fill
-            style={{ objectFit: "cover" }}
             sizes="(max-width: 768px) 100vw, 50vw"
+            priority
+            style={{ objectFit: "cover" }}
           />
 
-          {/* Subtle bottom gradient for text legibility */}
           <div
             style={{
               position: "absolute",
               inset: 0,
               background:
-                "linear-gradient(to top, rgba(0,0,0,0.35) 0%, transparent 50%)",
+                "linear-gradient(to top, rgba(0,0,0,0.35), transparent)",
             }}
           />
-
-          {/* Name watermark inside image */}
-          <div
-            style={{
-              position: "absolute",
-              bottom: 24,
-              left: 24,
-            }}
-          >
-            <p
-              style={{
-                fontFamily: "var(--font-heading)",
-                fontSize: "clamp(1.1rem, 2vw, 1.5rem)",
-                fontWeight: 700,
-                color: "#ffffff",
-                letterSpacing: "-0.02em",
-                lineHeight: 1.1,
-              }}
-            >
-              Sahil Haneefa
-            </p>
-            <p
-              style={{
-                fontFamily: "var(--font-body)",
-                fontSize: 11,
-                letterSpacing: "0.18em",
-                textTransform: "uppercase",
-                color: "rgba(255,255,255,0.6)",
-                marginTop: 4,
-              }}
-            >
-              Founder & CEO, Chief Architect
-            </p>
-          </div>
         </div>
 
-        {/* CONTENT */}
+        {/* TEXT */}
         <div style={{ display: "flex", flexDirection: "column", gap: 28 }}>
-          <h2
-            className="founder-text"
-            style={{
-              fontFamily: "var(--font-heading)",
-              fontSize: "clamp(2.2rem, 4.5vw, 3.8rem)",
-              fontWeight: 700,
-              lineHeight: 1.06,
-              letterSpacing: "-0.03em",
-              color: "#0a0a0a",
-            }}
-          >
+          <h2 className="reveal" style={{
+            fontSize: "clamp(2.2rem, 4.5vw, 3.8rem)",
+            fontWeight: 700,
+            lineHeight: 1.06,
+            letterSpacing: "-0.03em",
+            color: "#0a0a0a",
+          }}>
             Designing beyond visual boundaries
           </h2>
 
-          <p
-            className="founder-text"
-            style={{
-              fontFamily: "var(--font-body)",
-              fontSize: "clamp(1rem, 1.4vw, 1.15rem)",
-              lineHeight: 1.75,
-              color: "#5a5650",
-            }}
-          >
+          <p className="reveal" style={{
+            fontSize: "clamp(1rem, 1.4vw, 1.15rem)",
+            lineHeight: 1.75,
+            color: "#5a5650",
+          }}>
             TEAL Culture was founded with a singular vision — to redefine how
-            spaces are experienced, moving beyond aesthetics into something felt
-            before it is seen.
+            spaces are experienced.
           </p>
 
-          <p
-            className="founder-text"
-            style={{
-              fontFamily: "var(--font-body)",
-              fontSize: "clamp(0.95rem, 1.2vw, 1.05rem)",
-              lineHeight: 1.75,
-              color: "#8c8880",
-            }}
-          >
-            Every project reflects spatial harmony and emotional depth — a
-            balance between the structural and the sensory, built for those who
-            value the weight of a room.
+          <p className="reveal" style={{
+            fontSize: "clamp(0.95rem, 1.2vw, 1.05rem)",
+            lineHeight: 1.75,
+            color: "#8c8880",
+          }}>
+            Every project reflects spatial harmony and emotional depth.
           </p>
 
-          {/* Pull quote */}
-          <div
-            className="founder-text"
-            style={{
-              borderLeft: "2px solid #0a0a0a",
-              paddingLeft: 20,
-              marginTop: 8,
-            }}
-          >
-            <p
-              style={{
-                fontFamily: "var(--font-heading)",
-                fontSize: "clamp(1.05rem, 1.6vw, 1.3rem)",
-                fontStyle: "italic",
-                color: "#0a0a0a",
-                letterSpacing: "-0.01em",
-                lineHeight: 1.5,
-              }}
-            >
-              <span>“Driven by intuition, tone and reality.”</span>
-            </p>
-            <p
-              style={{
-                fontFamily: "var(--font-body)",
-                fontSize: 11,
-                letterSpacing: "0.2em",
-                textTransform: "uppercase",
-                color: "#b0a99a",
-                marginTop: 10,
-              }}
-            >
-              — Sahil
+          {/* Quote */}
+          <div className="reveal" style={{
+            borderLeft: "2px solid #0a0a0a",
+            paddingLeft: 20,
+          }}>
+            <p style={{ fontStyle: "italic" }}>
+              “Driven by intuition, tone and reality.”
             </p>
           </div>
 
-          {/* Stats row */}
-          <div
-            className="founder-text"
-            style={{
-              display: "flex",
-              gap: 40,
-              paddingTop: 24,
-              borderTop: "1px solid #e8e6e1",
-            }}
-          >
-            {[
-              { num: "8+", label: "Years" },
-              { num: "120+", label: "Projects" },
-              { num: "2", label: "Countries" },
-            ].map(({ num, label }) => (
-              <div key={label}>
-                <p
-                  style={{
-                    fontFamily: "var(--font-heading)",
-                    fontSize: "clamp(1.6rem, 3vw, 2.4rem)",
-                    fontWeight: 700,
-                    letterSpacing: "-0.03em",
-                    color: "#0a0a0a",
-                    lineHeight: 1,
-                  }}
-                >
-                  {num}
-                </p>
-                <p
-                  style={{
-                    fontFamily: "var(--font-body)",
-                    fontSize: 10,
-                    letterSpacing: "0.22em",
-                    textTransform: "uppercase",
-                    color: "#b0a99a",
-                    marginTop: 6,
-                  }}
-                >
-                  {label}
-                </p>
+          {/* Stats */}
+          <div className="reveal" style={{
+            display: "flex",
+            gap: 40,
+            paddingTop: 24,
+            borderTop: "1px solid #e8e6e1",
+          }}>
+            {["8+", "120+", "2"].map((n, i) => (
+              <div key={i}>
+                <p style={{ fontSize: 28, fontWeight: 700 }}>{n}</p>
               </div>
             ))}
           </div>
