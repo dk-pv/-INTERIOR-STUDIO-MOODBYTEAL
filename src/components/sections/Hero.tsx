@@ -87,6 +87,7 @@ export default function Hero() {
           className="w-[1px] h-12 bg-white/40"
         />
       </motion.div>
+      
     </section>
   );
 }
