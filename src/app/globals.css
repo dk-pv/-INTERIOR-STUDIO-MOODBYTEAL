@@ -11,7 +11,7 @@ html,
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-body);
+  font-family: var(--font-body); /* ✅ comes from next/font */
   scroll-behavior: smooth;
 }
 
@@ -28,7 +28,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: var(--font-heading);
+  font-family: var(--font-heading); /* ✅ correct */
   letter-spacing: -0.02em;
 }
 
@@ -45,7 +45,7 @@ section {
 .bg-soft {
   background: linear-gradient(to bottom, #f7f7f5, #f1f1ef);
 }
-/* Image default */
+
 img {
   max-width: 100%;
   display: block;

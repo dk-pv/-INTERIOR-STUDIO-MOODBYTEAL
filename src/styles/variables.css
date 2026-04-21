@@ -2,15 +2,11 @@
   /* COLORS */
   --background: #0a0a0a;
   --foreground: #ffffff;
-  --muted: rgba(255, 255, 255, 0.6); /* soft gray text */
+  --muted: rgba(255, 255, 255, 0.6);
   --border: rgba(0, 0, 0, 0.08);
 
-  --accent: #111111; /* strong black accent */
+  --accent: #111111;
   --accent-soft: rgba(0, 0, 0, 0.05);
-
-  /* TYPOGRAPHY */
-  --font-heading: "ClashDisplay", sans-serif;
-  --font-body: "Satoshi", sans-serif;
 
   /* SPACING */
   --section-padding: 6rem;
