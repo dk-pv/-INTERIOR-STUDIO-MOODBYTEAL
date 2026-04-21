@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect } from "react";
-import { initLenis } from "@/lib/lenis";
 
 export default function SmoothScrollProvider({
   children,
@@ -9,11 +8,15 @@ export default function SmoothScrollProvider({
   children: React.ReactNode;
 }) {
   useEffect(() => {
-    const lenis = initLenis();
+    if (window.innerWidth < 768) return; // 🔥 disable mobile
 
-    return () => {
-      lenis?.destroy();
-    };
+    import("@/lib/lenis").then(({ initLenis }) => {
+      const lenis = initLenis();
+
+      return () => {
+        lenis?.destroy();
+      };
+    });
   }, []);
 
   return <>{children}</>;

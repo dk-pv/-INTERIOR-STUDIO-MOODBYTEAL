@@ -8,24 +8,23 @@ export function useReveal(ref: React.RefObject<HTMLElement>) {
   useEffect(() => {
     if (!ref.current) return;
 
+    if (window.innerWidth < 768) return; // 🔥 disable mobile
+
     initGSAP();
 
     const el = ref.current;
 
     gsap.fromTo(
       el,
-      {
-        opacity: 0,
-        y: 60,
-      },
+      { opacity: 0, y: 40 },
       {
         opacity: 1,
         y: 0,
-        duration: 1,
-        ease: "power3.out",
+        duration: 0.6, // 🔥 reduced
+        ease: "power2.out",
         scrollTrigger: {
           trigger: el,
-          start: "top 85%",
+          start: "top 90%", // 🔥 earlier trigger
         },
       }
     );

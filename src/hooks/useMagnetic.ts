@@ -1,11 +1,10 @@
 "use client";
 
 import { useEffect } from "react";
-import gsap from "gsap";
 
 export function useMagnetic<T extends HTMLElement>(
   ref: React.RefObject<T | null>,
-  strength: number = 0.25
+  strength: number = 0.2
 ) {
   useEffect(() => {
     const el = ref.current;
@@ -18,26 +17,14 @@ export function useMagnetic<T extends HTMLElement>(
     };
 
     const handleMove = (e: MouseEvent) => {
-      if (!bounds) return;
-
       const x = e.clientX - bounds.left - bounds.width / 2;
       const y = e.clientY - bounds.top - bounds.height / 2;
 
-      gsap.to(el, {
-        x: x * strength,
-        y: y * strength,
-        duration: 0.35,
-        ease: "power2.out",
-      });
+      el.style.transform = `translate(${x * strength}px, ${y * strength}px)`;
     };
 
     const handleLeave = () => {
-      gsap.to(el, {
-        x: 0,
-        y: 0,
-        duration: 0.7,
-        ease: "elastic.out(1, 0.4)",
-      });
+      el.style.transform = "translate(0,0)";
     };
 
     el.addEventListener("mouseenter", handleEnter);
