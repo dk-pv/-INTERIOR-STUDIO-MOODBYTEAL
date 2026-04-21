@@ -1,5 +1,3 @@
-
-
 "use client";
 
 import Image from "next/image";
@@ -9,7 +7,6 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const EXPO = [0.16, 1, 0.3, 1];
 
 export default function Founder() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -32,7 +29,7 @@ export default function Founder() {
             trigger: imageWrapRef.current,
             start: "top 80%",
           },
-        }
+        },
       );
 
       // ── Divider line draw ────────────────────────────────────────────────────
@@ -48,7 +45,7 @@ export default function Founder() {
             trigger: sectionRef.current,
             start: "top 80%",
           },
-        }
+        },
       );
 
       // ── Text stagger: label → heading → body lines ──────────────────────────
@@ -66,7 +63,7 @@ export default function Founder() {
             trigger: sectionRef.current,
             start: "top 75%",
           },
-        }
+        },
       );
     }, sectionRef);
 
@@ -113,7 +110,8 @@ export default function Founder() {
           maxWidth: 1280,
           margin: "0 auto",
           display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(min(100%, 420px), 1fr))",
+          gridTemplateColumns:
+            "repeat(auto-fit, minmax(min(100%, 420px), 1fr))",
           gap: "clamp(48px, 6vw, 96px)",
           alignItems: "center",
         }}
@@ -140,8 +138,10 @@ export default function Founder() {
           {/* Subtle bottom gradient for text legibility */}
           <div
             style={{
-              position: "absolute", inset: 0,
-              background: "linear-gradient(to top, rgba(0,0,0,0.35) 0%, transparent 50%)",
+              position: "absolute",
+              inset: 0,
+              background:
+                "linear-gradient(to top, rgba(0,0,0,0.35) 0%, transparent 50%)",
             }}
           />
 
@@ -149,7 +149,8 @@ export default function Founder() {
           <div
             style={{
               position: "absolute",
-              bottom: 24, left: 24,
+              bottom: 24,
+              left: 24,
             }}
           >
             <p
@@ -181,7 +182,6 @@ export default function Founder() {
 
         {/* CONTENT */}
         <div style={{ display: "flex", flexDirection: "column", gap: 28 }}>
-
           <h2
             className="founder-text"
             style={{
@@ -205,9 +205,9 @@ export default function Founder() {
               color: "#5a5650",
             }}
           >
-            TEAL Culture was founded with a singular vision — to redefine how spaces
-            are experienced, moving beyond aesthetics into something felt before it
-            is seen.
+            TEAL Culture was founded with a singular vision — to redefine how
+            spaces are experienced, moving beyond aesthetics into something felt
+            before it is seen.
           </p>
 
           <p
@@ -219,9 +219,9 @@ export default function Founder() {
               color: "#8c8880",
             }}
           >
-            Every project reflects spatial harmony and emotional depth — a balance
-            between the structural and the sensory, built for those who value
-            the weight of a room.
+            Every project reflects spatial harmony and emotional depth — a
+            balance between the structural and the sensory, built for those who
+            value the weight of a room.
           </p>
 
           {/* Pull quote */}
@@ -243,7 +243,7 @@ export default function Founder() {
                 lineHeight: 1.5,
               }}
             >
-              "Driven by intuition, tone and reality."
+              <span>“Driven by intuition, tone and reality.”</span>
             </p>
             <p
               style={{

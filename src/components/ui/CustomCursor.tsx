@@ -50,7 +50,7 @@ export default function CustomCursor() {
       gsap.to(ring, {
         width: 64,
         height: 64,
-        backgroundColor: "#fff",   // ✅ white fill — difference mode flips it
+        backgroundColor: "#fff", // ✅ white fill — difference mode flips it
         duration: 0.3,
         ease: "power2.out",
       });
@@ -59,16 +59,26 @@ export default function CustomCursor() {
     };
 
     const detect = (e: MouseEvent) => {
-      const hovering = !!(e.target as HTMLElement).closest("[data-cursor='view']");
-      hovering ? toView() : toDefault();
+      const hovering = !!(e.target as HTMLElement).closest(
+        "[data-cursor='view']",
+      );
+
+      if (hovering) {
+        toView();
+      } else {
+        toDefault();
+      }
     };
 
-    window.addEventListener("mousemove", move);
-    window.addEventListener("mousemove", detect);
+    const handleMouseMove = (e: MouseEvent) => {
+      move(e);
+      detect(e);
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
 
     return () => {
-      window.removeEventListener("mousemove", move);
-      window.removeEventListener("mousemove", detect);
+      window.removeEventListener("mousemove", handleMouseMove);
     };
   }, []);
 
@@ -81,7 +91,7 @@ export default function CustomCursor() {
           inset: 0,
           pointerEvents: "none",
           zIndex: 9999,
-          mixBlendMode: "difference",  // ✅ KEY — auto inverts on dark bg
+          mixBlendMode: "difference", // ✅ KEY — auto inverts on dark bg
         }}
       >
         {/* Dot — always white, difference makes it black on white, white on black */}
@@ -93,7 +103,7 @@ export default function CustomCursor() {
             left: 0,
             width: 6,
             height: 6,
-            backgroundColor: "#ffffff",  // ✅ white
+            backgroundColor: "#ffffff", // ✅ white
             borderRadius: "50%",
             pointerEvents: "none",
             transform: "translate(-50%, -50%)",
@@ -110,7 +120,7 @@ export default function CustomCursor() {
             left: 0,
             width: 40,
             height: 40,
-            border: "1.5px solid #ffffff",  // ✅ white border
+            border: "1.5px solid #ffffff", // ✅ white border
             borderRadius: "50%",
             pointerEvents: "none",
             transform: "translate(-50%, -50%)",
@@ -128,7 +138,7 @@ export default function CustomCursor() {
               fontWeight: 700,
               letterSpacing: "0.14em",
               textTransform: "uppercase",
-              color: "#000",       // ✅ black text — difference flips to white on dark bg
+              color: "#000", // ✅ black text — difference flips to white on dark bg
               opacity: 0,
               userSelect: "none",
               whiteSpace: "nowrap",

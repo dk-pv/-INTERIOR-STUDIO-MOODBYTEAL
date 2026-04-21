@@ -1,9 +1,9 @@
 "use client";
 
-import { motion, AnimatePresence } from "framer-motion";
+import { motion} from "framer-motion";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useRef, useState, useEffect, useLayoutEffect } from "react";
+import { useRef, useState, useEffect } from "react";
 import gsap from "gsap";
 
 const navLinks = [
@@ -41,7 +41,7 @@ function useMagnetic(ref: React.RefObject<HTMLElement | null>, strength = 0.18) 
       el.removeEventListener("mousemove", onMove);
       el.removeEventListener("mouseleave", onLeave);
     };
-  }, [strength]);
+  }, [ref ,strength]);
 }
 
 
