@@ -1,75 +1,215 @@
 @import "../styles/variables.css";
 @import "tailwindcss";
 
-* {
+/* ─── RESET ──────────────────────────────────────── */
+*,
+*::before,
+*::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+/* ─── BASE ───────────────────────────────────────── */
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
 }
 
 html,
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-body); /* ✅ comes from next/font */
-  scroll-behavior: smooth;
+  font-family: var(--font-body);
+  min-height: 100vh;
+  overflow-x: hidden;
 }
 
-/* Smooth text */
 body {
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Headings */
+/* ─── TYPOGRAPHY ─────────────────────────────────── */
 h1,
 h2,
 h3,
 h4,
 h5,
 h6 {
-  font-family: var(--font-heading); /* ✅ correct */
-  letter-spacing: -0.02em;
+  font-family: var(--font-heading);
+  letter-spacing: var(--tracking-heading);
+  color: var(--foreground);
+  line-height: 1.05;
 }
 
-/* Section spacing */
-section {
-  padding: var(--section-padding) 0;
+p {
+  line-height: 1.7;
+  color: var(--foreground);
 }
 
-::selection {
-  background: #111;
-  color: #fff;
+/* ─── LINKS ──────────────────────────────────────── */
+a {
+  color: inherit;
+  text-decoration: none;
 }
 
-.bg-soft {
-  background: linear-gradient(to bottom, #f7f7f5, #f1f1ef);
-}
-
+/* ─── IMAGES ─────────────────────────────────────── */
 img {
   max-width: 100%;
   display: block;
 }
 
+/* ─── SECTIONS ───────────────────────────────────── */
+section {
+  padding: var(--section-padding) 0;
+}
+
+/* ─── SELECTION ──────────────────────────────────── */
+::selection {
+  background: #0a0a0a;
+  color: #f5f4f0;
+}
+
+/* ─── UTILITY BACKGROUNDS ────────────────────────── */
+
+/* Warm off-white — default */
+.bg-base {
+  background: var(--background);
+}
+
+/* Pure white */
+.bg-white-pure {
+  background: var(--background-pure);
+}
+
+/* Slightly darker off-white — alternate sections */
+.bg-alt {
+  background: var(--background-alt);
+}
+
+/* Deep black section */
+.bg-dark {
+  background: var(--dark-bg);
+  color: var(--dark-fg);
+}
+
+/* Teal-tinted soft bg */
+.bg-teal-soft {
+  background: var(--teal-muted);
+}
+
+/* ─── SECTION DIVIDER ────────────────────────────── */
+.divider {
+  width: 100%;
+  height: 1px;
+  background: var(--border);
+}
+
+/* ─── LABEL / TAG ────────────────────────────────── */
+.label {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--foreground-muted);
+}
+
+/* ─── CARD ───────────────────────────────────────── */
+.card {
+  background: var(--background-pure);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-soft);
+  transition: box-shadow 0.35s ease, transform 0.35s ease;
+}
+
+.card:hover {
+  box-shadow: var(--shadow-hover);
+  transform: translateY(-4px);
+}
+
+/* ─── BUTTON BASE ────────────────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  cursor: none;
+  transition: all 0.3s ease;
+  border-radius: var(--radius-pill);
+  padding: 12px 28px;
+  border: 1px solid transparent;
+}
+
+.btn-dark {
+  background: var(--accent);
+  color: #f5f4f0;
+  border-color: var(--accent);
+}
+
+.btn-dark:hover {
+  background: transparent;
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--accent);
+  border-color: var(--border-strong);
+}
+
+.btn-outline:hover {
+  background: var(--accent);
+  color: #f5f4f0;
+  border-color: var(--accent);
+}
+
+/* ─── CUSTOM CURSOR ──────────────────────────────── */
 .custom-cursor {
   position: fixed;
   top: 0;
   left: 0;
-  width: 14px;
-  height: 14px;
+  width: 12px;
+  height: 12px;
   border-radius: 50%;
   pointer-events: none;
   z-index: 9999;
-
-  background: white;
+  background: var(--accent);
   mix-blend-mode: difference;
-
   transform: translate(-50%, -50%);
   transition: transform 0.08s linear;
-
   will-change: transform;
 }
 
-a:hover ~ .custom-cursor,
-button:hover ~ .custom-cursor {
-  transform: scale(1.8);
+/* ─── GRAIN OVERLAY ──────────────────────────────── */
+.grain {
+  position: absolute;
+  inset: 0;
+  opacity: 0.025;
+  background-image: url('/noise.jpg');
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ─── SCROLLBAR ──────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent);
 }

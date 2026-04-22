@@ -9,10 +9,15 @@ const EXPO = [0.16, 1, 0.3, 1] as const;
 
 export default function StudioPage() {
   return (
-    <main style={{ backgroundColor: "#f9f8f6", color: "#0a0a0a" }}>
+    <main style={{ backgroundColor: "#f5f4f0", color: "#0a0a0a" }}>
+
+      {/* ═══════════════════════════════════════════
+          HERO — White editorial, bottom-anchored
+      ═══════════════════════════════════════════ */}
       <section
+        data-theme="light"
         style={{
-          minHeight: "100vh", // ✅ fallback
+          minHeight: "100vh",
           height: "100dvh",
           display: "flex",
           flexDirection: "column",
@@ -20,6 +25,7 @@ export default function StudioPage() {
           padding: "0 clamp(24px, 6vw, 96px) clamp(52px, 8vw, 88px)",
           position: "relative",
           overflow: "hidden",
+          backgroundColor: "#f5f4f0",
         }}
       >
         {/* Ghost watermark */}
@@ -27,18 +33,18 @@ export default function StudioPage() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1.6, ease: EXPO, delay: 0.1 }}
-          aria-hidden="true"
+          aria-hidden
           style={{
             position: "absolute",
             top: "50%",
             left: "50%",
             transform: "translate(-50%, -50%)",
             fontFamily: "var(--font-heading)",
-            fontSize: "clamp(120px, 22vw, 280px)",
-            fontWeight: 700,
+            fontSize: "clamp(100px, 20vw, 260px)",
+            fontWeight: 400,
             letterSpacing: "-0.05em",
             color: "transparent",
-            WebkitTextStroke: "1px rgba(0,0,0,0.06)",
+            WebkitTextStroke: "1px rgba(10,10,10,0.06)",
             whiteSpace: "nowrap",
             userSelect: "none",
             pointerEvents: "none",
@@ -48,18 +54,8 @@ export default function StudioPage() {
           STUDIO
         </motion.p>
 
-        {/* Grain */}
-        <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            backgroundImage: "url('/noise.jpg')",
-            backgroundRepeat: "repeat",
-            opacity: 0.03,
-            pointerEvents: "none",
-            willChange: "opacity",
-          }}
-        />
+        {/* Grain overlay */}
+        <div className="grain" />
 
         {/* Top bar */}
         <motion.div
@@ -75,130 +71,85 @@ export default function StudioPage() {
             gap: 10,
           }}
         >
-          <div
-            style={{
-              width: 20,
-              height: 1,
-              backgroundColor: "#0a0a0a",
-              opacity: 0.3,
-            }}
-          />
+          <div style={{ width: 20, height: 1, backgroundColor: "rgba(10,10,10,0.25)" }} />
           <span
             style={{
-              fontFamily: "var(--font-body)",
-              fontSize: 10,
+              fontFamily: "'DM Mono', monospace",
+              fontSize: "0.58rem",
               letterSpacing: "0.28em",
               textTransform: "uppercase",
-              color: "rgba(0,0,0,0.35)",
+              color: "rgba(10,10,10,0.3)",
             }}
           >
             02 / Studio
           </span>
         </motion.div>
 
-        {/* MAIN GRID */}
+        {/* Main content grid */}
         <div
           style={{
             position: "relative",
             zIndex: 2,
             display: "grid",
             gridTemplateColumns: "1fr",
-            rowGap: "40px",
+            rowGap: 36,
           }}
         >
-          {/* LEFT */}
+          {/* Heading block */}
           <div>
             <motion.p
               initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, ease: EXPO }}
               style={{
-                fontFamily: "var(--font-body)",
-                fontSize: 10,
+                fontFamily: "'DM Mono', monospace",
+                fontSize: "0.6rem",
                 letterSpacing: "0.36em",
                 textTransform: "uppercase",
-                color: "rgba(0,0,0,0.35)",
-                marginBottom: 20,
+                color: "rgba(10,10,10,0.32)",
+                marginBottom: 24,
               }}
             >
               A Design + Curation Studio
             </motion.p>
 
-            {/* H1 */}
-            <div style={{ overflow: "hidden" }}>
-              <motion.h1
-                initial={{ y: "105%", opacity: 0 }}
-                animate={{ y: "0%", opacity: 1 }}
-                transition={{ delay: 0.15, duration: 1.1, ease: EXPO }}
-                style={{
-                  fontFamily: "var(--font-heading)",
-                  fontSize: "clamp(2.6rem, 6.5vw, 5.8rem)",
-                  fontWeight: 700,
-                  lineHeight: 1.04,
-                  letterSpacing: "-0.035em",
-                  transform: "translateZ(0)",
-                }}
-              >
-                We design spaces
-              </motion.h1>
-            </div>
-
-            {/* H2 */}
-            <div style={{ overflow: "hidden" }}>
-              <motion.h2
-                initial={{ y: "105%", opacity: 0 }}
-                animate={{ y: "0%", opacity: 1 }}
-                transition={{ delay: 0.27, duration: 1.1, ease: EXPO }}
-                style={{
-                  fontFamily: "var(--font-heading)",
-                  fontSize: "clamp(2.6rem, 6.5vw, 5.8rem)",
-                  fontWeight: 700,
-                  fontStyle: "italic",
-                  lineHeight: 1.04,
-                  letterSpacing: "-0.035em",
-                }}
-              >
-                that feel
-              </motion.h2>
-            </div>
-
-            {/* H2 */}
-            <div style={{ overflow: "hidden" }}>
-              <motion.h2
-                initial={{ y: "105%", opacity: 0 }}
-                animate={{ y: "0%", opacity: 1 }}
-                transition={{ delay: 0.39, duration: 1.1, ease: EXPO }}
-                style={{
-                  fontFamily: "var(--font-heading)",
-                  fontSize: "clamp(2.6rem, 6.5vw, 5.8rem)",
-                  fontWeight: 700,
-                  lineHeight: 1.04,
-                  letterSpacing: "-0.035em",
-                }}
-              >
-                before they function
-              </motion.h2>
-            </div>
+            {[
+              { text: "We design spaces", italic: false },
+              { text: "that feel", italic: true, muted: false },
+              { text: "before they function", italic: false, muted: true },
+            ].map((line, i) => (
+              <div key={i} style={{ overflow: "hidden" }}>
+                <motion.h1
+                  initial={{ y: "105%", opacity: 0 }}
+                  animate={{ y: "0%", opacity: 1 }}
+                  transition={{ delay: 0.15 + i * 0.12, duration: 1.1, ease: EXPO }}
+                  style={{
+                    fontFamily: "var(--font-heading)",
+                    fontSize: "clamp(2.4rem, 6.5vw, 5.8rem)",
+                    fontWeight: 400,
+                    lineHeight: 1.04,
+                    letterSpacing: "-0.04em",
+                    fontStyle: line.italic ? "italic" : "normal",
+                    color: line.muted ? "rgba(10,10,10,0.28)" : "#0a0a0a",
+                    transform: "translateZ(0)",
+                  }}
+                >
+                  {line.text}
+                </motion.h1>
+              </div>
+            ))}
           </div>
 
-          {/* RIGHT */}
-          <div
-            style={{
-              maxWidth: 260,
-              width: "100%",
-              display: "flex",
-              flexDirection: "column",
-              gap: 20,
-            }}
-          >
+          {/* Descriptor */}
+          <div style={{ maxWidth: 320, display: "flex", flexDirection: "column", gap: 18 }}>
             <motion.div
               initial={{ scaleY: 0 }}
               animate={{ scaleY: 1 }}
               transition={{ delay: 0.8, duration: 1, ease: EXPO }}
               style={{
-                width: "1.5px",
-                height: 48,
-                backgroundColor: "rgba(0,0,0,0.2)",
+                width: 1,
+                height: 44,
+                backgroundColor: "rgba(10,10,10,0.18)",
                 transformOrigin: "top",
               }}
             />
@@ -210,11 +161,11 @@ export default function StudioPage() {
               style={{
                 fontFamily: "var(--font-body)",
                 fontSize: "clamp(0.82rem, 1.1vw, 0.95rem)",
-                lineHeight: 1.75,
-                color: "rgba(0,0,0,0.45)",
+                lineHeight: 1.8,
+                color: "rgba(10,10,10,0.45)",
               }}
             >
-              MOODBYTEAL blends emotion, architecture, and minimal luxury —
+              TEAL CULTURE blends emotion, architecture, and minimal luxury —
               crafting environments that resonate on a deeper level.
             </motion.p>
 
@@ -223,14 +174,14 @@ export default function StudioPage() {
               animate={{ opacity: 1 }}
               transition={{ delay: 1.3, duration: 0.7 }}
               style={{
-                fontFamily: "var(--font-body)",
-                fontSize: 9,
+                fontFamily: "'DM Mono', monospace",
+                fontSize: "0.56rem",
                 letterSpacing: "0.28em",
                 textTransform: "uppercase",
-                color: "rgba(0,0,0,0.25)",
+                color: "rgba(10,10,10,0.22)",
               }}
             >
-              Based in UAE / IND
+              Based in Kerala, India · UAE
             </motion.p>
           </div>
         </div>
@@ -246,7 +197,7 @@ export default function StudioPage() {
             left: "clamp(24px, 6vw, 96px)",
             right: "clamp(24px, 6vw, 96px)",
             height: 1,
-            backgroundColor: "rgba(0,0,0,0.1)",
+            backgroundColor: "rgba(10,10,10,0.1)",
             transformOrigin: "left",
           }}
         />
@@ -270,33 +221,29 @@ export default function StudioPage() {
             style={{
               width: 32,
               height: 1,
-              backgroundColor: "rgba(0,0,0,0.18)",
+              backgroundColor: "rgba(10,10,10,0.12)",
               overflow: "hidden",
               position: "relative",
             }}
           >
             <motion.div
               animate={{ x: ["-100%", "100%"] }}
-              transition={{
-                duration: 1.4,
-                repeat: Infinity,
-                ease: [0.4, 0, 0.2, 1],
-              }}
+              transition={{ duration: 1.4, repeat: Infinity, ease: [0.4, 0, 0.2, 1] }}
               style={{
                 position: "absolute",
                 width: "50%",
                 height: "100%",
-                backgroundColor: "rgba(0,0,0,0.55)",
+                backgroundColor: "rgba(10,10,10,0.5)",
               }}
             />
           </div>
           <span
             style={{
-              fontFamily: "var(--font-body)",
-              fontSize: 9,
+              fontFamily: "'DM Mono', monospace",
+              fontSize: "0.52rem",
               letterSpacing: "0.3em",
               textTransform: "uppercase",
-              color: "rgba(0,0,0,0.28)",
+              color: "rgba(10,10,10,0.25)",
             }}
           >
             Scroll
@@ -304,8 +251,13 @@ export default function StudioPage() {
         </motion.div>
       </section>
 
+      {/* About + MoodyTeal concept */}
       <About />
+
+      {/* Founder story */}
       <Founder />
+
+      {/* Team grid */}
       <Team />
     </main>
   );

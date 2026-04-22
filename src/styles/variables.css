@@ -1,13 +1,56 @@
 :root {
-  /* COLORS */
+  /* ─── CORE PALETTE ─────────────────────────── */
+  --background: #f5f4f0;          /* warm off-white — not sterile */
+  --background-pure: #ffffff;
+  --background-alt: #eeede8;      /* subtle section contrast */
+
+  --foreground: #0a0a0a;          /* near-black text */
+  --foreground-muted: rgba(10, 10, 10, 0.45);
+  --foreground-subtle: rgba(10, 10, 10, 0.22);
+
+  --accent: #0a0a0a;              /* black — primary accent */
+  --accent-soft: rgba(10, 10, 10, 0.06);
+
+  --border: rgba(10, 10, 10, 0.1);
+  --border-strong: rgba(10, 10, 10, 0.2);
+
+  /* ─── TEAL BRAND ACCENT ────────────────────── */
+  --teal: #2d6a6a;
+  --teal-light: #4a9e9e;
+  --teal-muted: rgba(45, 106, 106, 0.12);
+
+  /* ─── DARK SECTION OVERRIDE ────────────────── */
+  /* Use [data-theme="dark"] on sections you want black */
+  --dark-bg: #0a0a0a;
+  --dark-fg: #f5f4f0;
+
+  /* ─── TYPOGRAPHY ───────────────────────────── */
+  --tracking-wide: 0.22em;
+  --tracking-heading: -0.03em;
+
+  /* ─── SPACING ──────────────────────────────── */
+  --section-padding: 7rem;
+  --section-padding-sm: 4rem;
+
+  /* ─── RADIUS ───────────────────────────────── */
+  --radius-sm: 4px;
+  --radius-md: 12px;
+  --radius-lg: 24px;
+  --radius-pill: 999px;
+
+  /* ─── SHADOWS ──────────────────────────────── */
+  --shadow-soft: 0 2px 24px rgba(0,0,0,0.06);
+  --shadow-card: 0 8px 48px rgba(0,0,0,0.10);
+  --shadow-hover: 0 16px 64px rgba(0,0,0,0.16);
+}
+
+/* ─── DARK SECTION TOKENS ──────────────────────── */
+[data-theme="dark"] {
   --background: #0a0a0a;
-  --foreground: #ffffff;
-  --muted: rgba(255, 255, 255, 0.6);
-  --border: rgba(0, 0, 0, 0.08);
-
-  --accent: #111111;
-  --accent-soft: rgba(0, 0, 0, 0.05);
-
-  /* SPACING */
-  --section-padding: 6rem;
+  --background-alt: #111111;
+  --foreground: #f5f4f0;
+  --foreground-muted: rgba(245, 244, 240, 0.5);
+  --foreground-subtle: rgba(245, 244, 240, 0.22);
+  --border: rgba(255, 255, 255, 0.1);
+  --accent-soft: rgba(255, 255, 255, 0.05);
 }

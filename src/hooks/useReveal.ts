@@ -1,32 +1,64 @@
 "use client";
 
 import { useEffect } from "react";
-import gsap from "gsap";
-import { initGSAP } from "@/lib/gsap";
 
-export function useReveal(ref: React.RefObject<HTMLElement>) {
+// ─── useReveal ────────────────────────────────────────────
+// ✅ Keep — but GSAP dependency removed
+// Now uses native IntersectionObserver + Web Animations API
+// Same visual result, zero extra library cost
+// Framer Motion's useInView is preferred in components,
+// but this hook is useful for simple one-shot reveals on any element
+
+export function useReveal(
+  ref: React.RefObject<HTMLElement | null>,
+  options?: {
+    delay?: number;       // ms, default 0
+    duration?: number;    // ms, default 600
+    fromY?: number;       // px, default 32
+    once?: boolean;       // default true
+  }
+) {
+  const {
+    delay = 0,
+    duration = 600,
+    fromY = 32,
+    once = true,
+  } = options ?? {};
+
   useEffect(() => {
-    if (!ref.current) return;
-
-    if (window.innerWidth < 768) return; // 🔥 disable mobile
-
-    initGSAP();
-
     const el = ref.current;
+    if (!el) return;
 
-    gsap.fromTo(
-      el,
-      { opacity: 0, y: 40 },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 0.6, // 🔥 reduced
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: el,
-          start: "top 90%", // 🔥 earlier trigger
-        },
-      }
+    // Set initial invisible state
+    el.style.opacity = "0";
+    el.style.transform = `translateY(${fromY}px)`;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            el.animate(
+              [
+                { opacity: 0, transform: `translateY(${fromY}px)` },
+                { opacity: 1, transform: "translateY(0px)" },
+              ],
+              {
+                duration,
+                delay,
+                easing: "cubic-bezier(0.16, 1, 0.3, 1)",
+                fill: "forwards",
+              }
+            );
+
+            if (once) observer.unobserve(el);
+          }
+        });
+      },
+      { threshold: 0.15 }
     );
-  }, [ref]);
+
+    observer.observe(el);
+
+    return () => observer.disconnect();
+  }, [ref, delay, duration, fromY, once]);
 }

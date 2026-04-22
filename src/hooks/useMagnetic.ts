@@ -1,11 +1,17 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
+
+// ─── useMagnetic ──────────────────────────────────────────
+// ✅ Keep — used in Navbar NavLink and CtaButton
+// Optimized: RAF throttling prevents jank on fast mouse moves
 
 export function useMagnetic<T extends HTMLElement>(
   ref: React.RefObject<T | null>,
   strength: number = 0.2
 ) {
+  const frame = useRef<number | null>(null);
+
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
@@ -14,17 +20,23 @@ export function useMagnetic<T extends HTMLElement>(
 
     const handleEnter = () => {
       bounds = el.getBoundingClientRect();
+      el.style.willChange = "transform";
     };
 
     const handleMove = (e: MouseEvent) => {
-      const x = e.clientX - bounds.left - bounds.width / 2;
-      const y = e.clientY - bounds.top - bounds.height / 2;
+      if (frame.current) cancelAnimationFrame(frame.current);
 
-      el.style.transform = `translate(${x * strength}px, ${y * strength}px)`;
+      frame.current = requestAnimationFrame(() => {
+        const x = e.clientX - bounds.left - bounds.width / 2;
+        const y = e.clientY - bounds.top - bounds.height / 2;
+        el.style.transform = `translate3d(${x * strength}px, ${y * strength}px, 0)`;
+      });
     };
 
     const handleLeave = () => {
-      el.style.transform = "translate(0,0)";
+      if (frame.current) cancelAnimationFrame(frame.current);
+      el.style.transform = "translate3d(0,0,0)";
+      el.style.willChange = "auto";
     };
 
     el.addEventListener("mouseenter", handleEnter);
@@ -35,6 +47,7 @@ export function useMagnetic<T extends HTMLElement>(
       el.removeEventListener("mouseenter", handleEnter);
       el.removeEventListener("mousemove", handleMove);
       el.removeEventListener("mouseleave", handleLeave);
+      if (frame.current) cancelAnimationFrame(frame.current);
     };
   }, [ref, strength]);
 }

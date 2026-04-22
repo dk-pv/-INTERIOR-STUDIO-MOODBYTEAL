@@ -1,15 +1,16 @@
-import { Playfair_Display, Inter } from "next/font/google";
+import { Cormorant_Garamond, DM_Sans } from "next/font/google";
 
-export const headingFont = Playfair_Display({
+export const headingFont = Cormorant_Garamond({
   subsets: ["latin"],
-  weight: ["400", "600", "700"],
+  weight: ["300", "400", "500"],
+  style: ["normal", "italic"],
   variable: "--font-heading",
-  display: "swap", // ✅ prevents layout shift
+  display: "swap",
 });
 
-export const bodyFont = Inter({
+export const bodyFont = DM_Sans({
   subsets: ["latin"],
-  weight: ["400", "500"],
+  weight: ["300", "400", "500"],
   variable: "--font-body",
-  display: "swap", // ✅ important
+  display: "swap",
 });
