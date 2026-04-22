@@ -2,13 +2,9 @@
 
 import { useEffect, useRef } from "react";
 
-// ─── useMagnetic ──────────────────────────────────────────
-// ✅ Keep — used in Navbar NavLink and CtaButton
-// Optimized: RAF throttling prevents jank on fast mouse moves
-
 export function useMagnetic<T extends HTMLElement>(
   ref: React.RefObject<T | null>,
-  strength: number = 0.2
+  strength: number = 0.2,
 ) {
   const frame = useRef<number | null>(null);
 

@@ -1,100 +1,3 @@
-// export const projects = [
-//   // 🏡 VILLA INTERIOR
-//   {
-//     id: "villa-1",
-//     title: "Modern Villa Retreat",
-//     category: "Villa Interior",
-//     image: "/images/villa1.jpg",
-//     description: "A serene modern villa blending clean architecture with warm textures, crafted for peaceful luxury living.",
-//   },
-//   {
-//     id: "villa-2",
-//     title: "Luxury Courtyard Villa",
-//     category: "Villa Interior",
-//     image: "/images/villa2.jpg",
-//     description: "An inward-focused villa centered around a tranquil courtyard, balancing privacy, light, and refined elegance.",
-//   },
-//   {
-//     id: "villa-3",
-//     title: "Minimal Concrete Villa",
-//     category: "Villa Interior",
-//     image: "/images/villa3.jpg",
-//     description: "A bold minimal design using raw concrete and open spaces to create a timeless architectural statement.",
-//   },
-
-//   // 🏠 PRIVATE INTERIOR
-//   {
-//     id: "private-1",
-//     title: "Warm Minimal Residence",
-//     category: "Private Interior",
-//     image: "/images/interior1.jpg",
-//     description: "A cozy minimal home layered with soft tones and natural materials, designed for comfort and calm living.",
-//   },
-//   {
-//     id: "private-2",
-//     title: "Soft Light Living Space",
-//     category: "Private Interior",
-//     image: "/images/interior2.jpg",
-//     description: "An airy interior where natural light shapes the space, enhancing subtle textures and gentle color palettes.",
-//   },
-//   {
-//     id: "private-3",
-//     title: "Contemporary Home Interior",
-//     category: "Private Interior",
-//     image: "/images/interior3.jpg",
-//     description: "A refined contemporary interior combining modern aesthetics with functional, everyday comfort.",
-//   },
-
-//   // 🏢 COMMERCIAL INTERIOR
-//   {
-//     id: "commercial-1",
-//     title: "Premium Office Space",
-//     category: "Commercial Interior",
-//     image: "/images/commercial1.jpg",
-//     description: "A sophisticated workspace designed to inspire productivity through clean layouts and premium finishes.",
-//   },
-//   {
-//     id: "commercial-2",
-//     title: "Retail Experience Store",
-//     category: "Commercial Interior",
-//     image: "/images/commercial2.jpg",
-//     description: "An immersive retail environment crafted to enhance customer experience through spatial storytelling.",
-//   },
-//   {
-//     id: "commercial-3",
-//     title: "Luxury Workspace Design",
-//     category: "Commercial Interior",
-//     image: "/images/commercial3.jpg",
-//     description: "A high-end commercial interior blending elegance and efficiency to create a powerful brand presence.",
-//   },
-
-//   // 🏙️ APARTMENT INTERIOR
-//   {
-//     id: "apartment-1",
-//     title: "Urban Apartment Living",
-//     category: "Apartment Interior",
-//     image: "/images/apartment1.jpg",
-//     description: "A smart urban apartment designed for modern city living with efficient layouts and stylish detailing.",
-//   },
-//   {
-//     id: "apartment-2",
-//     title: "Compact Luxury Apartment",
-//     category: "Apartment Interior",
-//     image: "/images/apartment2.jpg",
-//     description: "A compact yet luxurious apartment maximizing space with elegant finishes and intelligent design.",
-//   },
-//   {
-//     id: "apartment-3",
-//     title: "Modern City Apartment",
-//     category: "Apartment Interior",
-//     image: "/images/apartment3.jpg",
-//     description: "A contemporary city apartment blending functionality with sleek aesthetics for a refined lifestyle.",
-//   },
-// ];
-
-
-
-
 export const projects = [
   // ─── VILLA INTERIOR ──────────────────────────────────────
   {
@@ -109,7 +12,8 @@ export const projects = [
     ],
     description:
       "A serene modern villa blending clean architecture with warm textures, crafted for peaceful luxury living. Natural materials anchor each space while controlled light shapes the atmosphere throughout the day.",
-    quote: "Architecture should speak of its time and place, but yearn for timelessness.",
+    quote:
+      "Architecture should speak of its time and place, but yearn for timelessness.",
     location: "Kerala, India",
     year: "2024",
     area: "4,200 sq.ft",
@@ -119,10 +23,7 @@ export const projects = [
     title: "Luxury Courtyard Villa",
     category: "Villa Interior",
     image: "/images/villa2.jpg",
-    images: [
-      "/images/villa2.jpg",
-      "/images/villa2-b.jpg",
-    ],
+    images: ["/images/villa2.jpg", "/images/villa2-b.jpg"],
     description:
       "An inward-focused villa centred around a tranquil courtyard, balancing privacy, natural light, and refined elegance. The courtyard becomes the heart — a breathing space within a private world.",
     quote: "The courtyard is not a void. It is the soul of the house.",
@@ -135,10 +36,7 @@ export const projects = [
     title: "Minimal Concrete Villa",
     category: "Villa Interior",
     image: "/images/villa3.jpg",
-    images: [
-      "/images/villa3.jpg",
-      "/images/villa3-b.jpg",
-    ],
+    images: ["/images/villa3.jpg", "/images/villa3-b.jpg"],
     description:
       "A bold minimal design using raw concrete and generous open spaces to create a timeless architectural statement. Every surface, joint, and opening was considered as part of a single continuous gesture.",
     location: "Trivandrum, India",
@@ -169,10 +67,7 @@ export const projects = [
     title: "Soft Light Living Space",
     category: "Private Interior",
     image: "/images/interior2.jpg",
-    images: [
-      "/images/interior2.jpg",
-      "/images/interior2-b.jpg",
-    ],
+    images: ["/images/interior2.jpg", "/images/interior2-b.jpg"],
     description:
       "An airy interior where natural light shapes the space, enhancing subtle textures and gentle colour palettes. The design follows the arc of daylight — morning warmth to evening calm.",
     location: "Thrissur, India",
@@ -184,9 +79,7 @@ export const projects = [
     title: "Contemporary Home Interior",
     category: "Private Interior",
     image: "/images/interior3.jpg",
-    images: [
-      "/images/interior3.jpg",
-    ],
+    images: ["/images/interior3.jpg"],
     description:
       "A refined contemporary interior combining modern aesthetics with functional, everyday comfort. Clean geometries and considered material transitions define the experience.",
     location: "Bangalore, India",
@@ -200,10 +93,7 @@ export const projects = [
     title: "Premium Office Space",
     category: "Commercial Interior",
     image: "/images/commercial1.jpg",
-    images: [
-      "/images/commercial1.jpg",
-      "/images/commercial1-b.jpg",
-    ],
+    images: ["/images/commercial1.jpg", "/images/commercial1-b.jpg"],
     description:
       "A sophisticated workspace designed to inspire productivity through clean layouts and premium finishes. The space rewards focus while communicating brand confidence without loudness.",
     quote: "A workspace should elevate the people who inhabit it.",
@@ -216,10 +106,7 @@ export const projects = [
     title: "Retail Experience Store",
     category: "Commercial Interior",
     image: "/images/commercial2.jpg",
-    images: [
-      "/images/commercial2.jpg",
-      "/images/commercial2-b.jpg",
-    ],
+    images: ["/images/commercial2.jpg", "/images/commercial2-b.jpg"],
     description:
       "An immersive retail environment crafted to enhance customer experience through spatial storytelling. Each zone has its own character — yet the journey through the space feels seamless.",
     location: "Kochi, India",
@@ -231,9 +118,7 @@ export const projects = [
     title: "Luxury Workspace Design",
     category: "Commercial Interior",
     image: "/images/commercial3.jpg",
-    images: [
-      "/images/commercial3.jpg",
-    ],
+    images: ["/images/commercial3.jpg"],
     description:
       "A high-end commercial interior blending elegance and efficiency to create a powerful brand presence. The materiality speaks the brand language without a single logo in sight.",
     location: "Abu Dhabi, UAE",
@@ -247,10 +132,7 @@ export const projects = [
     title: "Urban Apartment Living",
     category: "Apartment Interior",
     image: "/images/apartment1.jpg",
-    images: [
-      "/images/apartment1.jpg",
-      "/images/apartment1-b.jpg",
-    ],
+    images: ["/images/apartment1.jpg", "/images/apartment1-b.jpg"],
     description:
       "A smart urban apartment designed for modern city living with efficient layouts and stylish detailing. Compact does not mean compromised — every square foot serves multiple purposes beautifully.",
     quote: "Small spaces demand the sharpest thinking.",
@@ -263,10 +145,7 @@ export const projects = [
     title: "Compact Luxury Apartment",
     category: "Apartment Interior",
     image: "/images/apartment2.jpg",
-    images: [
-      "/images/apartment2.jpg",
-      "/images/apartment2-b.jpg",
-    ],
+    images: ["/images/apartment2.jpg", "/images/apartment2-b.jpg"],
     description:
       "A compact yet luxurious apartment maximising space with elegant finishes and intelligent design. The challenge was to make 900 sq.ft feel like a sanctuary — and it does.",
     location: "Dubai, UAE",
@@ -278,9 +157,7 @@ export const projects = [
     title: "Modern City Apartment",
     category: "Apartment Interior",
     image: "/images/apartment3.jpg",
-    images: [
-      "/images/apartment3.jpg",
-    ],
+    images: ["/images/apartment3.jpg"],
     description:
       "A contemporary city apartment blending functionality with sleek aesthetics for a refined lifestyle. The floor-to-ceiling palette gives the impression of height and calm simultaneously.",
     location: "Bangalore, India",

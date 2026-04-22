@@ -1,88 +1,3 @@
-// "use client";
-
-// import { useRef, useEffect } from "react";
-// import gsap from "gsap";
-// import { initGSAP } from "@/lib/gsap";
-
-// export default function About() {
-//   const sectionRef = useRef<HTMLDivElement>(null);
-//   const beamRef = useRef<HTMLDivElement>(null);
-//   const contentRef = useRef<HTMLDivElement>(null);
-
-//   useEffect(() => {
-//     initGSAP();
-
-//     const section = sectionRef.current;
-//     const beam = beamRef.current;
-//     const content = contentRef.current;
-
-//     if (!section || !beam || !content) return;
-
-//     // Light beam animation
-//     gsap.fromTo(
-//       beam,
-//       { height: "0%", opacity: 0 },
-//       {
-//         height: "100%",
-//         opacity: 1,
-//         duration: 1.2,
-//         ease: "power3.out",
-//         scrollTrigger: {
-//           trigger: section,
-//           start: "top 70%",
-//         },
-//       },
-//     );
-
-//     // Content reveal
-//     gsap.fromTo(
-//       content,
-//       { opacity: 0, y: 60 },
-//       {
-//         opacity: 1,
-//         y: 0,
-//         duration: 1,
-//         delay: 0.3,
-//         ease: "power3.out",
-//         scrollTrigger: {
-//           trigger: section,
-//           start: "top 70%",
-//         },
-//       },
-//     );
-//   }, []);
-
-//   return (
-//     <section
-//       ref={sectionRef}
-//       className="relative min-h-screen flex items-center justify-center overflow-hidden bg-black"
-//     >
-//       {/* Light Beam */}
-//       <div className="absolute inset-0 flex justify-center pointer-events-none">
-//         <div
-//           ref={beamRef}
-//           className="w-[2px] bg-gradient-to-b from-white via-white/30 to-transparent shadow-[0_0_40px_rgba(255,255,255,0.3)]"
-//         />
-//       </div>
-
-//       {/* Content */}
-//       <div ref={contentRef} className="relative text-center max-w-2xl px-6">
-//         <h2 className="text-3xl md:text-5xl font-heading mb-6 text-white">
-//           We Shape Spaces
-//         </h2>
-
-//         <p className="text-white/60 leading-relaxed">
-//           A design language rooted in contrast, depth, and emotion. We build
-//           spaces that speak beyond structure — spaces that feel.
-//         </p>
-//       </div>
-//     </section>
-//   );
-// }
-
-
-
-
 "use client";
 
 import { useRef, useEffect } from "react";
@@ -102,7 +17,11 @@ export default function About() {
         { height: "0%", opacity: 0 },
         { height: "100%", opacity: 1 },
       ],
-      { duration: 1200, easing: "cubic-bezier(0.16,1,0.3,1)", fill: "forwards" }
+      {
+        duration: 1200,
+        easing: "cubic-bezier(0.16,1,0.3,1)",
+        fill: "forwards",
+      },
     );
   }, [inView]);
 
@@ -149,7 +68,6 @@ export default function About() {
 
         {/* Main content */}
         <div style={{ position: "relative", maxWidth: 960, width: "100%" }}>
-          
           {/* Label */}
           <motion.p
             initial={{ opacity: 0, y: 12 }}
@@ -213,9 +131,9 @@ export default function About() {
               margin: "0 auto 64px",
             }}
           >
-            A design language rooted in contrast, depth, and emotion.
-            We build environments that speak beyond structure —
-            where every material, shadow, and detail carries intention.
+            A design language rooted in contrast, depth, and emotion. We build
+            environments that speak beyond structure — where every material,
+            shadow, and detail carries intention.
           </motion.p>
 
           {/* Three pillars — horizontal */}
@@ -232,9 +150,21 @@ export default function About() {
             }}
           >
             {[
-              { num: "01", title: "Spatial Harmony", desc: "Every proportion, every threshold — considered." },
-              { num: "02", title: "Emotional Depth", desc: "Interiors that evoke, not just impress." },
-              { num: "03", title: "Timeless Craft", desc: "Material choices built to outlast trends." },
+              {
+                num: "01",
+                title: "Spatial Harmony",
+                desc: "Every proportion, every threshold — considered.",
+              },
+              {
+                num: "02",
+                title: "Emotional Depth",
+                desc: "Interiors that evoke, not just impress.",
+              },
+              {
+                num: "03",
+                title: "Timeless Craft",
+                desc: "Material choices built to outlast trends.",
+              },
             ].map((item) => (
               <div
                 key={item.num}
@@ -360,8 +290,8 @@ export default function About() {
                 lineHeight: 1.85,
               }}
             >
-              moodyTEAL is not just a name — it is a state of mind. The teal
-              hue exists between blue and green, between calm and depth. It
+              moodyTEAL is not just a name — it is a state of mind. The teal hue
+              exists between blue and green, between calm and depth. It
               represents the emotional register we seek in every project:
               quietly powerful, never loud.
             </p>

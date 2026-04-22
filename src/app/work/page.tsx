@@ -1,64 +1,37 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useState } from "react";
 import ProjectShowcase from "@/components/sections/WorkGrid";
 
 const EXPO = [0.16, 1, 0.3, 1] as const;
+const LETTERS = "WORK".split("");
 
 export default function WorkPage() {
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+
   return (
     <main style={{ backgroundColor: "#f5f4f0", color: "#0a0a0a" }}>
-
-      {/* ═══════════════════════════════════════════
-          HERO — White editorial layout
-      ═══════════════════════════════════════════ */}
       <section
-        data-theme="light"
         style={{
-          minHeight: "85vh",
+          minHeight: "90vh",
           display: "flex",
           flexDirection: "column",
           justifyContent: "flex-end",
-          padding: "clamp(80px, 10vw, 120px) clamp(24px, 6vw, 96px) clamp(52px, 8vw, 80px)",
+          padding:
+            "clamp(80px, 10vw, 120px) clamp(24px, 6vw, 96px) clamp(52px, 8vw, 80px)",
           position: "relative",
           overflow: "hidden",
           backgroundColor: "#f5f4f0",
         }}
       >
-        {/* Ghost watermark */}
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1.2, ease: EXPO }}
-          aria-hidden
-          style={{
-            position: "absolute",
-            top: "45%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
-            fontFamily: "var(--font-heading)",
-            fontSize: "clamp(100px, 20vw, 280px)",
-            fontWeight: 400,
-            letterSpacing: "-0.06em",
-            color: "transparent",
-            WebkitTextStroke: "1px rgba(10,10,10,0.05)",
-            whiteSpace: "nowrap",
-            userSelect: "none",
-            pointerEvents: "none",
-            lineHeight: 1,
-          }}
-        >
-          WORK
-        </motion.p>
-
-        {/* Grain */}
         <div className="grain" />
 
-        {/* Top label */}
+        {/* Top-right label */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.7 }}
+          transition={{ duration: 0.8 }}
           style={{
             position: "absolute",
             top: "clamp(24px, 4vw, 48px)",
@@ -68,53 +41,103 @@ export default function WorkPage() {
             gap: 10,
           }}
         >
-          <div style={{ width: 20, height: 1, backgroundColor: "rgba(10,10,10,0.25)" }} />
+          <div
+            style={{
+              width: 20,
+              height: 1,
+              backgroundColor: "rgba(10,10,10,0.2)",
+            }}
+          />
           <span
             style={{
               fontFamily: "'DM Mono', monospace",
-              fontSize: "0.58rem",
+              fontSize: "0.55rem",
               letterSpacing: "0.28em",
               textTransform: "uppercase",
-              color: "rgba(10,10,10,0.3)",
+              color: "rgba(10,10,10,0.28)",
             }}
           >
             03 / Work
           </span>
         </motion.div>
 
-        {/* Main heading */}
-        <div style={{ position: "relative", zIndex: 2 }}>
-          <motion.p
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: EXPO }}
-            style={{
-              fontFamily: "'DM Mono', monospace",
-              fontSize: "0.6rem",
-              letterSpacing: "0.32em",
-              textTransform: "uppercase",
-              color: "rgba(10,10,10,0.3)",
-              marginBottom: 24,
-            }}
-          >
-            Selected Works
-          </motion.p>
+        {/* Giant hover letters */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1.2, ease: EXPO }}
+          style={{
+            position: "absolute",
+            top: "44%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            display: "flex",
+            gap: "0.02em",
+            zIndex: 1,
+          }}
+        >
+          {LETTERS.map((char, i) => (
+            <motion.span
+              key={i}
+              onHoverStart={() => setHoveredIndex(i)}
+              onHoverEnd={() => setHoveredIndex(null)}
+              animate={{
+                y: hoveredIndex === i ? -18 : 0,
+                opacity:
+                  hoveredIndex === null
+                    ? 1
+                    : hoveredIndex === i
+                      ? 1
+                      : 1 - Math.min(Math.abs(hoveredIndex - i) * 0.22, 0.7),
+              }}
+              transition={{ type: "spring", stiffness: 500, damping: 28 }}
+              style={{
+                fontFamily: "var(--font-heading)",
+                fontSize: "clamp(110px, 22vw, 300px)",
+                fontWeight: 400,
+                letterSpacing: "-0.06em",
+                color: "transparent",
+                WebkitTextStroke: "1px rgba(10,10,10,0.08)",
+                lineHeight: 1,
+                cursor: "default",
+                userSelect: "none",
+                display: "inline-block",
+              }}
+            >
+              {char}
+            </motion.span>
+          ))}
+        </motion.div>
 
-          <div style={{ display: "flex", alignItems: "flex-end", gap: "0.15em" }}>
-            {["Our", " Work"].map((word, i) => (
+        {/* Bottom heading block */}
+        <div style={{ position: "relative", zIndex: 2 }}>
+          <div
+            style={{ display: "flex", alignItems: "flex-end", gap: "0.12em" }}
+          >
+            {["Making", " things", " matter."].map((word, i) => (
               <div key={i} style={{ overflow: "hidden" }}>
                 <motion.h1
-                  initial={{ y: "105%", opacity: 0 }}
+                  initial={{ y: "108%", opacity: 0 }}
                   animate={{ y: "0%", opacity: 1 }}
-                  transition={{ duration: 1, delay: i * 0.14, ease: EXPO }}
+                  transition={{
+                    duration: 1,
+                    delay: 0.1 + i * 0.12,
+                    ease: EXPO,
+                  }}
                   style={{
                     fontFamily: "var(--font-heading)",
-                    fontSize: "clamp(3.5rem, 10vw, 9.5rem)",
+                    fontSize: "clamp(2.8rem, 7.5vw, 7rem)",
                     fontWeight: 400,
                     lineHeight: 1.0,
                     letterSpacing: "-0.04em",
-                    color: i === 0 ? "#0a0a0a" : "rgba(10,10,10,0.25)",
-                    fontStyle: i === 1 ? "italic" : "normal",
+                    margin: 0,
+                    color:
+                      i === 0
+                        ? "#0a0a0a"
+                        : i === 1
+                          ? "rgba(10,10,10,0.45)"
+                          : "rgba(10,10,10,0.18)",
+                    fontStyle: i === 2 ? "italic" : "normal",
                   }}
                 >
                   {word}
@@ -122,27 +145,44 @@ export default function WorkPage() {
               </div>
             ))}
           </div>
+
+          {/* Subtle sub-line */}
+          <motion.p
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.6, ease: EXPO }}
+            style={{
+              fontFamily: "'DM Mono', monospace",
+              fontSize: "0.58rem",
+              letterSpacing: "0.22em",
+              textTransform: "uppercase",
+              color: "rgba(10,10,10,0.22)",
+              marginTop: 20,
+              marginBottom: 0,
+            }}
+          >
+            12 projects — Interiors &amp; Spaces
+          </motion.p>
         </div>
 
         {/* Bottom rule */}
         <motion.div
           initial={{ scaleX: 0 }}
           animate={{ scaleX: 1 }}
-          transition={{ delay: 0.5, duration: 1.1, ease: EXPO }}
+          transition={{ delay: 0.5, duration: 1.2, ease: EXPO }}
           style={{
             position: "absolute",
             bottom: "clamp(52px, 8vw, 80px)",
             left: "clamp(24px, 6vw, 96px)",
             right: "clamp(24px, 6vw, 96px)",
             height: 1,
-            backgroundColor: "rgba(10,10,10,0.1)",
+            backgroundColor: "rgba(10,10,10,0.08)",
             transformOrigin: "left",
           }}
         />
       </section>
 
-      {/* Project grid */}
-      <ProjectShowcase />
+      <ProjectShowcase  />
     </main>
   );
 }

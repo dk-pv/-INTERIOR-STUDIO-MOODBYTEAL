@@ -10,10 +10,6 @@ const EXPO = [0.16, 1, 0.3, 1] as const;
 export default function StudioPage() {
   return (
     <main style={{ backgroundColor: "#f5f4f0", color: "#0a0a0a" }}>
-
-      {/* ═══════════════════════════════════════════
-          HERO — White editorial, bottom-anchored
-      ═══════════════════════════════════════════ */}
       <section
         data-theme="light"
         style={{
@@ -71,7 +67,13 @@ export default function StudioPage() {
             gap: 10,
           }}
         >
-          <div style={{ width: 20, height: 1, backgroundColor: "rgba(10,10,10,0.25)" }} />
+          <div
+            style={{
+              width: 20,
+              height: 1,
+              backgroundColor: "rgba(10,10,10,0.25)",
+            }}
+          />
           <span
             style={{
               fontFamily: "'DM Mono', monospace",
@@ -122,7 +124,11 @@ export default function StudioPage() {
                 <motion.h1
                   initial={{ y: "105%", opacity: 0 }}
                   animate={{ y: "0%", opacity: 1 }}
-                  transition={{ delay: 0.15 + i * 0.12, duration: 1.1, ease: EXPO }}
+                  transition={{
+                    delay: 0.15 + i * 0.12,
+                    duration: 1.1,
+                    ease: EXPO,
+                  }}
                   style={{
                     fontFamily: "var(--font-heading)",
                     fontSize: "clamp(2.4rem, 6.5vw, 5.8rem)",
@@ -141,7 +147,14 @@ export default function StudioPage() {
           </div>
 
           {/* Descriptor */}
-          <div style={{ maxWidth: 320, display: "flex", flexDirection: "column", gap: 18 }}>
+          <div
+            style={{
+              maxWidth: 320,
+              display: "flex",
+              flexDirection: "column",
+              gap: 18,
+            }}
+          >
             <motion.div
               initial={{ scaleY: 0 }}
               animate={{ scaleY: 1 }}
@@ -228,7 +241,11 @@ export default function StudioPage() {
           >
             <motion.div
               animate={{ x: ["-100%", "100%"] }}
-              transition={{ duration: 1.4, repeat: Infinity, ease: [0.4, 0, 0.2, 1] }}
+              transition={{
+                duration: 1.4,
+                repeat: Infinity,
+                ease: [0.4, 0, 0.2, 1],
+              }}
               style={{
                 position: "absolute",
                 width: "50%",
