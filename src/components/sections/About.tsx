@@ -141,6 +141,7 @@ export default function About() {
             initial={{ opacity: 0, y: 24 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.7 }}
+            className="pillars-grid"
             style={{
               display: "grid",
               gridTemplateColumns: "repeat(3, 1fr)",
@@ -244,6 +245,7 @@ export default function About() {
         </div>
 
         <div
+          className="concept-grid"
           style={{
             maxWidth: 960,
             margin: "0 auto",
@@ -297,6 +299,7 @@ export default function About() {
             </p>
 
             <div
+              className="stats-row"
               style={{
                 marginTop: 40,
                 paddingTop: 32,
@@ -340,6 +343,33 @@ export default function About() {
           </div>
         </div>
       </section>
+
+      {/* Responsive styles only */}
+      <style>{`
+        /* ── Pillars: tablet → 2 col, mobile → 1 col ── */
+        @media (max-width: 700px) {
+          .pillars-grid {
+            grid-template-columns: 1fr 1fr !important;
+          }
+        }
+        @media (max-width: 440px) {
+          .pillars-grid {
+            grid-template-columns: 1fr !important;
+          }
+        }
+
+        /* ── Concept dark section: stack on mobile ── */
+        @media (max-width: 680px) {
+          .concept-grid {
+            grid-template-columns: 1fr !important;
+            gap: 40px !important;
+          }
+          /* Stats row: space them evenly when stacked */
+          .stats-row {
+            gap: 24px !important;
+          }
+        }
+      `}</style>
     </>
   );
 }
