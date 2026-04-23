@@ -292,8 +292,11 @@ export default function Hero() {
               href="/studio"
               whileHover={{ x: 6 }}
               transition={{ duration: 0.25 }}
-              className="btn btn-outline mt-8 inline-flex"
-              style={{ cursor: "none" }}
+              className="btn btn-outline inline-flex"
+              style={{
+                cursor: "pointer",
+                marginTop: "clamp(40px, 6vw, 80px)",
+              }}
             >
               Our Story
               <span style={{ opacity: 0.5, fontSize: "0.8em" }}>→</span>

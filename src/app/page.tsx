@@ -8,10 +8,10 @@ export default function Home() {
   return (
     <>
       <Hero />
+      <About />
       <VisualCollections />
       <CollectionSections />
       <WorkGrid />
-      <About />
     </>
   );
 }

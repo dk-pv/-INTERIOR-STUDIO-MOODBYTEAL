@@ -280,7 +280,7 @@ export default function ProjectShowcase() {
               color: "rgba(10,10,10,0.25)",
             }}
           >
-            {filtered.length} projects
+            48+ projects
           </motion.p>
         </div>
 
