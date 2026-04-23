@@ -4,41 +4,119 @@ import { motion, useInView } from "framer-motion";
 import Image from "next/image";
 import { useRef } from "react";
 
-/* ─────────────────────────────────────────────────────────────
-   VISUAL COLLECTIONS — TEALCULTURE
-   White background throughout.
-   Three editorial blocks:
-     A) Commercial Architecture  — hero + bento grid
-     B) Villa Architecture       — text header + hero card + grid
-     C) Private Interior         — editorial heading + big card
-                                   + circles + pills
-───────────────────────────────────────────────────────────── */
+const C = [
+  "/portfolio/commercial-1.png",
+  "/portfolio/commercial-2.png",
+  "/portfolio/commercial-3.png",
+  "/portfolio/commercial-4.png",
+];
+const V = [
+  "/portfolio/villa-1.png",
+  "/portfolio/villa-2.png",
+  "/portfolio/villa-3.png",
+  "/portfolio/villa-4.png",
+];
+const P = [
+  "/portfolio/private-1.jpg",
+  "/portfolio/private-2.jpg",
+  "/portfolio/private-3.jpg",
+  "/portfolio/private-4.jpg",
+  "/portfolio/private-5.jpg",
+];
 
-const IMAGES = {
-  commercial: [
-    "/portfolio/commercial-1.png",
-    "/portfolio/commercial-2.png",
-    "/portfolio/commercial-3.png",
-    "/portfolio/commercial-4.png",
-  ],
-  villa: [
-    "/portfolio/villa-1.png",
-    "/portfolio/villa-2.png",
-    "/portfolio/villa-3.png",
-    "/portfolio/villa-4.png",
-  ],
-  private: [
-    "/portfolio/private-1.jpg",
-    "/portfolio/private-2.jpg",
-    "/portfolio/private-3.jpg",
-    "/portfolio/private-4.jpg",
-    "/portfolio/private-5.jpg",
-  ],
-};
+function Fade({
+  children,
+  d = 0,
+  style,
+  className,
+}: {
+  children: React.ReactNode;
+  d?: number;
+  style?: React.CSSProperties;
+  className?: string;
+}) {
+  const ref = useRef<HTMLDivElement>(null);
+  const ok = useInView(ref, { once: true, margin: "-30px" });
+  return (
+    <motion.div
+      ref={ref}
+      style={style}
+      className={className}
+      initial={{ opacity: 0, y: 10 }}
+      animate={ok ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.7, delay: d, ease: [0.16, 1, 0.3, 1] }}
+    >
+      {children}
+    </motion.div>
+  );
+}
 
-// ─── Shared primitives ───────────────────────────────────────
+function Tile({
+  src,
+  alt,
+  sizes = "(max-width:768px) 100vw, 33vw",
+  className = "",
+  style,
+  priority,
+}: {
+  src: string;
+  alt: string;
+  sizes?: string;
+  className?: string;
+  style?: React.CSSProperties;
+  priority?: boolean;
+}) {
+  return (
+    <div
+      className={`vc-tile ${className}`}
+      style={{
+        position: "relative",
+        overflow: "hidden",
+        backgroundColor: "#dedad4",
+        ...style,
+      }}
+    >
+      <Image
+        src={src}
+        alt={alt}
+        fill
+        sizes={sizes}
+        priority={priority}
+        style={{ objectFit: "cover" }}
+        className="vc-img"
+      />
+    </div>
+  );
+}
 
-function Mono({
+function TextCell({
+  children,
+  className = "",
+  style,
+}: {
+  children: React.ReactNode;
+  className?: string;
+  style?: React.CSSProperties;
+}) {
+  return (
+    <div
+      className={`vc-text-cell ${className}`}
+      style={{
+        backgroundColor: "#ffffff",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        gap: 10,
+        ...style,
+      }}
+    >
+      {children}
+    </div>
+  );
+}
+
+function Heading({
   children,
   style,
 }: {
@@ -48,12 +126,14 @@ function Mono({
   return (
     <p
       style={{
-        fontFamily: "'DM Mono', monospace",
-        fontSize: "0.52rem",
-        letterSpacing: "0.32em",
-        textTransform: "uppercase",
-        color: "rgba(10,10,10,0.32)",
+        fontFamily: "var(--font-heading, serif)",
+        fontSize: "clamp(0.7rem, 1.4vw, 1.2rem)",
+        letterSpacing: "0.3em",
+        color: "rgba(10,10,10,0.72)",
         margin: 0,
+        fontWeight: 400,
+        textAlign: "center",
+        lineHeight: 1.7,
         ...style,
       }}
     >
@@ -62,701 +142,272 @@ function Mono({
   );
 }
 
-function Tile({
-  src,
-  alt,
-  style,
-  radius,
-  overlay,
-}: {
-  src: string;
-  alt: string;
-  style?: React.CSSProperties;
-  radius?: string | number;
-  overlay?: React.ReactNode;
-}) {
-  return (
-    <div
-      className="vc-tile"
-      style={{
-        position: "relative",
-        overflow: "hidden",
-        backgroundColor: "#d8d6d0",
-        borderRadius: radius ?? 0,
-        ...style,
-      }}
-    >
-      <Image
-        src={src}
-        alt={alt}
-        fill
-        sizes="(max-width:768px) 100vw, 50vw"
-        style={{
-          objectFit: "cover",
-          transition: "transform 0.9s cubic-bezier(0.16,1,0.3,1)",
-        }}
-        className="vc-img"
-      />
-      {overlay && (
-        <div style={{ position: "absolute", inset: 0, zIndex: 2 }}>
-          {overlay}
-        </div>
-      )}
-    </div>
-  );
-}
-
-function BrandCell({ dark = false }: { dark?: boolean }) {
-  return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-        gap: 10,
-        backgroundColor: dark ? "#0a0a0a" : "#f5f4f0",
-        padding: 16,
-      }}
-    >
-      {/* Mini logo mark */}
-      <div
-        style={{
-          width: 28,
-          height: 28,
-          border: `1px solid ${dark ? "rgba(245,244,240,0.25)" : "rgba(10,10,10,0.2)"}`,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
-        <div
-          style={{
-            width: 12,
-            height: 12,
-            border: `1px solid ${dark ? "rgba(245,244,240,0.5)" : "rgba(10,10,10,0.4)"}`,
-            borderRadius: "50%",
-          }}
-        />
-      </div>
-      <p
-        style={{
-          fontFamily: "var(--font-heading)",
-          fontSize: "clamp(0.55rem,1vw,0.72rem)",
-          letterSpacing: "0.2em",
-          color: dark ? "rgba(245,244,240,0.7)" : "rgba(10,10,10,0.6)",
-          margin: 0,
-        }}
-      >
-        TEAL<span style={{ opacity: 0.4 }}>CULTURE</span>
-      </p>
-    </div>
-  );
-}
-
-function Fade({
-  children,
-  delay = 0,
-  y = 20,
-  style,
-}: {
-  children: React.ReactNode;
-  delay?: number;
-  y?: number;
-  style?: React.CSSProperties;
-}) {
+export function CommercialBlock() {
   const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-60px" });
-  return (
-    <motion.div
-      ref={ref}
-      style={style}
-      initial={{ opacity: 0, y }}
-      animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.8, delay, ease: [0.16, 1, 0.3, 1] }}
-    >
-      {children}
-    </motion.div>
-  );
-}
-
-/* ════════════════════════════════════════════════════════════
-   BLOCK A — COMMERCIAL ARCHITECTURE
-   White bg · small logo row · full hero · bento 3×3 grid
-════════════════════════════════════════════════════════════ */
-function CommercialBlock() {
-  const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-60px" });
-  const imgs = IMAGES.commercial;
+  const ok = useInView(ref, { once: true, margin: "-40px" });
 
   return (
-    <div
-      ref={ref}
-      style={{
-        backgroundColor: "#ffffff",
-        padding: "clamp(48px,7vw,88px) clamp(20px,5vw,64px)",
-      }}
-    >
-      {/* Top bar */}
+    <section ref={ref} style={{ backgroundColor: "#ffffff" }}>
+      {/* Row 1 */}
       <motion.div
+        className="vc-com-row1"
         initial={{ opacity: 0 }}
-        animate={inView ? { opacity: 1 } : {}}
+        animate={ok ? { opacity: 1 } : {}}
         transition={{ duration: 0.6 }}
-        style={{
-          display: "flex",
-          alignItems: "center",
-          gap: 16,
-          marginBottom: "clamp(20px,3vw,32px)",
-        }}
       >
-        {/* Logo mark */}
-        <div
-          style={{
-            width: 32,
-            height: 32,
-            border: "1px solid rgba(10,10,10,0.18)",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            flexShrink: 0,
-          }}
-        >
-          <div
-            style={{
-              width: 14,
-              height: 14,
-              border: "1px solid rgba(10,10,10,0.35)",
-              borderRadius: "50%",
-            }}
-          />
-        </div>
-        <Mono>Future-Forward Architecture</Mono>
+        {/* "COMMERCIAL" label cell */}
+        <TextCell className="vc-com-label-a">
+          <Heading>COMMERCIAL</Heading>
+        </TextCell>
+
+        {/* Centre portrait image */}
+        <Tile
+          src={C[1]}
+          alt="Commercial feature"
+          className="vc-com-hero"
+          priority
+          sizes="50vw"
+        />
+
+        {/* "ARCHITECTURE" label cell */}
+        <TextCell className="vc-com-label-b">
+          <Heading>ARCHITECTURE</Heading>
+        </TextCell>
       </motion.div>
 
-      {/* Hero image */}
-      <Fade delay={0.1}>
-        <div
-          style={{
-            position: "relative",
-            width: "100%",
-            height: "clamp(240px,38vw,460px)",
-            overflow: "hidden",
-            marginBottom: 2,
-          }}
-        >
-          <Image
-            src={imgs[0]}
-            alt="commercial hero"
-            fill
-            sizes="100vw"
-            style={{ objectFit: "cover", transition: "transform 0.9s cubic-bezier(0.16,1,0.3,1)" }}
-            className="vc-img"
-          />
-        </div>
+      {/* Row 2 — 3 images */}
+      <Fade d={0.12} className="vc-com-row2">
+        <Tile
+          src={C[0]}
+          alt="Commercial 2"
+          className="vc-com-img"
+          sizes="33vw"
+        />
+        <Tile
+          src={C[2]}
+          alt="Commercial 3"
+          className="vc-com-img"
+          sizes="33vw"
+        />
+        <Tile
+          src={C[3]}
+          alt="Commercial 4"
+          className="vc-com-img"
+          sizes="33vw"
+        />
       </Fade>
-
-      {/* Hero caption */}
-      <Fade delay={0.18}>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            padding: "clamp(12px,2vw,18px) 0",
-            borderBottom: "1px solid rgba(10,10,10,0.08)",
-            marginBottom: "clamp(16px,2.5vw,24px)",
-          }}
-        >
-          <Mono style={{ letterSpacing: "0.38em", color: "rgba(10,10,10,0.45)" }}>
-            Commercial Architecture
-          </Mono>
-        </div>
-      </Fade>
-
-      {/* Bento 3×3 grid */}
-      <Fade delay={0.22}>
-        <div
-          className="bento-grid"
-          style={{
-            display: "grid",
-            gridTemplateColumns: "1fr 1fr 1fr",
-            gridTemplateRows: "clamp(130px,17vw,210px) clamp(130px,17vw,210px)",
-            gap: 2,
-          }}
-        >
-          {/* Row 1 */}
-          <Tile src={imgs[1]} alt="commercial 2" />
-          <BrandCell />
-          <Tile src={imgs[2]} alt="commercial 3" />
-
-          {/* Row 2 */}
-          <div
-            style={{
-              backgroundColor: "#f5f4f0",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <Mono style={{ writingMode: "vertical-rl", transform: "rotate(180deg)" }}>
-              Commercial
-            </Mono>
-          </div>
-          <Tile src={imgs[3]} alt="commercial 4" />
-          <div
-            style={{
-              backgroundColor: "#f5f4f0",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <Mono style={{ writingMode: "vertical-rl" }}>Architecture</Mono>
-          </div>
-        </div>
-      </Fade>
-
-      {/* Bottom label */}
-      <Fade delay={0.3}>
-        <div style={{ display: "flex", justifyContent: "center", paddingTop: "clamp(16px,2vw,24px)" }}>
-          <Mono style={{ letterSpacing: "0.28em", color: "rgba(10,10,10,0.28)" }}>
-            Visual Collection
-          </Mono>
-        </div>
-      </Fade>
-    </div>
+    </section>
   );
 }
 
-/* ════════════════════════════════════════════════════════════
-   BLOCK B — VILLA ARCHITECTURE
-   White bg · centred text header · hero card with overlay
-                · 3×4 mosaic grid
-════════════════════════════════════════════════════════════ */
-function VillaBlock() {
+// ── VILLA ────────────────────────────────────────────────────
+/*
+  Desktop:
+    Row1: [img | TEALCULTURE cell | img]
+    Row2: [VILLA ARCHITECTURE cell | img | circle-img cell]
+  Tablet: same layout, smaller heights
+  Mobile:
+    [img] full width
+    [TEALCULTURE label centred]
+    [img | img] 2-col
+    [VILLA ARCHITECTURE label]
+    [img] + circle
+*/
+export function VillaBlock() {
   const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-60px" });
-  const imgs = IMAGES.villa;
+  const ok = useInView(ref, { once: true, margin: "-40px" });
 
   return (
-    <div
+    <section
       ref={ref}
-      style={{
-        backgroundColor: "#fafaf8",
-        padding: "clamp(48px,7vw,88px) clamp(20px,5vw,64px)",
-        borderTop: "1px solid rgba(10,10,10,0.06)",
-      }}
+      style={{ backgroundColor: "#ffffff", borderTop: "2px solid #f5f4f0" }}
     >
-      {/* Text header — centred */}
+      {/* Row 1 */}
       <motion.div
-        initial={{ opacity: 0, y: 16 }}
-        animate={inView ? { opacity: 1, y: 0 } : {}}
-        transition={{ duration: 0.65 }}
-        style={{ textAlign: "center", marginBottom: "clamp(20px,3.5vw,36px)" }}
-      >
-        <p
-          style={{
-            fontFamily: "var(--font-heading)",
-            fontSize: "clamp(0.72rem,1.1vw,0.88rem)",
-            letterSpacing: "0.36em",
-            color: "rgba(10,10,10,0.55)",
-            margin: "0 0 6px",
-          }}
-        >
-          VILLA ARCHITECTURE
-        </p>
-        <Mono style={{ letterSpacing: "0.3em" }}>Visual Collection</Mono>
-      </motion.div>
-
-      {/* Hero card with centre overlay */}
-      <Fade delay={0.1}>
-        <div
-          style={{
-            position: "relative",
-            width: "100%",
-            height: "clamp(280px,44vw,520px)",
-            overflow: "hidden",
-            marginBottom: 2,
-          }}
-        >
-          <Image
-            src={imgs[0]}
-            alt="villa hero"
-            fill
-            sizes="100vw"
-            style={{ objectFit: "cover", transition: "transform 0.9s cubic-bezier(0.16,1,0.3,1)" }}
-            className="vc-img"
-          />
-          {/* Subtle dark vignette */}
-          <div
-            style={{
-              position: "absolute",
-              inset: 0,
-              background: "radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.3) 100%)",
-              pointerEvents: "none",
-            }}
-          />
-          {/* Centred brand overlay */}
-          <div
-            style={{
-              position: "absolute",
-              inset: 0,
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              justifyContent: "center",
-              gap: 10,
-              zIndex: 2,
-            }}
-          >
-            <p
-              style={{
-                fontFamily: "var(--font-heading)",
-                fontSize: "clamp(0.9rem,1.8vw,1.3rem)",
-                letterSpacing: "0.28em",
-                color: "rgba(255,255,255,0.85)",
-                margin: 0,
-              }}
-            >
-              TEAL<span style={{ opacity: 0.55 }}>CULTURE</span>
-            </p>
-          </div>
-          {/* Bottom caption */}
-          <div
-            style={{
-              position: "absolute",
-              bottom: 0,
-              left: 0,
-              right: 0,
-              padding: "clamp(14px,2.5vw,24px)",
-              background: "linear-gradient(to top, rgba(0,0,0,0.5) 0%, transparent 100%)",
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "flex-end",
-              zIndex: 3,
-            }}
-          >
-            <p
-              style={{
-                fontFamily: "var(--font-heading)",
-                fontSize: "clamp(0.88rem,1.6vw,1.2rem)",
-                letterSpacing: "0.18em",
-                color: "rgba(255,255,255,0.8)",
-                margin: 0,
-              }}
-            >
-              VILLA ARCHITECTURE
-            </p>
-            <Mono style={{ color: "rgba(255,255,255,0.4)" }}>Visual Collection</Mono>
-          </div>
-        </div>
-      </Fade>
-
-      {/* Mosaic grid — 3 cols × 4 rows with brand cells */}
-      <Fade delay={0.2}>
-        <div
-          className="villa-grid"
-          style={{
-            display: "grid",
-            gridTemplateColumns: "1fr 1fr 1fr",
-            gridTemplateRows: "repeat(4, clamp(90px,13vw,160px))",
-            gap: 2,
-          }}
-        >
-          {/* Row 1 */}
-          <Tile src={imgs[1]} alt="villa 2" />
-          <BrandCell />
-          <Tile src={imgs[2]} alt="villa 3" />
-
-          {/* Row 2 */}
-          <BrandCell />
-          <Tile src={imgs[3]} alt="villa 4" style={{ gridRow: "2/4" }} />
-          <div
-            style={{
-              backgroundColor: "#f5f4f0",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              padding: 12,
-            }}
-          >
-            <Mono style={{ textAlign: "center", lineHeight: 2 }}>
-              Villa
-              <br />
-              Architecture
-            </Mono>
-          </div>
-
-          {/* Row 3 */}
-          <Tile src={imgs[0]} alt="villa alt" />
-          <div
-            style={{
-              backgroundColor: "#f5f4f0",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <Mono style={{ writingMode: "vertical-rl", transform: "rotate(180deg)" }}>
-              Visual Collection
-            </Mono>
-          </div>
-
-          {/* Row 4 — full width caption row */}
-          <Tile src={imgs[2]} alt="villa thumb" />
-          <div
-            style={{
-              backgroundColor: "#0a0a0a",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <Mono style={{ color: "rgba(245,244,240,0.4)" }}>TEAL</Mono>
-          </div>
-          <Tile src={imgs[1]} alt="villa thumb 2" />
-        </div>
-      </Fade>
-    </div>
-  );
-}
-
-/* ════════════════════════════════════════════════════════════
-   BLOCK C — PRIVATE INTERIOR
-   White bg · logo top · editorial mixed-case heading
-            · big interior card · circles · watermark · pills
-════════════════════════════════════════════════════════════ */
-function PrivateBlock() {
-  const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-60px" });
-  const imgs = IMAGES.private;
-
-  const CIRCLE = "clamp(100px,14vw,170px)";
-  const PILL_W = "clamp(90px,12vw,150px)";
-  const PILL_H = "clamp(140px,19vw,210px)";
-
-  return (
-    <div
-      ref={ref}
-      style={{
-        backgroundColor: "#ffffff",
-        padding: "clamp(48px,7vw,88px) clamp(20px,5vw,64px)",
-        borderTop: "1px solid rgba(10,10,10,0.06)",
-      }}
-    >
-      {/* Logo row */}
-      <motion.div
+        className="vc-vil-row1"
         initial={{ opacity: 0 }}
-        animate={inView ? { opacity: 1 } : {}}
-        transition={{ duration: 0.5 }}
-        style={{
-          display: "flex",
-          alignItems: "center",
-          gap: 12,
-          marginBottom: "clamp(24px,4vw,44px)",
-        }}
+        animate={ok ? { opacity: 1 } : {}}
+        transition={{ duration: 0.6 }}
       >
-        <div
-          style={{
-            width: 34,
-            height: 34,
-            border: "1px solid rgba(10,10,10,0.15)",
-            display: "grid",
-            placeItems: "center",
-          }}
-        >
+        <Tile src={V[0]} alt="Villa 1" className="vc-vil-img" sizes="33vw" />
+
+        <TextCell className="vc-vil-brand">
           <div
             style={{
-              width: 16,
-              height: 16,
-              border: "1px solid rgba(10,10,10,0.3)",
+              width: 26,
+              height: 26,
+              border: "1px solid rgba(10,10,10,0.18)",
               borderRadius: "50%",
+              display: "grid",
+              placeItems: "center",
             }}
-          />
-        </div>
-        <Mono>TEALCULTURE · Studio</Mono>
+          >
+            <div
+              style={{
+                width: 8,
+                height: 8,
+                borderRadius: "50%",
+                backgroundColor: "rgba(10,10,10,0.22)",
+              }}
+            />
+          </div>
+          <Heading>
+            TEAL<span style={{ opacity: 0.4 }}>CULTURE</span>
+          </Heading>
+        </TextCell>
+
+        <Tile src={V[1]} alt="Villa 2" className="vc-vil-img" sizes="33vw" />
       </motion.div>
 
-      {/* Editorial heading */}
+      {/* Row 2 */}
+      <Fade d={0.12} className="vc-vil-row2">
+        <TextCell className="vc-vil-title">
+          <Heading>
+            VILLA
+            <br />
+            ARCHITECTURE
+          </Heading>
+        </TextCell>
+
+        <Tile src={V[2]} alt="Villa 3" className="vc-vil-img2" sizes="33vw" />
+
+        {/* Circle image cell */}
+        <TextCell className="vc-vil-circle-cell">
+          <div
+            className="vc-tile vc-vil-circle"
+            style={{
+              position: "relative",
+              overflow: "hidden",
+              borderRadius: "50%",
+              backgroundColor: "#dedad4",
+              border: "1px solid rgba(10,10,10,0.1)",
+            }}
+          >
+            <Image
+              src={V[3]}
+              alt="Villa 4"
+              fill
+              sizes="200px"
+              style={{ objectFit: "cover" }}
+              className="vc-img"
+            />
+          </div>
+        </TextCell>
+      </Fade>
+    </section>
+  );
+}
+
+// ── PRIVATE ──────────────────────────────────────────────────
+/*
+  Desktop:  "NEUTRAL RESIDENTIAL" title → 3 large overlapping arch shapes →
+            TEALCULTURE label → 3 overlapping circles
+  Tablet:   Same, arches slightly smaller
+  Mobile:   Title → 1 large arch centred → 2 smaller arches row →
+            TEALCULTURE → 2 circles row
+*/
+export function PrivateBlock() {
+  const ref = useRef<HTMLDivElement>(null);
+  const ok = useInView(ref, { once: true, margin: "-40px" });
+
+  return (
+    <section ref={ref} className="vc-priv-section">
+      {/* Title */}
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={inView ? { opacity: 1, y: 0 } : {}}
-        transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
-        style={{ marginBottom: "clamp(24px,4vw,40px)" }}
+        initial={{ opacity: 0, y: 8 }}
+        animate={ok ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.6 }}
+        style={{ textAlign: "center", marginBottom: "clamp(28px,5vw,52px)" }}
       >
         <p
           style={{
-            fontFamily: "var(--font-heading)",
-            fontSize: "clamp(3rem,8vw,7rem)",
-            letterSpacing: "-0.04em",
-            lineHeight: 0.9,
-            color: "#0a0a0a",
-            fontWeight: 400,
+            fontFamily: "var(--font-heading, serif)",
+            fontSize: "clamp(0.6rem, 0.95vw, 0.82rem)",
+            letterSpacing: "0.46em",
+            color: "rgba(10,10,10,0.48)",
             margin: 0,
-            textTransform: "uppercase",
+            fontWeight: 400,
           }}
         >
-          Private
-        </p>
-        <p
-          style={{
-            fontFamily: "var(--font-heading)",
-            fontSize: "clamp(3rem,8vw,7rem)",
-            letterSpacing: "-0.04em",
-            lineHeight: 0.9,
-            fontWeight: 400,
-            margin: 0,
-            color: "#0a0a0a",
-          }}
-        >
-          <span style={{ fontStyle: "italic", color: "rgba(10,10,10,0.28)" }}>.</span>
-          <span>Interior</span>
+          NEUTRAL RESIDENTIAL
         </p>
       </motion.div>
 
-      {/* Big interior card */}
-      <Fade delay={0.12}>
-        <div
-          style={{
-            position: "relative",
-            width: "100%",
-            height: "clamp(220px,36vw,420px)",
-            overflow: "hidden",
-            marginBottom: "clamp(20px,3.5vw,36px)",
-          }}
-        >
-          <Image
-            src={imgs[0]}
-            alt="private interior hero"
-            fill
-            sizes="100vw"
-            style={{ objectFit: "cover", transition: "transform 0.9s cubic-bezier(0.16,1,0.3,1)" }}
-            className="vc-img"
-          />
-        </div>
+      {/* Arch row */}
+      <Fade d={0.08} className="vc-priv-arches">
+        {[P[0], P[1], P[2]].map((src, i) => (
+          <div
+            key={i}
+            className={`vc-tile vc-priv-arch ${i === 1 ? "vc-priv-arch--mid" : ""}`}
+            style={{
+              position: "relative",
+              overflow: "hidden",
+              borderRadius: "9999px",
+              backgroundColor: "#c8c4bc",
+              boxShadow: "0 6px 28px rgba(0,0,0,0.12)",
+            }}
+          >
+            <Image
+              src={src}
+              alt={`Private ${i + 1}`}
+              fill
+              sizes="(max-width:480px) 55vw, 22vw"
+              style={{ objectFit: "cover", objectPosition: "center 20%" }}
+              className="vc-img"
+            />
+          </div>
+        ))}
       </Fade>
 
-      {/* Neutral Residential label */}
-      <Fade delay={0.16}>
-        <div style={{ marginBottom: 14 }}>
-          <Mono style={{ letterSpacing: "0.32em" }}>Neutral Residential</Mono>
-        </div>
+      {/* TEALCULTURE label */}
+      <Fade
+        d={0.18}
+        style={{ textAlign: "center", margin: "clamp(20px,3.5vw,40px) 0" }}
+      >
+        <p
+          style={{
+            fontFamily: "var(--font-heading, serif)",
+            fontSize: "clamp(0.65rem, 1vw, 0.88rem)",
+            letterSpacing: "0.28em",
+            color: "rgba(10,10,10,0.42)",
+            margin: 0,
+            fontWeight: 400,
+          }}
+        >
+          TEAL<span style={{ opacity: 0.42 }}>CULTURE</span>
+        </p>
       </Fade>
 
       {/* Circle row */}
-      <Fade delay={0.2}>
-        <div
-          className="circle-row"
-          style={{
-            display: "flex",
-            gap: "clamp(6px,1.2vw,12px)",
-            flexWrap: "wrap",
-            marginBottom: "clamp(12px,2vw,20px)",
-          }}
-        >
-          {[imgs[1], imgs[2], imgs[3]].map((src, i) => (
-            <div
-              key={i}
-              style={{
-                position: "relative",
-                width: CIRCLE,
-                height: CIRCLE,
-                borderRadius: "50%",
-                overflow: "hidden",
-                flexShrink: 0,
-                backgroundColor: "#d8d6d0",
-              }}
-            >
-              <Image
-                src={src}
-                alt={`private circle ${i}`}
-                fill
-                sizes="170px"
-                style={{ objectFit: "cover", transition: "transform 0.8s cubic-bezier(0.16,1,0.3,1)" }}
-                className="vc-img"
-              />
-            </div>
-          ))}
-        </div>
-      </Fade>
-
-      {/* Watermark divider */}
-      <Fade delay={0.24}>
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: 16,
-            margin: "clamp(10px,1.8vw,18px) 0",
-          }}
-        >
-          <div style={{ flex: 1, height: 1, backgroundColor: "rgba(10,10,10,0.07)" }} />
-          <Mono style={{ color: "rgba(10,10,10,0.18)", letterSpacing: "0.36em" }}>
-            TEALCULTURE
-          </Mono>
-          <div style={{ flex: 1, height: 1, backgroundColor: "rgba(10,10,10,0.07)" }} />
-        </div>
-      </Fade>
-
-      {/* Pills row + description */}
-      <Fade delay={0.28}>
-        <div
-          className="pill-row"
-          style={{
-            display: "flex",
-            alignItems: "flex-end",
-            gap: "clamp(8px,1.5vw,16px)",
-            flexWrap: "wrap",
-          }}
-        >
-          {[imgs[3], imgs[4]].map((src, i) => (
-            <div
-              key={i}
-              style={{
-                position: "relative",
-                width: PILL_W,
-                height: PILL_H,
-                borderRadius: 9999,
-                overflow: "hidden",
-                flexShrink: 0,
-                backgroundColor: "#d8d6d0",
-              }}
-            >
-              <Image
-                src={src}
-                alt={`private pill ${i}`}
-                fill
-                sizes="150px"
-                style={{ objectFit: "cover", transition: "transform 0.8s cubic-bezier(0.16,1,0.3,1)" }}
-                className="vc-img"
-              />
-            </div>
-          ))}
-
-          {/* Text block */}
-          <div style={{ flex: 1, minWidth: 160, paddingBottom: 6 }}>
-            <p
-              style={{
-                fontFamily: "var(--font-body, sans-serif)",
-                fontSize: "clamp(0.8rem,1.1vw,0.9rem)",
-                color: "rgba(10,10,10,0.4)",
-                lineHeight: 1.8,
-                margin: "0 0 18px",
-              }}
-            >
-              Neutral residential spaces curated around lived emotion, tactile
-              material, and enduring simplicity.
-            </p>
-            <Mono style={{ letterSpacing: "0.3em" }}>Visual Collection</Mono>
+      <Fade d={0.24} className="vc-priv-circles">
+        {[P[2], P[3], P[4]].map((src, i) => (
+          <div
+            key={i}
+            className={`vc-tile vc-priv-circle ${i === 1 ? "vc-priv-circle--mid" : ""}`}
+            style={{
+              position: "relative",
+              overflow: "hidden",
+              borderRadius: "50%",
+              backgroundColor: "#c8c4bc",
+              boxShadow: "0 4px 20px rgba(0,0,0,0.10)",
+            }}
+          >
+            <Image
+              src={src}
+              alt={`Private circle ${i}`}
+              fill
+              sizes="(max-width:480px) 40vw, 18vw"
+              style={{ objectFit: "cover" }}
+              className="vc-img"
+            />
           </div>
-        </div>
+        ))}
       </Fade>
-    </div>
+    </section>
   );
 }
 
-/* ════════════════════════════════════════════════════════════
-   ROOT EXPORT
-════════════════════════════════════════════════════════════ */
+// ── ROOT + ALL RESPONSIVE CSS ────────────────────────────────
 export default function VisualCollections() {
   return (
     <section aria-label="Visual Collections — TEALCULTURE">
@@ -765,27 +416,215 @@ export default function VisualCollections() {
       <PrivateBlock />
 
       <style>{`
-        /* Hover zoom on all images */
-        .vc-tile:hover .vc-img,
-        .vc-img:hover { transform: scale(1.06) !important; }
 
-        /* Bento responsive */
-        @media (max-width: 600px) {
-          .bento-grid {
-            grid-template-columns: 1fr 1fr !important;
-            grid-template-rows: auto !important;
+        /* ── shared ── */
+        .vc-img {
+          object-fit: cover;
+          transition: transform 0.9s cubic-bezier(0.16,1,0.3,1);
+        }
+        .vc-tile:hover .vc-img { transform: scale(1.05); }
+
+
+        /* ══ COMMERCIAL ══════════════════════════════════════ */
+
+        /* Row 1 */
+        .vc-com-row1 {
+          display: grid;
+          gap: 2px;
+        }
+        .vc-com-hero { aspect-ratio: 3/4; }
+        .vc-com-label-a,
+        .vc-com-label-b { min-height: 80px; }
+
+        /* Row 2 */
+        .vc-com-row2 {
+          display: grid;
+          gap: 2px;
+        }
+        .vc-com-img { aspect-ratio: 4/3; }
+
+        /* Desktop ≥769px */
+        @media (min-width: 769px) {
+          .vc-com-row1 { grid-template-columns: 1fr 1fr 1fr; }
+          .vc-com-hero { aspect-ratio: unset; height: clamp(260px, 34vw, 420px); }
+          .vc-com-label-a,
+          .vc-com-label-b { height: clamp(260px, 34vw, 420px); }
+          .vc-com-row2 { grid-template-columns: 1fr 1fr 1fr; }
+          .vc-com-img { aspect-ratio: unset; height: clamp(200px, 26vw, 310px); }
+        }
+
+        /* Tablet 481–768px */
+        @media (min-width: 481px) and (max-width: 768px) {
+          .vc-com-row1 { grid-template-columns: 1fr 1fr 1fr; }
+          .vc-com-hero { aspect-ratio: unset; height: 200px; }
+          .vc-com-label-a,
+          .vc-com-label-b { height: 200px; }
+          .vc-com-row2 { grid-template-columns: 1fr 1fr 1fr; }
+          .vc-com-img { aspect-ratio: unset; height: 160px; }
+        }
+
+        /* Mobile ≤480px */
+        @media (max-width: 480px) {
+          /* Row1: stack hero full, labels side by side below */
+          .vc-com-row1 { grid-template-columns: 1fr; }
+          .vc-com-label-a { order: 2; }
+          .vc-com-hero    { order: 1; aspect-ratio: 4/3; height: auto; }
+          .vc-com-label-b { order: 3; }
+          /* Show labels as a side-by-side pair under the hero */
+          .vc-com-label-a,
+          .vc-com-label-b {
+            grid-column: 1;
+            min-height: 60px;
           }
-          .villa-grid {
-            grid-template-columns: 1fr 1fr !important;
-            grid-template-rows: auto !important;
+          /* Re-layout row1 as: hero full → labels 2-col */
+          .vc-com-row1 {
+            grid-template-columns: 1fr 1fr;
+          }
+          .vc-com-hero { grid-column: 1 / -1; }
+          /* Row 2: 2-col grid */
+          .vc-com-row2 { grid-template-columns: 1fr 1fr; }
+          .vc-com-img { aspect-ratio: 1/1; height: auto; }
+        }
+
+
+        /* ══ VILLA ═══════════════════════════════════════════ */
+
+        .vc-vil-row1,
+        .vc-vil-row2 { display: grid; gap: 2px; }
+        .vc-vil-img,
+        .vc-vil-img2 { aspect-ratio: 4/3; }
+        .vc-vil-brand,
+        .vc-vil-title,
+        .vc-vil-circle-cell { min-height: 80px; }
+        .vc-vil-circle { width: clamp(100px,15vw,200px); height: clamp(100px,15vw,200px); }
+
+        /* Desktop */
+        @media (min-width: 769px) {
+          .vc-vil-row1 { grid-template-columns: 1fr 1fr 1fr; }
+          .vc-vil-row2 { grid-template-columns: 1fr 1fr 1fr; }
+          .vc-vil-img,
+          .vc-vil-img2 { aspect-ratio: unset; height: clamp(220px, 28vw, 340px); }
+          .vc-vil-brand,
+          .vc-vil-title,
+          .vc-vil-circle-cell { height: clamp(220px, 28vw, 340px); }
+          .vc-vil-circle { width: clamp(130px,17vw,210px); height: clamp(130px,17vw,210px); }
+        }
+
+        /* Tablet */
+        @media (min-width: 481px) and (max-width: 768px) {
+          .vc-vil-row1 { grid-template-columns: 1fr 1fr 1fr; }
+          .vc-vil-row2 { grid-template-columns: 1fr 1fr 1fr; }
+          .vc-vil-img,
+          .vc-vil-img2 { aspect-ratio: unset; height: 180px; }
+          .vc-vil-brand,
+          .vc-vil-title,
+          .vc-vil-circle-cell { height: 180px; }
+          .vc-vil-circle { width: 110px; height: 110px; }
+        }
+
+        /* Mobile */
+        @media (max-width: 480px) {
+          /* Row1: full-width image → brand label → 2-col images */
+          .vc-vil-row1 {
+            grid-template-columns: 1fr 1fr;
+          }
+          /* First image spans full width */
+          .vc-vil-row1 > .vc-vil-img:first-child {
+            grid-column: 1 / -1;
+            aspect-ratio: 16/7;
+            height: auto;
+          }
+          /* Brand cell + second image side by side */
+          .vc-vil-brand { min-height: 100px; }
+          .vc-vil-img { aspect-ratio: 1/1; height: auto; }
+
+          /* Row2: 2-col */
+          .vc-vil-row2 {
+            grid-template-columns: 1fr 1fr;
+          }
+          .vc-vil-title { min-height: 100px; }
+          .vc-vil-img2 { aspect-ratio: 1/1; height: auto; }
+          /* Circle cell: hidden on mobile or shown smaller */
+          .vc-vil-circle-cell { display: none; }
+        }
+
+
+        /* ══ PRIVATE ═════════════════════════════════════════ */
+
+        .vc-priv-section {
+          background-color: #eeece7;
+          border-top: 2px solid #e5e3de;
+          padding: clamp(36px,6vw,72px) clamp(16px,5vw,60px);
+        }
+
+        /* Arch row */
+        .vc-priv-arches {
+          display: flex;
+          justify-content: center;
+          align-items: flex-end;
+        }
+        .vc-priv-arch {
+          flex-shrink: 0;
+          width: clamp(130px, 20vw, 240px);
+          height: clamp(190px, 30vw, 380px);
+          margin: 0 clamp(-28px,-4vw,-14px);
+          z-index: 1;
+        }
+        .vc-priv-arch--mid {
+          transform: translateY(-20px);
+          z-index: 2;
+        }
+
+        /* Circle row */
+        .vc-priv-circles {
+          display: flex;
+          justify-content: center;
+          align-items: flex-end;
+        }
+        .vc-priv-circle {
+          flex-shrink: 0;
+          width: clamp(110px,16vw,210px);
+          height: clamp(110px,16vw,210px);
+          margin: 0 clamp(-22px,-3vw,-10px);
+          z-index: 1;
+        }
+        .vc-priv-circle--mid {
+          transform: translateY(-10px);
+          z-index: 2;
+        }
+
+        /* Tablet */
+        @media (min-width: 481px) and (max-width: 768px) {
+          .vc-priv-arch {
+            width: clamp(110px, 26vw, 200px);
+            height: clamp(160px, 36vw, 280px);
+            margin: 0 -18px;
+          }
+          .vc-priv-arch--mid { transform: translateY(-16px); }
+          .vc-priv-circle {
+            width: clamp(100px,22vw,170px);
+            height: clamp(100px,22vw,170px);
+            margin: 0 -14px;
           }
         }
-        @media (max-width: 380px) {
-          .bento-grid,
-          .villa-grid { grid-template-columns: 1fr !important; }
-          .circle-row,
-          .pill-row   { gap: 8px !important; }
+
+        /* Mobile */
+        @media (max-width: 480px) {
+          /* 3 arches visible but compact */
+          .vc-priv-arch {
+            width: clamp(90px, 28vw, 140px);
+            height: clamp(130px, 40vw, 200px);
+            margin: 0 -12px;
+          }
+          .vc-priv-arch--mid { transform: translateY(-14px); }
+          .vc-priv-circle {
+            width: clamp(80px, 26vw, 120px);
+            height: clamp(80px, 26vw, 120px);
+            margin: 0 -10px;
+          }
+          .vc-priv-circle--mid { transform: translateY(-8px); }
         }
+
       `}</style>
     </section>
   );
