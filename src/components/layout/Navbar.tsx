@@ -467,7 +467,7 @@ export default function Navbar() {
               flexShrink: 0,
             }}
           >
-            TC
+            Teal Culture
           </Link>
 
           {/* Desktop: nav links + CTA */}

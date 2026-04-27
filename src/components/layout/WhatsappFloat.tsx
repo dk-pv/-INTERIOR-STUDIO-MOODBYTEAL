@@ -10,7 +10,6 @@ export default function WhatsappFloat() {
 
   return (
     <a
-    
       href={whatsappUrl}
       target="_blank"
       rel="noopener noreferrer"
@@ -24,22 +23,34 @@ export default function WhatsappFloat() {
         group
       "
     >
-      {/* Icon only — no background shell */}
+      <div
+        className="
+    absolute inset-0 rounded-full
+    blur-xl opacity-0
+    transition-all duration-300 ease-out
+    group-hover:opacity-100
+    bg-[radial-gradient(circle,rgba(37,211,102,0.45)_0%,transparent_70%)]
+  "
+      />
       <img
         src="/icons/whatsapp.png"
         alt="Chat on WhatsApp"
         className="
-          w-20 h-20
-          sm:w-24 sm:h-24
-          md:w-28 md:h-28
-          lg:w-32 lg:h-32
-          object-contain
-          drop-shadow-[0_8px_24px_rgba(0,0,0,0.30)]
-          transition-all duration-300 ease-out
-          group-hover:scale-110
-          group-hover:drop-shadow-[0_12px_32px_rgba(0,0,0,0.40)]
-          group-active:scale-95
-        "
+    w-20 h-20
+    sm:w-24 sm:h-24
+    md:w-28 md:h-28
+    lg:w-32 lg:h-32
+    object-contain
+
+    drop-shadow-[0_8px_24px_rgba(0,0,0,0.35)]
+
+    animate-[whatsappPulse_2.2s_ease-in-out_infinite]
+
+    hover:animate-none
+    hover:scale-110
+
+    transition-all duration-300 ease-out
+  "
       />
 
       {/* Tooltip label */}
