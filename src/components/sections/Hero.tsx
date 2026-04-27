@@ -6,23 +6,22 @@ import Image from "next/image";
 export default function Hero() {
   return (
     <>
-      {/* ═══════════════════════════════════════════════
-          HERO
-      ═══════════════════════════════════════════════ */}
       <section
         data-theme="dark"
         style={{
           position: "relative",
           width: "100%",
-          height: "100svh" /* svh — safe on mobile browsers */,
+          height: "100svh",
           minHeight: 560,
           display: "flex",
-          alignItems: "flex-end",
+          flexDirection: "column",
+          justifyContent: "space-between",
           overflow: "hidden",
-          backgroundColor: "#0a0a0a",
+          backgroundColor: "#050505",
         }}
       >
         {/* ── Background image ── */}
+        {/* ── Plain Background image ── */}
         <div
           style={{
             position: "absolute",
@@ -31,111 +30,119 @@ export default function Hero() {
             height: "100%",
           }}
         >
-          <Image
-            src="/hero-bg.png"
-            alt="TEAL CULTURE interior"
-            fill
-            priority
-            sizes="100vw"
-            style={{
-              objectFit: "cover",
-              objectPosition: "center center",
-              opacity: 0.6,
-            }}
-          />
+          {/* Desktop + Tablet */}
+          <div className="hidden sm:block w-full h-full">
+            <Image
+              src="/hero-desktop.png"
+              alt="MOODbyTEAL interior"
+              fill
+              priority
+              sizes="100vw"
+              style={{
+                objectFit: "cover",
+                objectPosition: "center center",
+              }}
+            />
+          </div>
+
+          {/* Mobile */}
+          <div className="block sm:hidden w-full h-full">
+            <Image
+              src="/hero-mobile.png"
+              alt="MOODbyTEAL interior mobile"
+              fill
+              priority
+              sizes="100vw"
+              style={{
+                objectFit: "cover",
+                objectPosition: "center center",
+              }}
+            />
+          </div>
         </div>
 
-        {/* ── Gradient overlay ── */}
-        <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            background:
-              "linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.1) 100%)",
-          }}
-        />
-
-        {/* ── Grain ── */}
-        <div className="grain" />
-
-        {/* ── Bottom content ── */}
+        {/* ── TOP ROW ── */}
         <div
           style={{
             position: "relative",
             zIndex: 10,
-            width: "100%",
-            padding: "0 clamp(20px, 6vw, 96px) clamp(32px, 6vh, 80px)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            padding: "clamp(20px, 4vw, 40px) clamp(20px, 6vw, 80px)",
           }}
         >
-          {/* Label */}
           <motion.p
-            initial={{ opacity: 0, y: 12 }}
+            initial={{ opacity: 0, y: -8 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
+            transition={{ duration: 0.7, delay: 0.2 }}
             style={{
               fontFamily: "'DM Mono', monospace",
-              fontSize: "clamp(0.5rem, 1.2vw, 0.62rem)",
-              letterSpacing: "0.28em",
+              fontSize: "clamp(0.45rem, 1vw, 0.58rem)",
+              letterSpacing: "0.30em",
               textTransform: "uppercase",
-              color: "rgba(245,244,240,0.45)",
-              marginBottom: "clamp(16px, 3vh, 28px)",
+              color: "rgba(245,244,240,0.40)",
+              margin: 0,
             }}
           >
             Interior Architecture Studio
           </motion.p>
+        </div>
 
-          {/* Main title */}
-          <motion.h1
-            initial={{ opacity: 0, y: 48 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+        {/* ── BOTTOM CONTENT ── */}
+        <div
+          style={{
+            position: "relative",
+            zIndex: 10,
+            padding: "0 clamp(20px, 6vw, 80px) clamp(28px, 5vh, 64px)",
+          }}
+        >
+          {/* Thin rule */}
+          <motion.div
+            initial={{ scaleX: 0 }}
+            animate={{ scaleX: 1 }}
+            transition={{ duration: 1.1, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
             style={{
-              fontFamily: "var(--font-heading)",
-              fontSize: "clamp(3.2rem, 10vw, 9rem)",
-              letterSpacing: "-0.04em",
-              lineHeight: 0.92,
-              color: "#f5f4f0",
-              fontWeight: 400,
-              margin: 0,
+              height: 1,
+              background: "rgba(245,244,240,0.12)",
+              marginBottom: "clamp(20px, 3.5vh, 36px)",
+              transformOrigin: "left",
             }}
-          >
-            TEAL
-            <br />
-            <span style={{ color: "rgba(245,244,240,0.5)" }}>CULTURE</span>
-          </motion.h1>
+          />
 
-          {/* Bottom row */}
           <div
             style={{
               display: "flex",
               alignItems: "flex-end",
               justifyContent: "space-between",
-              marginTop: "clamp(20px, 4vh, 40px)",
-              gap: 16,
+              gap: "clamp(16px, 4vw, 48px)",
             }}
+            className="flex-col sm:flex-row"
           >
+            {/* Tagline */}
             <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.7, duration: 0.8 }}
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.7, duration: 0.9 }}
               style={{
                 fontFamily: "var(--font-body)",
-                fontSize: "clamp(0.78rem, 1.6vw, 0.92rem)",
-                color: "rgba(245,244,240,0.4)",
-                letterSpacing: "0.03em",
-                maxWidth: "min(280px, 60vw)",
-                lineHeight: 1.65,
+                fontSize: "clamp(0.78rem, 1.4vw, 0.92rem)",
+                color: "rgba(245,244,240,0.40)",
+                letterSpacing: "0.04em",
+                maxWidth: "min(320px, 70vw)",
+                lineHeight: 1.75,
+                margin: 0,
               }}
             >
               We design spaces that carry emotion — where architecture meets
               identity.
             </motion.p>
 
-            {/* Scroll line — hidden on very small screens */}
+            {/* Scroll indicator */}
             <motion.div
               initial={{ opacity: 0 }}
-              animate={{ opacity: 0.45 }}
-              transition={{ delay: 1 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 1.1 }}
               style={{
                 display: "flex",
                 flexDirection: "column",
@@ -148,23 +155,23 @@ export default function Hero() {
                 animate={{ scaleY: [0, 1, 0] }}
                 transition={{
                   repeat: Infinity,
-                  duration: 1.6,
+                  duration: 1.8,
                   ease: "easeInOut",
                 }}
                 style={{
                   width: 1,
-                  height: 44,
-                  background: "#f5f4f0",
+                  height: 40,
+                  background: "rgba(245,244,240,0.35)",
                   transformOrigin: "top",
                 }}
               />
               <span
                 style={{
                   fontFamily: "'DM Mono', monospace",
-                  fontSize: "0.5rem",
-                  letterSpacing: "0.24em",
+                  fontSize: "0.45rem",
+                  letterSpacing: "0.26em",
                   textTransform: "uppercase",
-                  color: "rgba(245,244,240,0.28)",
+                  color: "rgba(245,244,240,0.22)",
                 }}
               >
                 Scroll
@@ -172,54 +179,6 @@ export default function Hero() {
             </motion.div>
           </div>
         </div>
-
-        {/* ── Top-right counter ── */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1, duration: 0.8 }}
-          style={{
-            position: "absolute",
-            top: "clamp(80px, 12vh, 130px)",
-            right: "clamp(20px, 6vw, 96px)",
-            textAlign: "right",
-          }}
-        >
-          <p
-            style={{
-              fontFamily: "'DM Mono', monospace",
-              fontSize: "0.52rem",
-              letterSpacing: "0.26em",
-              textTransform: "uppercase",
-              color: "rgba(245,244,240,0.22)",
-            }}
-          >
-            Est. 2020
-          </p>
-          <p
-            style={{
-              fontFamily: "var(--font-heading)",
-              fontSize: "clamp(1.8rem, 4vw, 2.8rem)",
-              color: "rgba(245,244,240,0.1)",
-              letterSpacing: "-0.04em",
-              lineHeight: 1,
-              margin: "4px 0",
-            }}
-          >
-            48+
-          </p>
-          <p
-            style={{
-              fontFamily: "'DM Mono', monospace",
-              fontSize: "0.5rem",
-              letterSpacing: "0.24em",
-              textTransform: "uppercase",
-              color: "rgba(245,244,240,0.18)",
-            }}
-          >
-            Projects
-          </p>
-        </motion.div>
       </section>
 
       {/* ═══════════════════════════════════════════════
@@ -229,7 +188,7 @@ export default function Hero() {
         data-theme="light"
         style={{
           backgroundColor: "#f5f4f0",
-          padding: "clamp(60px, 10vw, 100px) clamp(20px, 6vw, 96px)",
+          padding: "clamp(60px, 10vw, 100px) clamp(20px, 6vw, 80px)",
         }}
       >
         <div
@@ -242,7 +201,6 @@ export default function Hero() {
           }}
           className="md:flex-row md:items-start"
         >
-          {/* Left */}
           <div style={{ flex: 1 }}>
             <p
               style={{
@@ -273,7 +231,6 @@ export default function Hero() {
             </h2>
           </div>
 
-          {/* Right */}
           <div style={{ flex: 1, paddingTop: "clamp(0px, 3vw, 40px)" }}>
             <p
               style={{
@@ -293,10 +250,7 @@ export default function Hero() {
               whileHover={{ x: 6 }}
               transition={{ duration: 0.25 }}
               className="btn btn-outline inline-flex"
-              style={{
-                cursor: "pointer",
-                marginTop: "clamp(40px, 6vw, 80px)",
-              }}
+              style={{ cursor: "pointer", marginTop: "clamp(40px, 6vw, 80px)" }}
             >
               Our Story
               <span style={{ opacity: 0.5, fontSize: "0.8em" }}>→</span>
