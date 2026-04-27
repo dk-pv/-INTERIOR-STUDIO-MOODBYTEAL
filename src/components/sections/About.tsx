@@ -267,7 +267,7 @@ export default function About() {
                 marginBottom: 24,
               }}
             >
-              The Concept
+              The Studio
             </p>
             <h2
               style={{

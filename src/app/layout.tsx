@@ -4,6 +4,8 @@ import PageTransition from "@/components/layout/PageTransition";
 import IntroLoader from "@/components/layout/IntroLoader";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import WhatsappFloat from "@/components/layout/WhatsappFloat";
+
 export default function RootLayout({
   children,
 }: {
@@ -14,6 +16,7 @@ export default function RootLayout({
       <body className="bg-background text-foreground antialiased">
         <IntroLoader>
           <Navbar />
+          <WhatsappFloat />
           <PageTransition>{children}</PageTransition>
           <Footer />
         </IntroLoader>
