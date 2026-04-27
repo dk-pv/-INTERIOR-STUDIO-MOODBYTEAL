@@ -1,9 +1,9 @@
 "use client";
 
 import { motion } from "framer-motion";
-import About from "@/components/sections/About";
 import Founder from "@/components/sections/Founder";
 import Team from "@/components/sections/Team";
+import MoodyTealConcept from "@/components/sections/MoodyTealConcept";
 
 const EXPO = [0.16, 1, 0.3, 1] as const;
 
@@ -268,8 +268,8 @@ export default function StudioPage() {
         </motion.div>
       </section>
 
-      {/* About + MoodyTeal concept */}
-      <About />
+      {/* MoodyTeal concept */}
+      <MoodyTealConcept/>
 
       {/* Founder story */}
       <Founder />
