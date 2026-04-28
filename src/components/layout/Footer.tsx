@@ -195,14 +195,7 @@ export default function Footer() {
             <a href="tel:+971502685369" className="tc-phone">
               +971 50 268 5369
             </a>
-            <a
-              href="https://wa.me/971502685369?text=Hi%20I%20am%20interested%20in%20your%20services"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="tc-phone"
-            >
-              WhatsApp — +971 50 268 5369
-            </a>
+           
 
             <div className="tc-divider" />
 

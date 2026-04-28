@@ -1,7 +1,7 @@
 "use client";
 
-import { useRef, useState } from "react";
-import { motion, useInView } from "framer-motion";
+import { useRef, useState, useEffect } from "react";
+import { motion, useInView, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 
 const EXPO = [0.16, 1, 0.3, 1] as const;
@@ -23,7 +23,6 @@ function Field({
   rows?: number;
 }) {
   const [focused, setFocused] = useState(false);
-
   const baseStyle: React.CSSProperties = {
     width: "100%",
     background: "transparent",
@@ -38,7 +37,6 @@ function Field({
     transition: "border-color 0.3s ease",
     cursor: "text",
   };
-
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
       <label
@@ -53,7 +51,6 @@ function Field({
       >
         {label}
       </label>
-
       {rows ? (
         <textarea
           required
@@ -78,6 +75,344 @@ function Field({
         />
       )}
     </div>
+  );
+}
+
+// ─── Cycling Word ─────────────────────────────────────────
+const cyclingWords = [
+  "Beautiful",
+  "Timeless",
+  "Intentional",
+  "Refined",
+  "Resonant",
+];
+
+function CyclingWord() {
+  const [index, setIndex] = useState(0);
+  useEffect(() => {
+    const t = setInterval(
+      () => setIndex((i) => (i + 1) % cyclingWords.length),
+      2200,
+    );
+    return () => clearInterval(t);
+  }, []);
+  return (
+    <div
+      style={{ overflow: "hidden", height: "1.1em", display: "inline-block" }}
+    >
+      <AnimatePresence mode="wait">
+        <motion.span
+          key={index}
+          initial={{ y: "100%", opacity: 0 }}
+          animate={{ y: "0%", opacity: 1 }}
+          exit={{ y: "-100%", opacity: 0 }}
+          transition={{ duration: 0.55, ease: EXPO }}
+          style={{
+            display: "block",
+            fontFamily: "var(--font-heading)",
+            fontStyle: "italic",
+            color: "#1d9e75",
+          }}
+        >
+          {cyclingWords[index]}
+        </motion.span>
+      </AnimatePresence>
+    </div>
+  );
+}
+
+// ─── Hero Right Dark Panel ────────────────────────────────
+function HeroDarkPanel({ inView }: { inView: boolean }) {
+  const stats = [
+    { value: "48+", label: "Projects" },
+    { value: "8+", label: "Years" },
+    { value: "2", label: "Countries" },
+  ];
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, x: 48 }}
+      animate={inView ? { opacity: 1, x: 0 } : {}}
+      transition={{ duration: 1.1, ease: EXPO, delay: 0.3 }}
+      style={{
+        position: "absolute",
+        right: "clamp(36px, 7vw, 96px)",
+        top: "50%",
+        transform: "translateY(-50%)",
+        width: "clamp(260px, 30vw, 380px)",
+        backgroundColor: "#0a0a0a",
+        padding: "clamp(28px, 3vw, 40px)",
+        display: "flex",
+        flexDirection: "column",
+        gap: 0,
+        pointerEvents: "none",
+      }}
+    >
+      {/* Top rule — draws in */}
+      <motion.div
+        initial={{ scaleX: 0 }}
+        animate={inView ? { scaleX: 1 } : {}}
+        transition={{ duration: 0.9, ease: EXPO, delay: 0.5 }}
+        style={{
+          height: 1,
+          backgroundColor: "rgba(245,244,240,0.12)",
+          transformOrigin: "left",
+          marginBottom: 28,
+        }}
+      />
+
+      {/* Label */}
+      <motion.p
+        initial={{ opacity: 0, y: 8 }}
+        animate={inView ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.6, ease: EXPO, delay: 0.6 }}
+        style={{
+          fontFamily: "'DM Mono', monospace",
+          fontSize: "0.52rem",
+          letterSpacing: "0.32em",
+          textTransform: "uppercase",
+          color: "rgba(245,244,240,0.28)",
+          marginBottom: 16,
+        }}
+      >
+        TEAL CULTURE · Studio
+      </motion.p>
+
+      {/* Big animated headline */}
+      <div style={{ marginBottom: 28 }}>
+        {/* Line 1 — static */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8, ease: EXPO, delay: 0.65 }}
+        >
+          <span
+            style={{
+              fontFamily: "var(--font-heading)",
+              fontSize: "clamp(1.5rem, 2.8vw, 2.2rem)",
+              letterSpacing: "-0.03em",
+              lineHeight: 1.1,
+              color: "#f5f4f0",
+              display: "block",
+            }}
+          >
+            Contact Us.
+          </span>
+        </motion.div>
+
+        {/* Line 2 — static */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8, ease: EXPO, delay: 0.75 }}
+          style={{ marginTop: 4 }}
+        >
+          <span
+            style={{
+              fontFamily: "var(--font-heading)",
+              fontSize: "clamp(1.5rem, 2.8vw, 2.2rem)",
+              letterSpacing: "-0.03em",
+              lineHeight: 1.1,
+              color: "#f5f4f0",
+              display: "block",
+            }}
+          >
+            Build
+          </span>
+        </motion.div>
+
+        {/* Line 3 — cycling word */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8, ease: EXPO, delay: 0.85 }}
+        >
+          <span
+            style={{
+              fontFamily: "var(--font-heading)",
+              fontSize: "clamp(1.5rem, 2.8vw, 2.2rem)",
+              letterSpacing: "-0.03em",
+              lineHeight: 1.1,
+              color: "#f5f4f0",
+              display: "block",
+            }}
+          >
+            <CyclingWord />
+          </span>
+        </motion.div>
+
+        {/* Line 4 — static */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.8, ease: EXPO, delay: 0.9 }}
+        >
+          <span
+            style={{
+              fontFamily: "var(--font-heading)",
+              fontSize: "clamp(1.5rem, 2.8vw, 2.2rem)",
+              letterSpacing: "-0.03em",
+              lineHeight: 1.1,
+              color: "rgba(245,244,240,0.22)",
+              fontStyle: "italic",
+              display: "block",
+            }}
+          >
+            Interiors.
+          </span>
+        </motion.div>
+      </div>
+
+      {/* Mid divider */}
+      <motion.div
+        initial={{ scaleX: 0 }}
+        animate={inView ? { scaleX: 1 } : {}}
+        transition={{ duration: 0.9, ease: EXPO, delay: 1 }}
+        style={{
+          height: 1,
+          backgroundColor: "rgba(245,244,240,0.08)",
+          transformOrigin: "left",
+          marginBottom: 24,
+        }}
+      />
+
+      {/* Stats row */}
+      <motion.div
+        initial={{ opacity: 0, y: 12 }}
+        animate={inView ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.7, ease: EXPO, delay: 1.05 }}
+        style={{ display: "flex", gap: 24, marginBottom: 28 }}
+      >
+        {stats.map((s) => (
+          <div key={s.label}>
+            <p
+              style={{
+                fontFamily: "var(--font-heading)",
+                fontSize: "clamp(1.4rem, 2.2vw, 1.9rem)",
+                letterSpacing: "-0.04em",
+                color: "#f5f4f0",
+                lineHeight: 1,
+              }}
+            >
+              {s.value}
+            </p>
+            <p
+              style={{
+                fontFamily: "'DM Mono', monospace",
+                fontSize: "0.5rem",
+                letterSpacing: "0.22em",
+                textTransform: "uppercase",
+                color: "rgba(245,244,240,0.28)",
+                marginTop: 5,
+              }}
+            >
+              {s.label}
+            </p>
+          </div>
+        ))}
+      </motion.div>
+
+      {/* Bottom divider */}
+      <motion.div
+        initial={{ scaleX: 0 }}
+        animate={inView ? { scaleX: 1 } : {}}
+        transition={{ duration: 0.9, ease: EXPO, delay: 1.12 }}
+        style={{
+          height: 1,
+          backgroundColor: "rgba(245,244,240,0.08)",
+          transformOrigin: "left",
+          marginBottom: 20,
+        }}
+      />
+
+      {/* Availability + scanning bar */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={inView ? { opacity: 1 } : {}}
+        transition={{ duration: 0.6, delay: 1.2 }}
+        style={{ display: "flex", flexDirection: "column", gap: 12 }}
+      >
+        <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+          {/* Pulsing dot */}
+          <div
+            style={{ position: "relative", width: 6, height: 6, flexShrink: 0 }}
+          >
+            <motion.div
+              animate={{ scale: [1, 2.6, 1], opacity: [0.6, 0, 0.6] }}
+              transition={{ duration: 2, repeat: Infinity, ease: "easeOut" }}
+              style={{
+                position: "absolute",
+                inset: 0,
+                borderRadius: "50%",
+                backgroundColor: "#1d9e75",
+              }}
+            />
+            <div
+              style={{
+                position: "absolute",
+                inset: 0,
+                borderRadius: "50%",
+                backgroundColor: "#1d9e75",
+              }}
+            />
+          </div>
+          <span
+            style={{
+              fontFamily: "'DM Mono', monospace",
+              fontSize: "0.5rem",
+              letterSpacing: "0.26em",
+              textTransform: "uppercase",
+              color: "#1d9e75",
+            }}
+          >
+            Accepting Projects
+          </span>
+        </div>
+
+        {/* Thin scanning progress bar */}
+        <div
+          style={{
+            height: 1,
+            width: "100%",
+            backgroundColor: "rgba(245,244,240,0.06)",
+            position: "relative",
+            overflow: "hidden",
+          }}
+        >
+          <motion.div
+            animate={{ x: ["-100%", "110%"] }}
+            transition={{
+              duration: 1.8,
+              repeat: Infinity,
+              ease: [0.4, 0, 0.2, 1],
+              repeatDelay: 1,
+            }}
+            style={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              height: "100%",
+              width: "35%",
+              background:
+                "linear-gradient(to right, transparent, #1d9e75, transparent)",
+            }}
+          />
+        </div>
+
+        {/* Kerala · UAE tag */}
+        <p
+          style={{
+            fontFamily: "'DM Mono', monospace",
+            fontSize: "0.48rem",
+            letterSpacing: "0.28em",
+            textTransform: "uppercase",
+            color: "rgba(245,244,240,0.18)",
+          }}
+        >
+          Kerala · UAE
+        </p>
+      </motion.div>
+    </motion.div>
   );
 }
 
@@ -109,7 +444,7 @@ export default function ContactPage() {
       style={{ backgroundColor: "#f5f4f0", color: "#0a0a0a" }}
     >
       {/* ═══════════════════════════════════════
-          HERO — full-height, editorial
+          HERO
       ═══════════════════════════════════════ */}
       <section
         data-theme="light"
@@ -187,6 +522,9 @@ export default function ContactPage() {
           </span>
         </motion.div>
 
+        {/* ── DARK PANEL RIGHT ── */}
+        <HeroDarkPanel inView={heroInView} />
+
         {/* Main content */}
         <div style={{ position: "relative", zIndex: 2 }}>
           <motion.p
@@ -205,7 +543,6 @@ export default function ContactPage() {
             Let's Begin
           </motion.p>
 
-          {/* Headline */}
           {["Define", "Your Space"].map((word, i) => (
             <div key={i} style={{ overflow: "hidden" }}>
               <motion.h1
@@ -231,7 +568,6 @@ export default function ContactPage() {
             </div>
           ))}
 
-          {/* Descriptor */}
           <motion.p
             initial={{ opacity: 0, y: 16 }}
             animate={heroInView ? { opacity: 1, y: 0 } : {}}
@@ -332,11 +668,7 @@ export default function ContactPage() {
       >
         {/* LEFT — Image */}
         <div
-          style={{
-            position: "relative",
-            overflow: "hidden",
-            minHeight: 480,
-          }}
+          style={{ position: "relative", overflow: "hidden", minHeight: 480 }}
         >
           <Image
             src="/images/contact.jpg"
@@ -344,8 +676,6 @@ export default function ContactPage() {
             fill
             style={{ objectFit: "cover" }}
           />
-
-          {/* subtle overlay */}
           <div
             style={{
               position: "absolute",
@@ -354,15 +684,8 @@ export default function ContactPage() {
                 "linear-gradient(to top, rgba(10,10,10,0.55), rgba(10,10,10,0.1))",
             }}
           />
-
-          {/* Quote overlay */}
           <div
-            style={{
-              position: "absolute",
-              bottom: 24,
-              left: 24,
-              right: 24,
-            }}
+            style={{ position: "absolute", bottom: 24, left: 24, right: 24 }}
           >
             <div
               style={{
@@ -412,7 +735,6 @@ export default function ContactPage() {
           }}
         >
           <div style={{ width: "100%", maxWidth: 440 }}>
-            {/* Form header */}
             <motion.div
               initial={{ opacity: 0, y: 24 }}
               animate={formInView ? { opacity: 1, y: 0 } : {}}
@@ -445,7 +767,6 @@ export default function ContactPage() {
               </h2>
             </motion.div>
 
-            {/* Form */}
             {sent ? (
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -508,8 +829,6 @@ export default function ContactPage() {
                   onChange={(v) => setForm({ ...form, message: v })}
                   rows={5}
                 />
-
-                {/* Submit */}
                 <motion.button
                   type="submit"
                   whileHover={{ backgroundColor: "#2d6a6a" }}
@@ -565,8 +884,8 @@ export default function ContactPage() {
             },
             {
               label: "Phone",
-              value: "+91 98765 43210",
-              href: "tel:+919876543210",
+              value: "+971 50 268 5369",
+              href: "tel:+971502685369",
             },
             {
               label: "Instagram",
@@ -619,7 +938,6 @@ export default function ContactPage() {
           ))}
         </div>
 
-        {/* Closing statement */}
         <div
           style={{
             maxWidth: 700,

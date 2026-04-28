@@ -87,9 +87,9 @@ export default function MoodyTealConcept() {
               transition={{ delay: 0.25, duration: 0.8 }}
               viewport={{ once: true }}
             >
-              Moodby
+              MOODby
               <span style={{ color: "rgba(245,244,240,0.28)" }}>
-                Teal
+                TEAL
               </span>
             </motion.h2>
           </div>
