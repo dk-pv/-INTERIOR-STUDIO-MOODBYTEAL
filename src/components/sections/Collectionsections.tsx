@@ -7,32 +7,32 @@ export const furnitureImages = [
   {
     id: "furniture-1",
     src: "/portfolio/furniture-1.png",
-    alt: "Modern designer chair with minimal style",
+    alt: "Real estate office corridor with bold orange door",
   },
   {
     id: "furniture-2",
     src: "/portfolio/furniture-2.png",
-    alt: "Luxury sofa with neutral fabric tones",
+    alt: "Modern reception with acrylic table and orange seating",
   },
   {
     id: "furniture-3",
     src: "/portfolio/furniture-3.png",
-    alt: "Minimal wooden furniture aesthetic",
+    alt: "Open lounge space with curved grey sofas and warm tones",
   },
   {
     id: "furniture-4",
     src: "/portfolio/furniture-4.png",
-    alt: "High-end modern interior furniture piece",
+    alt: "Office corridor with motion blur and orange accent walls",
   },
   {
     id: "furniture-5",
     src: "/portfolio/furniture-5.png",
-    alt: "Soft curved contemporary furniture design",
+    alt: "Luxury office floor with cream chairs and orange island",
   },
   {
     id: "furniture-6",
     src: "/portfolio/furniture-6.png",
-    alt: "Premium designer furniture with clean lines",
+    alt: "Close detail of red handle on dark architectural panel",
   },
 ];
 
@@ -62,7 +62,6 @@ function DesignerFurniture() {
   return (
     <section className="tc-fur-section">
       <div className="tc-fur-wrap">
-        {/* ── ROW 1: heading text left + image[0] right ── */}
         <div className="tc-fur-row tc-fur-row-top">
           {/* Text block */}
           <FadeUp delay={0}>
@@ -82,7 +81,8 @@ function DesignerFurniture() {
               <img
                 src={furnitureImages[0].src}
                 alt={furnitureImages[0].alt}
-                className="tc-fur-img"
+                loading="lazy"
+                className="tc-fur-img object-top"
               />
             </div>
           </FadeUp>
@@ -95,7 +95,8 @@ function DesignerFurniture() {
               <img
                 src={furnitureImages[1].src}
                 alt={furnitureImages[1].alt}
-                className="tc-fur-img"
+                loading="lazy"
+                className="tc-fur-img object-top"
               />
             </div>
           </FadeUp>
@@ -104,7 +105,8 @@ function DesignerFurniture() {
               <img
                 src={furnitureImages[2].src}
                 alt={furnitureImages[2].alt}
-                className="tc-fur-img"
+                loading="lazy"
+                className="tc-fur-img object-top"
               />
             </div>
           </FadeUp>
@@ -117,7 +119,8 @@ function DesignerFurniture() {
               <img
                 src={furnitureImages[3].src}
                 alt={furnitureImages[3].alt}
-                className="tc-fur-img"
+                loading="lazy"
+                className="tc-fur-img object-top"
               />
             </div>
           </FadeUp>
@@ -126,7 +129,8 @@ function DesignerFurniture() {
               <img
                 src={furnitureImages[4].src}
                 alt={furnitureImages[4].alt}
-                className="tc-fur-img"
+                loading="lazy"
+                className="tc-fur-img object-top"
               />
             </div>
           </FadeUp>
@@ -139,7 +143,8 @@ function DesignerFurniture() {
               <img
                 src={furnitureImages[5].src}
                 alt={furnitureImages[5].alt}
-                className="tc-fur-img"
+                loading="lazy"
+                className="tc-fur-img object-top"
               />
             </div>
           </FadeUp>
@@ -184,12 +189,12 @@ const styles = `
   .tc-fur-row {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    clamp(4px, 0.5vw, 7px);
+    gap: clamp(4px, 0.5vw, 7px);
     align-items: stretch;
   }
 
   /* top row: text left sits at bottom of its half-height cell */
-  .tc-fur-row-top { align-items: end; }
+  .tc-fur-row-top { align-items: stretch; }
   .tc-fur-text {
     padding-bottom: clamp(4px, 1vw, 10px);
     padding-left: clamp(2px, 0.4vw, 6px);
@@ -215,10 +220,11 @@ const styles = `
 
   /* image cells */
   .tc-fur-cell { overflow: hidden; background: #d8d5cf; }
-  .tc-fur-cell-std { aspect-ratio: 4 / 2.6; }
+  .tc-fur-cell-std { aspect-ratio: 4 / 5; }
   .tc-fur-img {
     width: 100%; height: 100%;
     object-fit: cover; display: block;
+    object-position: center;
     transition: transform 0.7s cubic-bezier(0.22,1,0.36,1);
   }
   .tc-fur-cell:hover .tc-fur-img { transform: scale(1.04); }
@@ -230,7 +236,7 @@ const styles = `
     align-items: flex-end;
     justify-content: flex-end;
     padding: clamp(6px, 1vw, 14px) clamp(4px, 0.6vw, 8px);
-    aspect-ratio: 4 / 2.6;
+    aspect-ratio: 4 / 5;
   }
   .tc-fur-brand {
     font-family: 'DM Mono', 'Courier New', monospace;

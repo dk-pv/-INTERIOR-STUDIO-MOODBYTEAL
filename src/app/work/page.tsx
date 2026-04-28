@@ -5,7 +5,7 @@ import { useState } from "react";
 import ProjectShowcase from "@/components/sections/WorkGrid";
 
 const EXPO = [0.16, 1, 0.3, 1] as const;
-const LETTERS = "WORK".split("");
+const LETTERS = "OUR WORKS".split("");
 
 export default function WorkPage() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
@@ -72,7 +72,7 @@ export default function WorkPage() {
             left: "50%",
             transform: "translate(-50%, -50%)",
             display: "flex",
-            gap: "0.02em",
+            gap: "0.01em",
             zIndex: 1,
           }}
         >
@@ -93,11 +93,11 @@ export default function WorkPage() {
               transition={{ type: "spring", stiffness: 500, damping: 28 }}
               style={{
                 fontFamily: "var(--font-heading)",
-                fontSize: "clamp(90px, 20vw, 240px)",
+                fontSize: "clamp(70px, 14vw, 180px)",
                 fontWeight: 400,
                 letterSpacing: "-0.05em",
-                color: "transparent",
-                WebkitTextStroke: "1px rgba(10,10,10,0.08)",
+                color: "rgba(10,10,10,0.04)",
+                WebkitTextStroke: "1px rgba(10,10,10,0.18)",
                 lineHeight: 1,
                 cursor: "default",
                 userSelect: "none",

@@ -39,7 +39,7 @@ export default function StudioPage() {
             fontWeight: 400,
             letterSpacing: "-0.05em",
             color: "transparent",
-            WebkitTextStroke: "1px rgba(10,10,10,0.06)",
+            WebkitTextStroke: "1px rgba(10,10,10,0.08)",
             whiteSpace: "nowrap",
             userSelect: "none",
             pointerEvents: "none",

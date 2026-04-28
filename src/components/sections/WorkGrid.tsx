@@ -241,7 +241,7 @@ export default function ProjectShowcase() {
       style={{
         minHeight: "auto",
         backgroundColor: "#f5f4f0",
-       padding: "clamp(48px, 7vw, 90px) clamp(24px, 5vw, 64px)",
+        padding: "clamp(48px, 7vw, 90px) clamp(24px, 5vw, 64px)",
       }}
     >
       {/* ── Header ── */}
@@ -283,24 +283,6 @@ export default function ProjectShowcase() {
             48+ projects
           </motion.p>
         </div>
-
-        {/* Heading */}
-        <motion.h2
-          initial={{ opacity: 0, y: 32 }}
-          animate={headerInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-          style={{
-            fontFamily: "var(--font-heading)",
-            fontSize: "clamp(2.5rem, 6vw, 5.5rem)",
-            letterSpacing: "-0.04em",
-            lineHeight: 1.0,
-            color: "#0a0a0a",
-            fontWeight: 400,
-            marginBottom: 22,
-          }}
-        >
-          Our Work
-        </motion.h2>
 
         {/* Divider */}
         <div
