@@ -5,7 +5,7 @@ import { useState } from "react";
 import ProjectShowcase from "@/components/sections/WorkGrid";
 
 const EXPO = [0.16, 1, 0.3, 1] as const;
-const LETTERS = "OUR WORKS".split("");
+const LETTERS = "OUR WORK".split("");
 
 export default function WorkPage() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
@@ -72,7 +72,7 @@ export default function WorkPage() {
             left: "50%",
             transform: "translate(-50%, -50%)",
             display: "flex",
-            gap: "0.01em",
+            gap: "0.015em",
             zIndex: 1,
           }}
         >
@@ -83,21 +83,22 @@ export default function WorkPage() {
               onHoverEnd={() => setHoveredIndex(null)}
               animate={{
                 y: hoveredIndex === i ? -12 : 0,
+                scale: hoveredIndex === i ? 1.06 : 1,
                 opacity:
                   hoveredIndex === null
                     ? 1
                     : hoveredIndex === i
                       ? 1
-                      : 1 - Math.min(Math.abs(hoveredIndex - i) * 0.22, 0.7),
+                      : 1 - Math.min(Math.abs(hoveredIndex - i) * 0.28, 0.75),
               }}
               transition={{ type: "spring", stiffness: 500, damping: 28 }}
               style={{
                 fontFamily: "var(--font-heading)",
-                fontSize: "clamp(70px, 14vw, 180px)",
+                fontSize: "clamp(80px, 16vw, 200px)",
                 fontWeight: 400,
                 letterSpacing: "-0.05em",
-                color: "rgba(10,10,10,0.04)",
-                WebkitTextStroke: "1px rgba(10,10,10,0.18)",
+                color: "rgba(10,10,10,0.03)",
+                WebkitTextStroke: "1px rgba(10,10,10,0.22)",
                 lineHeight: 1,
                 cursor: "default",
                 userSelect: "none",
