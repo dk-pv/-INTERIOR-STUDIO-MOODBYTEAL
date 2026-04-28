@@ -111,7 +111,7 @@ function ProjectCard({
         <div
           style={{
             position: "relative",
-            aspectRatio: "4 / 3",
+            aspectRatio: "4 / 2.7",
             overflow: "hidden",
           }}
         >
@@ -146,7 +146,7 @@ function ProjectCard({
               position: "absolute",
               top: 14,
               left: 14,
-              padding: "5px 12px",
+              padding: "4px 10px",
               backgroundColor: "rgba(245,244,240,0.92)",
               borderRadius: 999,
               fontFamily: "'DM Mono', monospace",
@@ -166,7 +166,7 @@ function ProjectCard({
             transition={{ duration: 0.28 }}
             style={{
               position: "absolute",
-              bottom: 14,
+              bottom: 10,
               left: 14,
               right: 14,
             }}
@@ -187,7 +187,7 @@ function ProjectCard({
         {/* Card footer */}
         <div
           style={{
-            padding: "16px 18px",
+            padding: "12px 14px",
             borderTop: "1px solid rgba(10,10,10,0.07)",
             display: "flex",
             justifyContent: "space-between",
@@ -239,20 +239,20 @@ export default function ProjectShowcase() {
     <section
       data-theme="light"
       style={{
-        minHeight: "100vh",
+        minHeight: "auto",
         backgroundColor: "#f5f4f0",
-        padding: "clamp(80px, 10vw, 120px) clamp(24px, 6vw, 80px)",
+       padding: "clamp(48px, 7vw, 90px) clamp(24px, 5vw, 64px)",
       }}
     >
       {/* ── Header ── */}
-      <div ref={headerRef} style={{ marginBottom: 56 }}>
+      <div ref={headerRef} style={{ marginBottom: 36 }}>
         {/* top row: label + count */}
         <div
           style={{
             display: "flex",
             justifyContent: "space-between",
             alignItems: "flex-end",
-            marginBottom: 20,
+            marginBottom: 14,
           }}
         >
           <motion.p
@@ -296,7 +296,7 @@ export default function ProjectShowcase() {
             lineHeight: 1.0,
             color: "#0a0a0a",
             fontWeight: 400,
-            marginBottom: 36,
+            marginBottom: 22,
           }}
         >
           Our Work
@@ -307,7 +307,7 @@ export default function ProjectShowcase() {
           style={{
             height: 1,
             backgroundColor: "rgba(10,10,10,0.1)",
-            marginBottom: 28,
+            marginBottom: 18,
           }}
         />
 
@@ -316,7 +316,7 @@ export default function ProjectShowcase() {
           initial={{ opacity: 0, y: 12 }}
           animate={headerInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.2 }}
-          style={{ display: "flex", gap: 8, flexWrap: "wrap" }}
+          style={{ display: "flex", gap: 6, flexWrap: "wrap" }}
         >
           {categories.map((cat) => (
             <FilterPill
@@ -341,7 +341,7 @@ export default function ProjectShowcase() {
             display: "grid",
             gridTemplateColumns:
               "repeat(auto-fill, minmax(min(100%, 300px), 1fr))",
-            gap: "clamp(16px, 2.5vw, 28px)",
+            gap: "clamp(12px, 2vw, 20px)",
           }}
         >
           {filtered.map((project, index) => (

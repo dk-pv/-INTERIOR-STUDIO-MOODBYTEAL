@@ -18,7 +18,7 @@ export default function About() {
         { height: "100%", opacity: 1 },
       ],
       {
-        duration: 1200,
+        duration: 900,
         easing: "cubic-bezier(0.16,1,0.3,1)",
         fill: "forwards",
       },
@@ -32,13 +32,13 @@ export default function About() {
         data-theme="light"
         style={{
           position: "relative",
-          minHeight: "100vh",
+          minHeight: "auto",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
           overflow: "hidden",
           backgroundColor: "#f5f4f0",
-          padding: "clamp(80px, 10vw, 140px) clamp(24px, 6vw, 96px)",
+          padding: "clamp(48px, 7vw, 90px) clamp(24px, 5vw, 72px)",
         }}
       >
         {/* Vertical beam — dark on white bg */}
@@ -76,7 +76,7 @@ export default function About() {
               letterSpacing: "0.3em",
               textTransform: "uppercase",
               color: "rgba(10,10,10,0.35)",
-              marginBottom: 48,
+              marginBottom: 28,
               textAlign: "center",
             }}
           >
@@ -96,13 +96,13 @@ export default function About() {
               color: "#0a0a0a",
               fontWeight: 400,
               textAlign: "center",
-              marginBottom: 32,
+              marginBottom: 20,
             }}
           >
-            Driven intuition{" "}
-            <span style={{ color: "rgba(10,10,10,0.25)" }}>tone and</span>
+            Driven by{" "}
+            <span style={{ color: "rgba(10,10,10,0.25)" }}>intuition.</span>
             <br />
-            That{" "}
+            Tone and{" "}
             <span
               style={{
                 fontStyle: "italic",
@@ -112,7 +112,6 @@ export default function About() {
               reality.
             </span>
           </motion.h2>
-
           {/* Body text */}
           <motion.p
             initial={{ opacity: 0 }}
@@ -125,7 +124,7 @@ export default function About() {
               letterSpacing: "0.01em",
               textAlign: "center",
               maxWidth: 520,
-              margin: "0 auto 64px",
+              margin: "0 auto 40px",
             }}
           >
             A design language rooted in contrast, depth, and emotion. We build

@@ -20,13 +20,13 @@ export default function Founder() {
       data-theme="light"
       style={{
         backgroundColor: "#ffffff",
-        padding: "clamp(80px, 10vw, 140px) clamp(24px, 6vw, 96px)",
+        padding: "clamp(48px, 7vw, 90px) clamp(24px, 5vw, 72px)",
         overflow: "hidden",
       }}
     >
       <div style={{ maxWidth: 1200, margin: "0 auto" }}>
         {/* ── Label + Divider ── */}
-        <div style={{ marginBottom: 72 }}>
+        <div style={{ marginBottom: 40 }}>
           <motion.p
             initial={{ opacity: 0, y: 10 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
@@ -61,7 +61,7 @@ export default function Founder() {
             display: "grid",
             gridTemplateColumns:
               "repeat(auto-fit, minmax(min(100%, 400px), 1fr))",
-            gap: "clamp(48px, 7vw, 96px)",
+            gap: "clamp(32px, 5vw, 64px)",
             alignItems: "center",
           }}
         >
@@ -73,7 +73,7 @@ export default function Founder() {
             style={{
               position: "relative",
               width: "100%",
-              aspectRatio: "3 / 4",
+              aspectRatio: "3 / 3.5",
               overflow: "hidden",
             }}
           >
@@ -103,11 +103,11 @@ export default function Founder() {
               transition={{ duration: 0.7, delay: 0.5 }}
               style={{
                 position: "absolute",
-                bottom: 20,
-                left: 20,
+                bottom: 14,
+                left: 14,
                 backgroundColor: "rgba(245,244,240,0.92)",
                 backdropFilter: "blur(12px)",
-                padding: "12px 18px",
+                padding: "10px 14px",
                 borderRadius: 4,
               }}
             >
@@ -141,7 +141,7 @@ export default function Founder() {
             initial={{ opacity: 0, x: 32 }}
             animate={inView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
-            style={{ display: "flex", flexDirection: "column", gap: 28 }}
+            style={{ display: "flex", flexDirection: "column", gap: 20 }}
           >
             <h2
               style={{
@@ -190,8 +190,8 @@ export default function Founder() {
             <div
               style={{
                 borderLeft: "2px solid #0a0a0a",
-                paddingLeft: 20,
-                margin: "8px 0",
+                paddingLeft: 14,
+                margin: "4px 0",
               }}
             >
               <p
@@ -212,8 +212,8 @@ export default function Founder() {
             <div
               style={{
                 display: "flex",
-                gap: 40,
-                paddingTop: 28,
+                gap: 28,
+                paddingTop: 20,
                 borderTop: "1px solid rgba(10,10,10,0.08)",
               }}
             >
@@ -237,7 +237,7 @@ export default function Founder() {
                       letterSpacing: "0.22em",
                       textTransform: "uppercase",
                       color: "rgba(10,10,10,0.3)",
-                      marginTop: 6,
+                      marginTop: 4,
                     }}
                   >
                     {stat.label}

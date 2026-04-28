@@ -14,12 +14,12 @@ export default function WorkPage() {
     <main style={{ backgroundColor: "#f5f4f0", color: "#0a0a0a" }}>
       <section
         style={{
-          minHeight: "90vh",
+          minHeight: "82vh",
           display: "flex",
           flexDirection: "column",
           justifyContent: "flex-end",
           padding:
-            "clamp(80px, 10vw, 120px) clamp(24px, 6vw, 96px) clamp(52px, 8vw, 80px)",
+            "clamp(60px, 8vw, 96px) clamp(24px, 5vw, 72px) clamp(36px, 6vw, 60px)",
           position: "relative",
           overflow: "hidden",
           backgroundColor: "#f5f4f0",
@@ -34,7 +34,7 @@ export default function WorkPage() {
           transition={{ duration: 0.8 }}
           style={{
             position: "absolute",
-            top: "clamp(24px, 4vw, 48px)",
+            top: "clamp(20px, 3.5vw, 36px)",
             right: "clamp(24px, 6vw, 96px)",
             display: "flex",
             alignItems: "center",
@@ -68,7 +68,7 @@ export default function WorkPage() {
           transition={{ duration: 1.2, ease: EXPO }}
           style={{
             position: "absolute",
-            top: "44%",
+            top: "42%",
             left: "50%",
             transform: "translate(-50%, -50%)",
             display: "flex",
@@ -82,7 +82,7 @@ export default function WorkPage() {
               onHoverStart={() => setHoveredIndex(i)}
               onHoverEnd={() => setHoveredIndex(null)}
               animate={{
-                y: hoveredIndex === i ? -18 : 0,
+                y: hoveredIndex === i ? -12 : 0,
                 opacity:
                   hoveredIndex === null
                     ? 1
@@ -93,9 +93,9 @@ export default function WorkPage() {
               transition={{ type: "spring", stiffness: 500, damping: 28 }}
               style={{
                 fontFamily: "var(--font-heading)",
-                fontSize: "clamp(110px, 22vw, 300px)",
+                fontSize: "clamp(90px, 20vw, 240px)",
                 fontWeight: 400,
-                letterSpacing: "-0.06em",
+                letterSpacing: "-0.05em",
                 color: "transparent",
                 WebkitTextStroke: "1px rgba(10,10,10,0.08)",
                 lineHeight: 1,
@@ -126,7 +126,7 @@ export default function WorkPage() {
                   }}
                   style={{
                     fontFamily: "var(--font-heading)",
-                    fontSize: "clamp(2.8rem, 7.5vw, 7rem)",
+                    fontSize: "clamp(2.5rem, 6.5vw, 6rem)",
                     fontWeight: 400,
                     lineHeight: 1.0,
                     letterSpacing: "-0.04em",
@@ -157,7 +157,7 @@ export default function WorkPage() {
               letterSpacing: "0.22em",
               textTransform: "uppercase",
               color: "rgba(10,10,10,0.22)",
-              marginTop: 20,
+              marginTop: 14,
               marginBottom: 0,
             }}
           >
@@ -172,7 +172,7 @@ export default function WorkPage() {
           transition={{ delay: 0.5, duration: 1.2, ease: EXPO }}
           style={{
             position: "absolute",
-            bottom: "clamp(52px, 8vw, 80px)",
+            bottom: "clamp(36px, 6vw, 60px)",
             left: "clamp(24px, 6vw, 96px)",
             right: "clamp(24px, 6vw, 96px)",
             height: 1,
@@ -182,7 +182,7 @@ export default function WorkPage() {
         />
       </section>
 
-      <ProjectShowcase  />
+      <ProjectShowcase />
     </main>
   );
 }

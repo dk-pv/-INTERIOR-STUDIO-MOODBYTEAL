@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef , use} from "react";
+import { useRef, use } from "react";
 import { motion, useInView, useScroll, useTransform } from "framer-motion";
 import { notFound } from "next/navigation";
 import Link from "next/link";
@@ -32,7 +32,7 @@ function HeroImage({ src, alt }: { src: string; alt: string }) {
       ref={ref}
       style={{
         position: "relative",
-        height: "clamp(480px, 80vh, 860px)",
+        height: "clamp(420px, 70vh, 720px)",
         overflow: "hidden",
       }}
     >
@@ -123,7 +123,7 @@ function NextProject({ project }: { project: ExtendedProject }) {
         transition={{ duration: 0.6 }}
         style={{
           position: "relative",
-          height: "clamp(280px, 45vh, 480px)",
+         height: "clamp(240px, 38vh, 400px)",
           overflow: "hidden",
         }}
       >
@@ -149,7 +149,7 @@ function NextProject({ project }: { project: ExtendedProject }) {
           }}
         />
 
-        <div style={{ position: "absolute", bottom: 32, left: 40, right: 40 }}>
+        <div style={{ position: "absolute", bottom: 24, left: 32, right: 32 }}>
           <p
             style={{
               fontFamily: "'DM Mono', monospace",
@@ -194,8 +194,8 @@ function NextProject({ project }: { project: ExtendedProject }) {
           transition={{ duration: 0.3 }}
           style={{
             position: "absolute",
-            top: 32,
-            right: 40,
+            top: 24,
+            right: 32,
             fontFamily: "var(--font-heading)",
             fontSize: "2rem",
             color: "rgba(245,244,240,0.6)",
@@ -240,7 +240,7 @@ export default function ProjectDetailPage({
       <section
         data-theme="light"
         style={{
-          padding: "clamp(48px, 7vw, 80px) clamp(24px, 6vw, 96px)",
+          padding: "clamp(36px, 6vw, 64px) clamp(24px, 5vw, 72px)",
           maxWidth: 1280,
           margin: "0 auto",
         }}
@@ -249,7 +249,7 @@ export default function ProjectDetailPage({
           style={{
             display: "grid",
             gridTemplateColumns: "1fr auto",
-            gap: 48,
+            gap: 32,
             alignItems: "start",
             flexWrap: "wrap",
           }}
@@ -266,7 +266,7 @@ export default function ProjectDetailPage({
                 letterSpacing: "0.28em",
                 textTransform: "uppercase",
                 color: "rgba(10,10,10,0.3)",
-                marginBottom: 16,
+                marginBottom: 10,
               }}
             >
               {project.category}
@@ -278,7 +278,7 @@ export default function ProjectDetailPage({
               transition={{ duration: 1, ease: EXPO, delay: 0.1 }}
               style={{
                 fontFamily: "var(--font-heading)",
-                fontSize: "clamp(2.5rem, 6vw, 6rem)",
+                fontSize: "clamp(2.2rem, 5.5vw, 5rem)",
                 letterSpacing: "-0.04em",
                 lineHeight: 1.0,
                 color: "#0a0a0a",
@@ -338,7 +338,7 @@ export default function ProjectDetailPage({
           style={{
             height: 1,
             backgroundColor: "rgba(10,10,10,0.1)",
-            marginTop: 40,
+            marginTop: 28,
             transformOrigin: "left",
           }}
         />
@@ -348,13 +348,13 @@ export default function ProjectDetailPage({
       <section
         data-theme="light"
         style={{
-          padding: "0 clamp(24px, 6vw, 96px) clamp(64px, 8vw, 96px)",
+          padding: "0 clamp(24px, 5vw, 72px) clamp(48px, 6vw, 72px)",
           maxWidth: 1280,
           margin: "0 auto",
         }}
       >
         <div
-          style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 64 }}
+          style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 40 }}
         >
           <motion.p
             initial={{ opacity: 0, y: 24 }}
@@ -363,7 +363,7 @@ export default function ProjectDetailPage({
             transition={{ duration: 0.9, ease: EXPO }}
             style={{
               fontFamily: "var(--font-body)",
-              fontSize: "clamp(1rem, 1.4vw, 1.15rem)",
+             fontSize: "clamp(0.95rem, 1.2vw, 1.05rem)",
               lineHeight: 1.85,
               color: "rgba(10,10,10,0.55)",
             }}
@@ -380,7 +380,7 @@ export default function ProjectDetailPage({
               transition={{ duration: 0.9, ease: EXPO, delay: 0.15 }}
               style={{
                 borderLeft: "2px solid rgba(10,10,10,0.15)",
-                paddingLeft: 28,
+                paddingLeft: 20,
                 alignSelf: "center",
               }}
             >
@@ -406,7 +406,7 @@ export default function ProjectDetailPage({
         <section
           data-theme="light"
           style={{
-            padding: "0 clamp(24px, 6vw, 96px) clamp(64px, 8vw, 96px)",
+            padding: "0 clamp(24px, 5vw, 72px) clamp(48px, 6vw, 72px)",
             maxWidth: 1280,
             margin: "0 auto",
             display: "flex",
@@ -428,7 +428,7 @@ export default function ProjectDetailPage({
       {/* ── Back link ── */}
       <div
         style={{
-          padding: "32px clamp(24px, 6vw, 96px) 64px",
+           padding: "24px clamp(24px, 5vw, 72px) 48px",
           maxWidth: 1280,
           margin: "0 auto",
         }}

@@ -1,56 +1,62 @@
 :root {
   /* ─── CORE PALETTE ─────────────────────────── */
-  --background: #f5f4f0;          /* warm off-white — not sterile */
+  --background: #f5f4f0;
   --background-pure: #ffffff;
-  --background-alt: #eeede8;      /* subtle section contrast */
+  --background-alt: #eeede8;
 
-  --foreground: #0a0a0a;          /* near-black text */
+  --foreground: #0a0a0a;
   --foreground-muted: rgba(10, 10, 10, 0.45);
   --foreground-subtle: rgba(10, 10, 10, 0.22);
 
-  --accent: #0a0a0a;              /* black — primary accent */
-  --accent-soft: rgba(10, 10, 10, 0.06);
+  --accent: #0a0a0a;
+  --accent-soft: rgba(10, 10, 10, 0.05);
 
-  --border: rgba(10, 10, 10, 0.1);
-  --border-strong: rgba(10, 10, 10, 0.2);
+  --border: rgba(10, 10, 10, 0.08);
+  --border-strong: rgba(10, 10, 10, 0.18);
 
-  /* ─── TEAL BRAND ACCENT ────────────────────── */
+  /* ─── TEAL BRAND ───────────────────────────── */
   --teal: #2d6a6a;
   --teal-light: #4a9e9e;
-  --teal-muted: rgba(45, 106, 106, 0.12);
+  --teal-muted: rgba(45, 106, 106, 0.10);
 
-  /* ─── DARK SECTION OVERRIDE ────────────────── */
-  /* Use [data-theme="dark"] on sections you want black */
+  /* ─── DARK MODE TOKENS ─────────────────────── */
   --dark-bg: #0a0a0a;
   --dark-fg: #f5f4f0;
 
   /* ─── TYPOGRAPHY ───────────────────────────── */
   --tracking-wide: 0.22em;
-  --tracking-heading: -0.03em;
+  --tracking-heading: -0.035em;
 
-  /* ─── SPACING ──────────────────────────────── */
-  --section-padding: 7rem;
-  --section-padding-sm: 4rem;
+  /* ─── SPACING SCALE (NEW SYSTEM) ───────────── */
+  --space-xs: 8px;
+  --space-sm: 16px;
+  --space-md: 24px;
+  --space-lg: 40px;
+  --space-xl: 64px;
+
+  /* ─── SECTION SPACING (UPDATED) ───────────── */
+  --section-padding: clamp(48px, 6vw, 72px);
+  --section-padding-sm: clamp(32px, 4vw, 48px);
 
   /* ─── RADIUS ───────────────────────────────── */
   --radius-sm: 4px;
-  --radius-md: 12px;
-  --radius-lg: 24px;
+  --radius-md: 10px;
+  --radius-lg: 20px;
   --radius-pill: 999px;
 
-  /* ─── SHADOWS ──────────────────────────────── */
-  --shadow-soft: 0 2px 24px rgba(0,0,0,0.06);
-  --shadow-card: 0 8px 48px rgba(0,0,0,0.10);
-  --shadow-hover: 0 16px 64px rgba(0,0,0,0.16);
+  /* ─── SHADOWS (SOFTER) ─────────────────────── */
+  --shadow-soft: 0 2px 18px rgba(0,0,0,0.05);
+  --shadow-card: 0 6px 36px rgba(0,0,0,0.08);
+  --shadow-hover: 0 12px 48px rgba(0,0,0,0.12);
 }
 
-/* ─── DARK SECTION TOKENS ──────────────────────── */
+/* ─── DARK SECTION TOKENS ───────────────────── */
 [data-theme="dark"] {
   --background: #0a0a0a;
   --background-alt: #111111;
   --foreground: #f5f4f0;
   --foreground-muted: rgba(245, 244, 240, 0.5);
   --foreground-subtle: rgba(245, 244, 240, 0.22);
-  --border: rgba(255, 255, 255, 0.1);
-  --accent-soft: rgba(255, 255, 255, 0.05);
+  --border: rgba(255, 255, 255, 0.08);
+  --accent-soft: rgba(255, 255, 255, 0.04);
 }

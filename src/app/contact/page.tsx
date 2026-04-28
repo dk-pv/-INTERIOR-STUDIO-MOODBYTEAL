@@ -30,7 +30,7 @@ function Field({
     border: "none",
     borderBottom: `1px solid ${focused ? "#0a0a0a" : "rgba(10,10,10,0.15)"}`,
     outline: "none",
-    padding: "14px 0",
+    padding: "10px 0",
     fontFamily: "var(--font-body)",
     fontSize: "1rem",
     color: "#0a0a0a",
@@ -115,11 +115,11 @@ export default function ContactPage() {
         data-theme="light"
         ref={heroRef}
         style={{
-          minHeight: "100vh",
+          minHeight: "85vh",
           display: "flex",
           flexDirection: "column",
           justifyContent: "flex-end",
-          padding: "0 clamp(24px, 6vw, 96px) clamp(52px, 8vw, 80px)",
+          padding: "0 clamp(24px, 5vw, 72px) clamp(36px, 6vw, 60px)",
           position: "relative",
           overflow: "hidden",
           backgroundColor: "#f5f4f0",
@@ -242,7 +242,7 @@ export default function ContactPage() {
               color: "rgba(10,10,10,0.45)",
               lineHeight: 1.75,
               maxWidth: 380,
-              marginTop: 28,
+              marginTop: 18,
             }}
           >
             Share your vision with us. We'll translate it into a refined,
@@ -257,7 +257,7 @@ export default function ContactPage() {
           transition={{ delay: 0.5, duration: 1.1, ease: EXPO }}
           style={{
             position: "absolute",
-            bottom: "clamp(52px, 8vw, 88px)",
+            bottom: "clamp(36px, 6vw, 60px)",
             left: "clamp(24px, 6vw, 96px)",
             right: "clamp(24px, 6vw, 96px)",
             height: 1,
@@ -273,7 +273,7 @@ export default function ContactPage() {
           transition={{ delay: 1.6, duration: 1 }}
           style={{
             position: "absolute",
-            bottom: "clamp(14px, 2.5vw, 28px)",
+            bottom: "clamp(10px, 2vw, 20px)",
             left: "50%",
             transform: "translateX(-50%)",
             display: "flex",
@@ -327,7 +327,7 @@ export default function ContactPage() {
         style={{
           display: "grid",
           gridTemplateColumns: "1fr 1fr",
-          minHeight: "90vh",
+          minHeight: "70vh",
         }}
       >
         {/* LEFT — Image */}
@@ -359,15 +359,15 @@ export default function ContactPage() {
           <div
             style={{
               position: "absolute",
-              bottom: 40,
-              left: 40,
-              right: 40,
+              bottom: 24,
+              left: 24,
+              right: 24,
             }}
           >
             <div
               style={{
                 borderLeft: "2px solid rgba(245,244,240,0.5)",
-                paddingLeft: 20,
+                paddingLeft: 14,
               }}
             >
               <p
@@ -407,7 +407,7 @@ export default function ContactPage() {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            padding: "clamp(48px, 6vw, 80px) clamp(32px, 5vw, 72px)",
+            padding: "clamp(32px, 5vw, 60px) clamp(24px, 4vw, 56px)",
             backgroundColor: "#ffffff",
           }}
         >
@@ -417,7 +417,7 @@ export default function ContactPage() {
               initial={{ opacity: 0, y: 24 }}
               animate={formInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.7, ease: EXPO }}
-              style={{ marginBottom: 48 }}
+              style={{ marginBottom: 28 }}
             >
               <p
                 style={{
@@ -480,7 +480,7 @@ export default function ContactPage() {
                 animate={formInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.7, delay: 0.15, ease: EXPO }}
                 onSubmit={handleSubmit}
-                style={{ display: "flex", flexDirection: "column", gap: 36 }}
+                style={{ display: "flex", flexDirection: "column", gap: 24 }}
               >
                 <Field
                   label="Full Name"
@@ -515,7 +515,7 @@ export default function ContactPage() {
                   whileHover={{ backgroundColor: "#2d6a6a" }}
                   transition={{ duration: 0.25 }}
                   style={{
-                    padding: "16px 32px",
+                    padding: "12px 24px",
                     backgroundColor: "#0a0a0a",
                     color: "#f5f4f0",
                     fontFamily: "'DM Mono', monospace",
@@ -544,7 +544,7 @@ export default function ContactPage() {
         data-theme="light"
         style={{
           backgroundColor: "#f5f4f0",
-          padding: "clamp(60px, 8vw, 100px) clamp(24px, 6vw, 96px)",
+          padding: "clamp(40px, 6vw, 70px) clamp(24px, 5vw, 72px)",
           borderTop: "1px solid rgba(10,10,10,0.08)",
         }}
       >
@@ -554,7 +554,7 @@ export default function ContactPage() {
             margin: "0 auto",
             display: "grid",
             gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
-            gap: "clamp(32px, 5vw, 64px)",
+            gap: "clamp(20px, 4vw, 40px)",
           }}
         >
           {[
@@ -583,7 +583,7 @@ export default function ContactPage() {
                   letterSpacing: "0.28em",
                   textTransform: "uppercase",
                   color: "rgba(10,10,10,0.3)",
-                  marginBottom: 12,
+                  marginBottom: 8,
                 }}
               >
                 {item.label}
@@ -623,7 +623,7 @@ export default function ContactPage() {
         <div
           style={{
             maxWidth: 700,
-            margin: "clamp(60px, 8vw, 100px) auto 0",
+            margin: "clamp(40px, 6vw, 70px) auto 0",
             textAlign: "center",
           }}
         >

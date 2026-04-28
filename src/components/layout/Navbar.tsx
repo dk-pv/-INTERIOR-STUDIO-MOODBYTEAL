@@ -74,7 +74,7 @@ function NavLink({
       style={{
         position: "relative",
         fontFamily: "'DM Mono', monospace",
-        fontSize: "0.68rem",
+        fontSize: "0.62rem",
         letterSpacing: "0.22em",
         textTransform: "uppercase",
         color: active ? activeColor : mutedColor,
@@ -126,7 +126,7 @@ function CtaButton({ isLight }: { isLight: boolean }) {
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
       style={{
-        padding: "8px 22px",
+        padding: "6px 18px",
         borderRadius: 999,
         fontFamily: "'DM Mono', monospace",
         fontSize: "0.62rem",
@@ -264,7 +264,7 @@ function MobileMenu({
             display: "flex",
             flexDirection: "column",
             justifyContent: "center",
-            padding: "0 clamp(28px, 8vw, 56px)",
+            padding: "0 clamp(20px, 6vw, 40px)",
           }}
         >
           {/* Nav links staggered */}
@@ -286,7 +286,7 @@ function MobileMenu({
                   onClick={onClose}
                   style={{
                     fontFamily: "var(--font-heading)",
-                    fontSize: "clamp(2.6rem, 10vw, 4rem)",
+                    fontSize: "clamp(2.2rem, 9vw, 3.4rem)",
                     letterSpacing: "-0.04em",
                     lineHeight: 1.1,
                     fontWeight: 400,
@@ -313,7 +313,7 @@ function MobileMenu({
               backgroundColor: isLight
                 ? "rgba(10,10,10,0.1)"
                 : "rgba(245,244,240,0.1)",
-              margin: "32px 0",
+              margin: "20px 0",
               transformOrigin: "left",
             }}
           />
@@ -421,7 +421,7 @@ export default function Navbar() {
       <div
         style={{
           position: "fixed",
-          top: 28,
+          top: 18,
           left: 0,
           right: 0,
           zIndex: 50,
@@ -436,7 +436,7 @@ export default function Navbar() {
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
           style={{
-            height: 58,
+            height: 48,
             width: "100%",
             maxWidth: 820,
             borderRadius: 999,
@@ -447,7 +447,7 @@ export default function Navbar() {
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
-            padding: "0 clamp(18px, 4vw, 36px)",
+            padding: "0 clamp(14px, 3vw, 28px)",
             transform: "translateZ(0)",
             transition: "background 0.35s ease, border-color 0.35s ease",
             pointerEvents: "all",
@@ -458,7 +458,7 @@ export default function Navbar() {
             href="/"
             style={{
               fontFamily: "var(--font-heading)",
-              fontSize: "0.82rem",
+              fontSize: "0.74rem",
               letterSpacing: "0.18em",
               textTransform: "uppercase",
               color: isLight ? "#0a0a0a" : "#f5f4f0",
@@ -473,7 +473,7 @@ export default function Navbar() {
           {/* Desktop: nav links + CTA */}
           {!isMobile && (
             <>
-              <div style={{ display: "flex", gap: 32 }}>
+              <div style={{ display: "flex", gap: 22 }}>
                 {navLinks.map((link) => (
                   <NavLink
                     key={link.href}

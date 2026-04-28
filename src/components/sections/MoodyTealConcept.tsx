@@ -1,5 +1,7 @@
 "use client";
 
+import { motion } from "framer-motion";
+
 export default function MoodyTealConcept() {
   return (
     <>
@@ -10,7 +12,7 @@ export default function MoodyTealConcept() {
         data-theme="dark"
         style={{
           backgroundColor: "#0a0a0a",
-          padding: "clamp(80px, 10vw, 140px) clamp(24px, 6vw, 96px)",
+          padding: "clamp(40px, 6vw, 80px) clamp(24px, 6vw, 96px)", // ↓ reduced
           position: "relative",
           overflow: "hidden",
         }}
@@ -23,7 +25,7 @@ export default function MoodyTealConcept() {
             left: "50%",
             transform: "translate(-50%, -50%)",
             fontFamily: "var(--font-heading)",
-            fontSize: "clamp(8rem, 20vw, 22rem)",
+            fontSize: "clamp(6rem, 16vw, 18rem)", // ↓ slightly reduced
             letterSpacing: "-0.06em",
             color: "rgba(255,255,255,0.03)",
             whiteSpace: "nowrap",
@@ -35,32 +37,43 @@ export default function MoodyTealConcept() {
           TEAL
         </div>
 
-        <div
+        {/* Animated container */}
+        <motion.div
           className="concept-grid"
           style={{
             maxWidth: 960,
             margin: "0 auto",
             display: "grid",
             gridTemplateColumns: "1fr 1fr",
-            gap: "clamp(48px, 8vw, 96px)",
+            gap: "clamp(32px, 6vw, 64px)", // ↓ reduced
             alignItems: "center",
             position: "relative",
           }}
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+          viewport={{ once: true, margin: "-80px" }}
         >
+          {/* LEFT */}
           <div>
-            <p
+            <motion.p
               style={{
                 fontFamily: "'DM Mono', monospace",
                 fontSize: "0.6rem",
                 letterSpacing: "0.3em",
                 textTransform: "uppercase",
                 color: "rgba(245,244,240,0.3)",
-                marginBottom: 24,
+                marginBottom: 20, // ↓ reduced
               }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.15, duration: 0.6 }}
+              viewport={{ once: true }}
             >
               The Studio
-            </p>
-            <h2
+            </motion.p>
+
+            <motion.h2
               style={{
                 fontFamily: "var(--font-heading)",
                 fontSize: "clamp(2.2rem, 4vw, 4rem)",
@@ -69,35 +82,50 @@ export default function MoodyTealConcept() {
                 color: "#f5f4f0",
                 fontWeight: 400,
               }}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.25, duration: 0.8 }}
+              viewport={{ once: true }}
             >
-              moody
-              <span style={{ color: "rgba(245,244,240,0.28)" }}>TEAL</span>
-            </h2>
+              Moodby
+              <span style={{ color: "rgba(245,244,240,0.28)" }}>
+                Teal
+              </span>
+            </motion.h2>
           </div>
 
+          {/* RIGHT */}
           <div>
-            <p
+            <motion.p
               style={{
                 fontSize: "clamp(0.88rem, 1.2vw, 1rem)",
                 color: "rgba(245,244,240,0.45)",
                 lineHeight: 1.85,
               }}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.35, duration: 0.8 }}
+              viewport={{ once: true }}
             >
               moodyTEAL is not just a name — it is a state of mind. The teal hue
               exists between blue and green, between calm and depth. It
               represents the emotional register we seek in every project:
               quietly powerful, never loud.
-            </p>
+            </motion.p>
 
-            <div
+            <motion.div
               className="stats-row"
               style={{
-                marginTop: 40,
-                paddingTop: 32,
+                marginTop: 20, // ↓ reduced
+                paddingTop: 18, // ↓ reduced
                 borderTop: "1px solid rgba(245,244,240,0.1)",
                 display: "flex",
-                gap: 40,
+                gap: 32, // ↓ reduced
               }}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5, duration: 0.8 }}
+              viewport={{ once: true }}
             >
               {[
                 { label: "Founded", value: "2020" },
@@ -130,21 +158,21 @@ export default function MoodyTealConcept() {
                   </p>
                 </div>
               ))}
-            </div>
+            </motion.div>
           </div>
-        </div>
+        </motion.div>
       </section>
 
-      {/* SAME responsive styles */}
+      {/* Responsive */}
       <style>{`
         @media (max-width: 680px) {
           .concept-grid {
             grid-template-columns: 1fr !important;
-            gap: 40px !important;
+            gap: 32px !important;
           }
 
           .stats-row {
-            gap: 24px !important;
+            gap: 20px !important;
           }
         }
       `}</style>

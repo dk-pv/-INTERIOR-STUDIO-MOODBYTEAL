@@ -162,7 +162,7 @@ function TeamCard({
           style={{
             position: "relative",
             width: "100%",
-            aspectRatio: "3 / 4",
+            aspectRatio: "3 / 3.4",
             overflow: "hidden",
           }}
         >
@@ -200,9 +200,9 @@ function TeamCard({
           <div
             style={{
               position: "absolute",
-              top: 12,
-              right: 12,
-              padding: "4px 10px",
+              top: 10,
+              right: 10,
+              padding: "3px 8px",
               backgroundColor: "rgba(245,244,240,0.9)",
               backdropFilter: "blur(8px)",
               borderRadius: 999,
@@ -220,7 +220,7 @@ function TeamCard({
         {/* Name/role footer */}
         <div
           style={{
-            padding: "16px 18px",
+            padding: "12px 14px",
             borderTop: "1px solid rgba(10,10,10,0.07)",
             display: "flex",
             justifyContent: "space-between",
@@ -246,7 +246,7 @@ function TeamCard({
                 letterSpacing: "0.18em",
                 textTransform: "uppercase",
                 color: "rgba(10,10,10,0.35)",
-                marginTop: 4,
+                marginTop: 2,
               }}
             >
               {member.role}
@@ -274,13 +274,13 @@ export default function Team() {
       data-theme="light"
       style={{
         backgroundColor: "#f5f4f0",
-        padding: "clamp(80px, 10vw, 140px) clamp(24px, 6vw, 80px)",
+       padding: "clamp(48px, 7vw, 90px) clamp(24px, 5vw, 64px)",
         overflow: "hidden",
       }}
     >
       <div style={{ maxWidth: 1280, margin: "0 auto" }}>
         {/* ── Header ── */}
-        <div ref={headerRef} style={{ marginBottom: 64 }}>
+        <div ref={headerRef} style={{ marginBottom: 40 }}>
           <motion.p
             initial={{ opacity: 0 }}
             animate={headerInView ? { opacity: 1 } : {}}
@@ -303,7 +303,7 @@ export default function Team() {
               justifyContent: "space-between",
               alignItems: "flex-end",
               flexWrap: "wrap",
-              gap: 20,
+              gap: 14,
             }}
           >
             <motion.h2
@@ -356,7 +356,7 @@ export default function Team() {
             style={{
               height: 1,
               backgroundColor: "rgba(10,10,10,0.1)",
-              marginTop: 32,
+              marginTop: 20,
               transformOrigin: "left",
             }}
           />
@@ -368,7 +368,7 @@ export default function Team() {
             display: "grid",
             gridTemplateColumns:
               "repeat(auto-fill, minmax(min(100%, 220px), 1fr))",
-            gap: "clamp(16px, 2.5vw, 24px)",
+           gap: "clamp(12px, 2vw, 18px)",
           }}
         >
           {team.map((member, i) => (

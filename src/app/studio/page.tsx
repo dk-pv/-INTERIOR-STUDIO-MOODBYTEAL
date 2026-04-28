@@ -13,12 +13,11 @@ export default function StudioPage() {
       <section
         data-theme="light"
         style={{
-          minHeight: "100vh",
-          height: "100dvh",
+          minHeight: "85vh",
           display: "flex",
           flexDirection: "column",
           justifyContent: "flex-end",
-          padding: "0 clamp(24px, 6vw, 96px) clamp(52px, 8vw, 88px)",
+         padding: "0 clamp(24px, 5vw, 72px) clamp(36px, 6vw, 60px)",
           position: "relative",
           overflow: "hidden",
           backgroundColor: "#f5f4f0",
@@ -94,7 +93,7 @@ export default function StudioPage() {
             zIndex: 2,
             display: "grid",
             gridTemplateColumns: "1fr",
-            rowGap: 36,
+            rowGap: 24,
           }}
         >
           {/* Heading block */}
@@ -109,7 +108,7 @@ export default function StudioPage() {
                 letterSpacing: "0.36em",
                 textTransform: "uppercase",
                 color: "rgba(10,10,10,0.32)",
-                marginBottom: 24,
+                marginBottom: 16,
               }}
             >
               A Design + Curation Studio
@@ -131,7 +130,7 @@ export default function StudioPage() {
                   }}
                   style={{
                     fontFamily: "var(--font-heading)",
-                    fontSize: "clamp(2.4rem, 6.5vw, 5.8rem)",
+                    fontSize: "clamp(2.2rem, 6vw, 5.2rem)",
                     fontWeight: 400,
                     lineHeight: 1.04,
                     letterSpacing: "-0.04em",
@@ -149,10 +148,10 @@ export default function StudioPage() {
           {/* Descriptor */}
           <div
             style={{
-              maxWidth: 320,
+              maxWidth: 300,
               display: "flex",
               flexDirection: "column",
-              gap: 18,
+              gap: 12,
             }}
           >
             <motion.div
@@ -161,7 +160,7 @@ export default function StudioPage() {
               transition={{ delay: 0.8, duration: 1, ease: EXPO }}
               style={{
                 width: 1,
-                height: 44,
+                height: 32,
                 backgroundColor: "rgba(10,10,10,0.18)",
                 transformOrigin: "top",
               }}
@@ -174,7 +173,7 @@ export default function StudioPage() {
               style={{
                 fontFamily: "var(--font-body)",
                 fontSize: "clamp(0.82rem, 1.1vw, 0.95rem)",
-                lineHeight: 1.8,
+                lineHeight: 1.7,
                 color: "rgba(10,10,10,0.45)",
               }}
             >
@@ -206,7 +205,7 @@ export default function StudioPage() {
           transition={{ delay: 0.6, duration: 1.1, ease: EXPO }}
           style={{
             position: "absolute",
-            bottom: "clamp(52px, 8vw, 88px)",
+            bottom: "clamp(36px, 6vw, 60px)",
             left: "clamp(24px, 6vw, 96px)",
             right: "clamp(24px, 6vw, 96px)",
             height: 1,
@@ -222,7 +221,7 @@ export default function StudioPage() {
           transition={{ delay: 1.8, duration: 1 }}
           style={{
             position: "absolute",
-            bottom: "clamp(14px, 2.5vw, 28px)",
+            bottom: "clamp(10px, 2vw, 20px)",
             left: "50%",
             transform: "translateX(-50%)",
             display: "flex",

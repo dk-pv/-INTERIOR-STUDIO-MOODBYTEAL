@@ -306,10 +306,10 @@ export default function Footer() {
           display: grid;
           grid-template-columns: 1fr auto 1fr;
           align-items: center;
-          gap: 32px;
+          gap: 20px;
           width: 100%;
           max-width: none;
-          padding: 36px clamp(32px, 6vw, 120px) 20px;
+          padding:  24px clamp(28px, 5vw, 96px) 14px;
           position: relative;
         }
 
@@ -343,7 +343,7 @@ export default function Footer() {
         .tc-contact-card {
           border: 1px solid rgba(255,255,255,0.1);
           border-radius: 14px;
-          padding: 18px 22px;
+          padding: 14px 18px;
           background: rgba(255,255,255,0.03);
           display: flex;
           flex-direction: column;
@@ -352,7 +352,7 @@ export default function Footer() {
         .tc-phone {
           display: block;
           font-family: 'DM Mono','Courier New',monospace;
-          font-size: 1.15rem;
+          font-size: 1rem;
           font-weight: 400;
           color: #ffffff;
           letter-spacing: 0.06em;
@@ -365,7 +365,7 @@ export default function Footer() {
           width: 100%;
           height: 0.5px;
           background: rgba(255,255,255,0.09);
-          margin: 12px 0;
+          margin: 8px 0;
         }
         .tc-email {
           font-family: 'DM Mono','Courier New',monospace;
@@ -382,12 +382,12 @@ export default function Footer() {
           display: flex;
           flex-direction: column;
           align-items: center;
-          gap: 10px;
+          gap: 6px;
         }
         .tc-fire-wrap {
           position: relative;
-          width: 170px;
-          height: 170px;
+          width: 140px;
+          height: 140px;
           display: flex;
           align-items: center;
           justify-content: center;
@@ -477,7 +477,7 @@ export default function Footer() {
           flex-direction: column;
           align-items: flex-end;
           text-align: right;
-          gap: 7px;
+          gap: 5px;
         }
         .tc-address-en {
           font-family: 'DM Mono','Courier New',monospace;
@@ -507,7 +507,7 @@ export default function Footer() {
         .tc-www:hover { color: rgba(255,255,255,0.65); }
         .tc-socials {
           display: flex;
-          gap: 14px;
+          gap: 10px;
           flex-wrap: wrap;
           justify-content: flex-end;
           margin-top: 4px;
@@ -523,7 +523,7 @@ export default function Footer() {
         /* ─── Bottom bar ─── */
         .tc-bottom-bar {
           border-top: 0.5px solid rgba(255,255,255,0.06);
-          padding: 10px clamp(28px, 5vw, 72px);
+          padding: 8px clamp(24px, 4vw, 56px);
           display: flex;
           justify-content: space-between;
           align-items: center;
@@ -535,7 +535,7 @@ export default function Footer() {
         .tc-bottom-center,
         .tc-bottom-right {
           font-family: 'DM Mono','Courier New',monospace;
-          font-size: 0.55rem;
+          font-size: 0.5rem;
           letter-spacing: 0.18em;
           color: rgba(255,255,255,0.28);
           text-transform: uppercase;

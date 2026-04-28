@@ -69,7 +69,7 @@ export default function Hero() {
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
-            padding: "clamp(20px, 4vw, 40px) clamp(20px, 6vw, 80px)",
+            padding:"clamp(14px, 3vw, 28px) clamp(20px, 5vw, 64px)",
           }}
         >
           <motion.p
@@ -94,7 +94,7 @@ export default function Hero() {
           style={{
             position: "relative",
             zIndex: 10,
-            padding: "0 clamp(20px, 6vw, 80px) clamp(28px, 5vh, 64px)",
+            padding:"0 clamp(20px, 5vw, 64px) clamp(20px, 4vh, 48px)",
           }}
         >
           {/* Thin rule */}
@@ -105,7 +105,7 @@ export default function Hero() {
             style={{
               height: 1,
               background: "rgba(245,244,240,0.12)",
-              marginBottom: "clamp(20px, 3.5vh, 36px)",
+              marginBottom: "clamp(14px, 2.5vh, 24px)",
               transformOrigin: "left",
             }}
           />
@@ -115,7 +115,7 @@ export default function Hero() {
               display: "flex",
               alignItems: "flex-end",
               justifyContent: "space-between",
-              gap: "clamp(16px, 4vw, 48px)",
+              gap: "clamp(12px, 3vw, 32px)",
             }}
             className="flex-col sm:flex-row"
           >
@@ -160,7 +160,7 @@ export default function Hero() {
                 }}
                 style={{
                   width: 1,
-                  height: 40,
+                  height: 28,
                   background: "rgba(245,244,240,0.35)",
                   transformOrigin: "top",
                 }}
@@ -188,7 +188,7 @@ export default function Hero() {
         data-theme="light"
         style={{
           backgroundColor: "#f5f4f0",
-          padding: "clamp(60px, 10vw, 100px) clamp(20px, 6vw, 80px)",
+          padding:"clamp(40px, 7vw, 70px) clamp(20px, 5vw, 64px)",
         }}
       >
         <div
@@ -197,7 +197,7 @@ export default function Hero() {
             margin: "0 auto",
             display: "flex",
             flexDirection: "column",
-            gap: "clamp(40px, 6vw, 96px)",
+             gap: "clamp(28px, 5vw, 64px)",
           }}
           className="md:flex-row md:items-start"
         >
@@ -250,7 +250,7 @@ export default function Hero() {
               whileHover={{ x: 6 }}
               transition={{ duration: 0.25 }}
               className="btn btn-outline inline-flex"
-              style={{ cursor: "pointer", marginTop: "clamp(40px, 6vw, 80px)" }}
+              style={{ cursor: "pointer",marginTop: "clamp(24px, 4vw, 48px)" }}
             >
               Our Story
               <span style={{ opacity: 0.5, fontSize: "0.8em" }}>→</span>

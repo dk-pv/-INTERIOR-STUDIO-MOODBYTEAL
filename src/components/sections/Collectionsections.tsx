@@ -169,7 +169,7 @@ const styles = `
   /* ─── FURNITURE SECTION ─── */
   .tc-fur-section {
     background: #ffffff;
-    padding: clamp(44px, 7vw, 88px) clamp(28px, 5.5vw, 68px);
+    padding: clamp(32px, 5.5vw, 64px) clamp(24px, 5vw, 56px);
     border-top: 1px solid rgba(17,17,17,0.07);
   }
   .tc-fur-wrap {
@@ -177,21 +177,21 @@ const styles = `
     margin: 0 auto;
     display: flex;
     flex-direction: column;
-    gap: clamp(5px, 0.65vw, 9px);
+    gap:  clamp(4px, 0.5vw, 7px);
   }
 
   /* rows */
   .tc-fur-row {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: clamp(5px, 0.65vw, 9px);
+    clamp(4px, 0.5vw, 7px);
     align-items: stretch;
   }
 
   /* top row: text left sits at bottom of its half-height cell */
   .tc-fur-row-top { align-items: end; }
   .tc-fur-text {
-    padding-bottom: clamp(8px, 1.5vw, 18px);
+    padding-bottom: clamp(4px, 1vw, 10px);
     padding-left: clamp(2px, 0.4vw, 6px);
   }
   .tc-fur-heading {
@@ -202,7 +202,7 @@ const styles = `
     line-height: 1.1;
     color: #111111;
     text-transform: uppercase;
-    margin-bottom: clamp(6px, 1vw, 12px);
+    margin-bottom:  clamp(4px, 0.7vw, 8px)
   }
   .tc-fur-sub {
     font-family: 'DM Mono', 'Courier New', monospace;
@@ -215,7 +215,7 @@ const styles = `
 
   /* image cells */
   .tc-fur-cell { overflow: hidden; background: #d8d5cf; }
-  .tc-fur-cell-std { aspect-ratio: 4 / 3; }
+  .tc-fur-cell-std { aspect-ratio: 4 / 2.6; }
   .tc-fur-img {
     width: 100%; height: 100%;
     object-fit: cover; display: block;
@@ -229,8 +229,8 @@ const styles = `
     display: flex;
     align-items: flex-end;
     justify-content: flex-end;
-    padding: clamp(10px, 1.5vw, 20px) clamp(4px, 0.8vw, 10px);
-    aspect-ratio: 4 / 3;
+    padding: clamp(6px, 1vw, 14px) clamp(4px, 0.6vw, 8px);
+    aspect-ratio: 4 / 2.6;
   }
   .tc-fur-brand {
     font-family: 'DM Mono', 'Courier New', monospace;
