@@ -15,65 +15,68 @@ export default function WhatsappFloat() {
       rel="noopener noreferrer"
       className="
         fixed
-        bottom-4 right-4
-        sm:bottom-5 sm:right-5
-        md:bottom-6 md:right-6
-        lg:bottom-8 lg:right-8
+        bottom-6 right-6
+        sm:bottom-8 sm:right-8
+        md:bottom-10 md:right-10
         z-[999]
         group
       "
     >
+      {/* ✨ Glow */}
       <div
         className="
-    absolute inset-0 rounded-full
-    blur-lg opacity-0
-    transition-all duration-300 ease-out
-    group-hover:opacity-100
-    bg-[radial-gradient(circle,rgba(37,211,102,0.28)_0%,transparent_70%)]
-  "
+          absolute inset-0
+          blur-2xl
+          opacity-70
+          bg-[radial-gradient(circle,rgba(45,106,106,0.35)_0%,transparent_70%)]
+          animate-[waGlow_3s_ease-in-out_infinite]
+        "
       />
+
+      {/* ✨ ICON ONLY (BIG) */}
       <img
         src="/icons/whatsapp.png"
         alt="Chat on WhatsApp"
         className="
-    w-14 h-14
-    sm:w-16 sm:h-16
-    md:w-18 md:h-18
-    lg:w-20 lg:h-20
-    object-contain
+          relative
 
-    drop-shadow-[0_5px_18px_rgba(0,0,0,0.25)]
+          w-20 h-20
+          sm:w-24 sm:h-24
+          md:w-28 md:h-28
+          lg:w-32 lg:h-32
 
-    animate-[whatsappPulse_3s_ease-in-out_infinite]
+          object-contain
 
-    hover:animate-none
-    hover:scale-105
+          drop-shadow-[0_12px_40px_rgba(0,0,0,0.35)]
 
-    transition-all duration-300 ease-out
-  "
+          animate-[waZoom_2.4s_ease-in-out_infinite]
+
+          group-hover:scale-110
+          group-hover:rotate-[4deg]
+
+          transition-all duration-300 ease-out
+        "
       />
 
-      {/* Tooltip label */}
+      {/* Tooltip */}
       <span
         className="
-          absolute right-full mr-2 top-1/2 -translate-y-1/2
-          px-2.5 py-1
-           rounded-lg
-          bg-white
-          text-[#111]
+          absolute right-full mr-3 top-1/2 -translate-y-1/2
+          px-3 py-1.5
+          rounded-md
+          bg-[#0a0a0a]
+          text-[#f5f4f0]
           text-[10px] sm:text-xs
-          font-medium
+          tracking-[0.2em]
+          uppercase
           whitespace-nowrap
-          shadow-md
           opacity-0 translate-x-2
           group-hover:opacity-100 group-hover:translate-x-0
           transition-all duration-200 ease-out
           pointer-events-none
-          select-none
         "
       >
-        Chat with us
-        <span className="absolute left-full top-1/2 -translate-y-1/2 border-4 border-transparent border-l-white" />
+        Chat Now →
       </span>
     </a>
   );

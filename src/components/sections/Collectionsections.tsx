@@ -68,9 +68,9 @@ function DesignerFurniture() {
           <FadeUp delay={0}>
             <div className="tc-fur-text">
               <h2 className="tc-fur-heading">
-                DESIGNER
+                INTERIOR
                 <br />
-                FURNITURE
+                DESIGN STUDIO
               </h2>
               <p className="tc-fur-sub">INSPIRED BY JAPANDI MINIMALISM</p>
             </div>

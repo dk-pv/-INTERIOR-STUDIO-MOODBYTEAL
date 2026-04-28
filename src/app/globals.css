@@ -206,3 +206,24 @@ section {
   50%  { transform: scale(1.04); opacity: 0.9; }
   100% { transform: scale(1); opacity: 1; }
 }
+
+
+@keyframes waZoom {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.12);
+  }
+}
+
+@keyframes waGlow {
+  0%, 100% {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.9;
+    transform: scale(1.25);
+  }
+}
