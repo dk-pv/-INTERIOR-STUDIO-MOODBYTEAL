@@ -195,7 +195,6 @@ export default function Footer() {
             <a href="tel:+971502685369" className="tc-phone">
               +971 50 268 5369
             </a>
-           
 
             <div className="tc-divider" />
 
@@ -239,20 +238,17 @@ export default function Footer() {
         {/* ── COL 3: Address + socials ── */}
         <div className="tc-col-right">
           <p className="tc-address-en">
-            Business Centre, Sharjah Publishing City Free Zone,
+            Dubai,
             <br />
-            Sharjah, United Arab Emirates
-          </p>
-          <p className="tc-address-ar">
-            تيل كلتشر، مركز الأعمال، المدينة الإبداعية، الشارقة
+            United Arab Emirates
           </p>
           <a
-            href="https://www.teal.com"
+            href="https://www.moodbyteal.com"
             target="_blank"
             rel="noopener noreferrer"
             className="tc-www"
           >
-            www.teal.com
+            www.moodbyteal.com
           </a>
           <div className="tc-socials">
             {socials.map((s) => (

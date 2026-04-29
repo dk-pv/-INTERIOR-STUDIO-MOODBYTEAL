@@ -3,6 +3,14 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 
+const ease = [0.16, 1, 0.3, 1] as [number, number, number, number];
+const fadeUp = (delay = 0) => ({
+  initial: { opacity: 0, y: 24 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true, margin: "-80px" },
+  transition: { delay, duration: 0.75, ease },
+});
+
 export default function Hero() {
   return (
     <>
@@ -20,8 +28,6 @@ export default function Hero() {
           backgroundColor: "#050505",
         }}
       >
-        {/* ── Background image ── */}
-        {/* ── Plain Background image ── */}
         <div
           style={{
             position: "absolute",
@@ -30,7 +36,6 @@ export default function Hero() {
             height: "100%",
           }}
         >
-          {/* Desktop + Tablet */}
           <div className="hidden sm:block w-full h-full">
             <Image
               src="/hero-desktop.png"
@@ -38,14 +43,9 @@ export default function Hero() {
               fill
               priority
               sizes="100vw"
-              style={{
-                objectFit: "cover",
-                objectPosition: "center center",
-              }}
+              style={{ objectFit: "cover", objectPosition: "center center" }}
             />
           </div>
-
-          {/* Mobile */}
           <div className="block sm:hidden w-full h-full">
             <Image
               src="/hero-mobile.png"
@@ -53,39 +53,19 @@ export default function Hero() {
               fill
               priority
               sizes="100vw"
-              style={{
-                objectFit: "cover",
-                objectPosition: "center center",
-              }}
+              style={{ objectFit: "cover", objectPosition: "center center" }}
             />
           </div>
         </div>
-        {/* ── Corner Labels ── */}
+
         {[
           { text: "Interior Design", pos: "top-left" },
           { text: "Turnkey Fit-out Construction", pos: "top-right" },
           { text: "Furniture Manufacturing", pos: "bottom-left" },
           { text: "Interior Styling", pos: "bottom-right" },
         ].map((item, i) => {
-          const baseStyle = {
-            position: "absolute" as const,
-            zIndex: 20,
-            fontFamily: "'DM Mono', monospace",
-            fontSize: "clamp(0.55rem, 1vw, 0.7rem)",
-            letterSpacing: "0.32em",
-            textTransform: "uppercase" as const,
-            color: "rgba(245,244,240,0.65)",
-            fontWeight: 500, // ✅ slightly bold
-            pointerEvents: "none" as const,
-
-            // ✅ premium effects
-            textShadow: "0 0 18px rgba(255,255,255,0.12)",
-            backdropFilter: "blur(2px)",
-          };
-
-          const spacing = "clamp(20px, 3vw, 48px)"; // ✅ responsive distance
-
-          const positionStyles =
+          const spacing = "clamp(20px, 3vw, 48px)";
+          const pos =
             item.pos === "top-left"
               ? { top: spacing, left: spacing }
               : item.pos === "top-right"
@@ -97,38 +77,41 @@ export default function Hero() {
                       right: spacing,
                       textAlign: "right" as const,
                     };
-
           return (
             <motion.div
               key={item.text}
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{
-                delay: 0.5 + i * 0.2,
-                duration: 0.8,
-                ease: [0.16, 1, 0.3, 1],
+              transition={{ delay: 0.5 + i * 0.2, duration: 0.8, ease }}
+              style={{
+                position: "absolute",
+                zIndex: 20,
+                fontFamily: "'DM Mono', monospace",
+                fontSize: "clamp(0.55rem, 1vw, 0.7rem)",
+                letterSpacing: "0.32em",
+                textTransform: "uppercase",
+                color: "rgba(245,244,240,0.65)",
+                fontWeight: 500,
+                pointerEvents: "none",
+                textShadow: "0 0 18px rgba(255,255,255,0.12)",
+                backdropFilter: "blur(2px)",
+                ...pos,
               }}
-              whileHover={{ opacity: 1 }} // future-proof (if interactive later)
-              style={{ ...baseStyle, ...positionStyles }}
             >
               {item.text}
             </motion.div>
           );
         })}
-        
-        {/* ── TOP ROW ── */}
+
         <div
           style={{
             position: "relative",
             zIndex: 10,
             display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
             padding: "clamp(14px, 3vw, 28px) clamp(20px, 5vw, 64px)",
           }}
-        ></div>
+        />
 
-        {/* ── BOTTOM CONTENT ── */}
         <div
           style={{
             position: "relative",
@@ -136,11 +119,10 @@ export default function Hero() {
             padding: "0 clamp(20px, 5vw, 64px) clamp(20px, 4vh, 48px)",
           }}
         >
-          {/* Thin rule */}
           <motion.div
             initial={{ scaleX: 0 }}
             animate={{ scaleX: 1 }}
-            transition={{ duration: 1.1, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 1.1, delay: 0.4, ease }}
             style={{
               height: 1,
               background: "rgba(245,244,240,0.12)",
@@ -148,13 +130,7 @@ export default function Hero() {
               transformOrigin: "left",
             }}
           />
-
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "flex-end", // push scroll to right
-            }}
-          >
+          <div style={{ display: "flex", justifyContent: "flex-end" }}>
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -197,68 +173,125 @@ export default function Hero() {
         </div>
       </section>
 
-      {/* ═══════════════════════════════════════════════
-          INTRO STRIP
-      ═══════════════════════════════════════════════ */}
+      {/* ══════════════════════════════════════
+          INTRO / PHILOSOPHY STRIP
+      ══════════════════════════════════════ */}
       <section
         data-theme="light"
         style={{
           backgroundColor: "#f5f4f0",
-          padding: "clamp(40px, 7vw, 70px) clamp(20px, 5vw, 64px)",
+          padding: "clamp(32px, 5vw, 60px) clamp(20px, 6vw, 80px)",
+          overflow: "hidden",
         }}
       >
-        <div
-          style={{
-            maxWidth: 1100,
-            margin: "0 auto",
-            display: "flex",
-            flexDirection: "column",
-            gap: "clamp(28px, 5vw, 64px)",
-          }}
-          className="md:flex-row md:items-start"
-        >
-          <div style={{ flex: 1 }}>
-            <p
-              style={{
-                fontFamily: "'DM Mono', monospace",
-                fontSize: "0.55rem",
-                letterSpacing: "0.28em",
-                textTransform: "uppercase",
-                color: "rgba(10,10,10,0.35)",
-                marginBottom: 20,
-              }}
-            >
-              Our Philosophy
-            </p>
+        <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+          {/* ── OUR PHILOSOPHY label — ✅ spread, no variants prop ── */}
+          <motion.p
+            {...fadeUp(0)}
+            style={{
+              fontFamily: "'DM Mono', monospace",
+              fontSize: "0.55rem",
+              letterSpacing: "0.28em",
+              textTransform: "uppercase",
+              color: "rgba(10,10,10,0.35)",
+              marginBottom: 18,
+            }}
+          >
+            Our Philosophy
+          </motion.p>
+
+          {/* ── Animated rule ── */}
+          <motion.div
+            initial={{ scaleX: 0 }}
+            whileInView={{ scaleX: 1 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.9, delay: 0.05, ease }}
+            style={{
+              height: 1,
+              background: "rgba(10,10,10,0.08)",
+              marginBottom: 20,
+              transformOrigin: "left",
+            }}
+          />
+
+          {/* ── About + Logo row — ✅ spread ── */}
+          <motion.div
+            {...fadeUp(0.12)}
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "18px",
+              flexWrap: "wrap",
+              marginBottom: "clamp(10px, 2vw, 18px)",
+            }}
+          >
             <h2
               style={{
                 fontFamily: "var(--font-heading)",
-                fontSize: "clamp(1.9rem, 4vw, 3.2rem)",
-                letterSpacing: "-0.03em",
-                lineHeight: 1.1,
+                fontSize: "clamp(2.4rem, 5.5vw, 4rem)",
+                letterSpacing: "-0.025em",
+                lineHeight: 1.0,
                 color: "#0a0a0a",
                 fontWeight: 400,
                 margin: 0,
               }}
             >
-              Space is not just built.
-              <br />
-              <span style={{ color: "rgba(10,10,10,0.3)" }}>It is felt.</span>
+              About
             </h2>
-          </div>
 
-          <div style={{ flex: 1, paddingTop: "clamp(0px, 3vw, 40px)" }}>
+            <motion.div
+              initial={{ opacity: 0, x: -12 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.35, duration: 0.7, ease }}
+            >
+              <Image
+                src="/teal-culture-logo.png"
+                alt="Teal Culture Logo"
+                width={200}
+                height={52}
+                priority
+                style={{ objectFit: "contain" }}
+              />
+            </motion.div>
+          </motion.div>
+
+          {/* ── Tagline — ✅ spread ── */}
+          <motion.p
+            {...fadeUp(0.24)}
+            style={{
+              fontFamily: "var(--font-heading)",
+              fontSize: "clamp(1.7rem, 3.6vw, 2.8rem)",
+              color: "rgba(10,10,10,0.18)",
+              lineHeight: 1.15,
+              fontWeight: 400,
+              margin: "0 0 clamp(16px, 3vw, 32px) 0",
+            }}
+          >
+            Where Space Becomes Experience
+          </motion.p>
+
+          {/* ── Body + CTA — ✅ spread ── */}
+          <motion.div {...fadeUp(0.36)} style={{ maxWidth: 900 }}>
             <p
               style={{
-                fontSize: "clamp(0.85rem, 1.4vw, 0.95rem)",
-                color: "rgba(10,10,10,0.52)",
-                lineHeight: 1.85,
+                fontSize: "clamp(0.85rem, 1.35vw, 0.95rem)",
+                color: "rgba(10,10,10,0.50)",
+                lineHeight: 1.9,
                 letterSpacing: "0.01em",
+                margin: "0 0 clamp(20px, 3vw, 36px) 0",
               }}
             >
-              TEAL CULTURE is a luxury interior architecture studio crafting
-              bespoke environments — private residences, commercial spaces,
-              villas, and apartments — where every detail speaks intention.
+              Teal Culture emerges within India and the United Arab Emirates as
+              a convergence of architecture, interiors, and Artificial
+              Intelligence. Built form is experienced as a continuous spatial
+              journey rather than a fixed object. Spaces unfold through
+              reduction and precision. Matter is guided by silence, weight, and
+              light — revealing itself gradually through movement and
+              perception. Founded by Sahil Haneefa, Teal Culture is an ongoing
+              exploration of how construction becomes experience where
+              architecture, intelligence, and human perception flow into a
+              single evolving field.
             </p>
 
             <motion.a
@@ -266,12 +299,12 @@ export default function Hero() {
               whileHover={{ x: 6 }}
               transition={{ duration: 0.25 }}
               className="btn btn-outline inline-flex"
-              style={{ cursor: "pointer", marginTop: "clamp(24px, 4vw, 48px)" }}
+              style={{ cursor: "pointer" }}
             >
               Our Story
               <span style={{ opacity: 0.5, fontSize: "0.8em" }}>→</span>
             </motion.a>
-          </div>
+          </motion.div>
         </div>
       </section>
     </>
