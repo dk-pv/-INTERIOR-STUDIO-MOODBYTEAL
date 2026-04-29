@@ -671,7 +671,7 @@ export default function ContactPage() {
           style={{ position: "relative", overflow: "hidden", minHeight: 480 }}
         >
           <Image
-            src="/images/contact.jpg"
+            src="/images/contact.png"
             alt="TEAL CULTURE Interior"
             fill
             style={{ objectFit: "cover" }}

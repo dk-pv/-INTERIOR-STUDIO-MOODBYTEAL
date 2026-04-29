@@ -43,7 +43,6 @@ const team = [
   },
 ];
 
-// ─── Team Card ─────────────────────────────────────────────
 function TeamCard({
   member,
   index,
@@ -140,7 +139,7 @@ function TeamCard({
           cursor: "none",
         }}
       >
-        {/* Glow on white card */}
+        {/* Glow */}
         <div
           ref={glowRef}
           style={{
@@ -184,7 +183,7 @@ function TeamCard({
             }}
           />
 
-          {/* Overlay on hover */}
+          {/* Hover overlay */}
           <div
             style={{
               position: "absolute",
@@ -217,7 +216,7 @@ function TeamCard({
           </div>
         </div>
 
-        {/* Name/role footer */}
+        {/* Footer */}
         <div
           style={{
             padding: "12px 14px",
@@ -274,16 +273,17 @@ export default function Team() {
       data-theme="light"
       style={{
         backgroundColor: "#f5f4f0",
-       padding: "clamp(48px, 7vw, 90px) clamp(24px, 5vw, 64px)",
+        padding: "clamp(48px, 7vw, 90px) clamp(24px, 5vw, 64px)",
         overflow: "hidden",
       }}
     >
       <div style={{ maxWidth: 1280, margin: "0 auto" }}>
-        {/* ── Header ── */}
+        {/* ── Header — mirrors Founder section exactly ── */}
         <div ref={headerRef} style={{ marginBottom: 40 }}>
+          {/* Mono label */}
           <motion.p
-            initial={{ opacity: 0 }}
-            animate={headerInView ? { opacity: 1 } : {}}
+            initial={{ opacity: 0, y: 10 }}
+            animate={headerInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6 }}
             style={{
               fontFamily: "'DM Mono', monospace",
@@ -297,39 +297,48 @@ export default function Team() {
             The Team
           </motion.p>
 
+          {/* Animated divider */}
+          <motion.div
+            initial={{ scaleX: 0 }}
+            animate={headerInView ? { scaleX: 1 } : {}}
+            transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+            style={{
+              height: 1,
+              backgroundColor: "rgba(10,10,10,0.12)",
+              transformOrigin: "left",
+              marginBottom: 32,
+            }}
+          />
+
+          {/* Heading row — matches Founder layout */}
           <div
             style={{
               display: "flex",
-              justifyContent: "space-between",
-              alignItems: "flex-end",
               flexWrap: "wrap",
-              gap: 14,
+              alignItems: "flex-end",
+              justifyContent: "space-between",
+              gap: 16,
             }}
           >
             <motion.h2
-              initial={{ opacity: 0, y: 32 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={headerInView ? { opacity: 1, y: 0 } : {}}
               transition={{
-                duration: 0.9,
+                duration: 0.8,
                 ease: [0.16, 1, 0.3, 1],
                 delay: 0.1,
               }}
               style={{
                 fontFamily: "var(--font-heading)",
-                fontSize: "clamp(2.5rem, 5vw, 5rem)",
-                letterSpacing: "-0.04em",
-                lineHeight: 1.0,
-                color: "#0a0a0a",
+                fontSize: "clamp(2rem, 4vw, 3.6rem)",
                 fontWeight: 400,
+                lineHeight: 1.08,
+                letterSpacing: "-0.04em",
+                color: "#0a0a0a",
+                margin: 0,
               }}
             >
-              People behind
-              <br />
-              <span
-                style={{ color: "rgba(10,10,10,0.28)", fontStyle: "italic" }}
-              >
-                the spaces
-              </span>
+              The Team
             </motion.h2>
 
             <motion.p
@@ -338,28 +347,16 @@ export default function Team() {
               transition={{ duration: 0.7, delay: 0.3 }}
               style={{
                 fontFamily: "'DM Mono', monospace",
-                fontSize: "0.6rem",
-                letterSpacing: "0.22em",
-                color: "rgba(10,10,10,0.28)",
-                maxWidth: 240,
-                lineHeight: 1.7,
+                fontSize: "0.58rem",
+                letterSpacing: "0.2em",
+                color: "rgba(10,10,10,0.3)",
+                textTransform: "uppercase",
+                alignSelf: "flex-end",
               }}
             >
-              A collective of architects, designers, and visionaries.
+              Est. 2020 — UAE
             </motion.p>
           </div>
-
-          <motion.div
-            initial={{ scaleX: 0 }}
-            animate={headerInView ? { scaleX: 1 } : {}}
-            transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-            style={{
-              height: 1,
-              backgroundColor: "rgba(10,10,10,0.1)",
-              marginTop: 20,
-              transformOrigin: "left",
-            }}
-          />
         </div>
 
         {/* ── Grid ── */}
@@ -368,7 +365,7 @@ export default function Team() {
             display: "grid",
             gridTemplateColumns:
               "repeat(auto-fill, minmax(min(100%, 220px), 1fr))",
-           gap: "clamp(12px, 2vw, 18px)",
+            gap: "clamp(12px, 2vw, 18px)",
           }}
         >
           {team.map((member, i) => (

@@ -1,29 +1,232 @@
 "use client";
 
 import Image from "next/image";
-import { useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import { useRef, useState } from "react";
+import { motion, useInView, AnimatePresence } from "framer-motion";
 
 const founders = [
   {
     name: "Sahil Haneefa",
-    title: "Founder & Design Director",
+    title: "Founder & CEO",
+    index: "01",
   },
   {
-    name: "Aryan Mehta",
-    title: "Co-Founder & Creative Lead",
+    name: "Muhammed Rashid",
+    title: "Co-Founder, Execution Director",
+    index: "02",
   },
   {
-    name: "Priya Nair",
-    title: "Co-Founder & Strategy Head",
+    name: "Amrithapriya",
+    title: "Co-Founder, Creative Director",
+    index: "03",
   },
 ];
 
-const stats = [
-  { value: "8+", label: "Years" },
-  { value: "48+", label: "Projects" },
-  { value: "2", label: "Countries" },
-];
+function FounderCard({
+  founder,
+  inView,
+  delay,
+}: {
+  founder: (typeof founders)[0];
+  inView: boolean;
+  delay: number;
+}) {
+  const [hovered, setHovered] = useState(false);
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 48 }}
+      animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1], delay }}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      style={{ display: "flex", flexDirection: "column", gap: 0 }}
+    >
+      {/* ── Image Container ── */}
+      <div
+        style={{
+          position: "relative",
+          width: "100%",
+          aspectRatio: "3 / 3.8",
+          overflow: "hidden",
+          cursor: "default",
+        }}
+      >
+        {/* Ghost index number */}
+        <motion.span
+          animate={{ opacity: hovered ? 0.06 : 0.03 }}
+          transition={{ duration: 0.4 }}
+          style={{
+            position: "absolute",
+            top: -10,
+            right: 8,
+            fontFamily: "var(--font-heading)",
+            fontSize: "clamp(5rem, 10vw, 9rem)",
+            fontWeight: 400,
+            letterSpacing: "-0.06em",
+            color: "#0a0a0a",
+            lineHeight: 1,
+            zIndex: 2,
+            userSelect: "none",
+            pointerEvents: "none",
+          }}
+        >
+          {founder.index}
+        </motion.span>
+
+        {/* Image with zoom on hover */}
+        <motion.div
+          animate={{ scale: hovered ? 1.06 : 1 }}
+          transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+          style={{ position: "absolute", inset: 0 }}
+        >
+          <Image
+            src="/images/founder.jpg"
+            alt={`${founder.name} – MoodbyTEAL`}
+            fill
+            sizes="(max-width: 768px) 100vw, 33vw"
+            style={{ objectFit: "cover", objectPosition: "top center" }}
+          />
+        </motion.div>
+
+        {/* Dark vignette */}
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            background:
+              "linear-gradient(to top, rgba(10,10,10,0.55) 0%, rgba(10,10,10,0.1) 50%, transparent 100%)",
+            zIndex: 1,
+          }}
+        />
+
+        {/* Animated reveal line */}
+        <motion.div
+          animate={{ scaleX: hovered ? 1 : 0 }}
+          initial={{ scaleX: 0 }}
+          transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+          style={{
+            position: "absolute",
+            bottom: 0,
+            left: 0,
+            width: "100%",
+            height: 2,
+            backgroundColor: "#f5f4f0",
+            transformOrigin: "left",
+            zIndex: 3,
+          }}
+        />
+
+        {/* Name badge — slides up on hover */}
+        <motion.div
+          animate={{ y: hovered ? 0 : 12, opacity: hovered ? 1 : 0.82 }}
+          transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+          style={{
+            position: "absolute",
+            bottom: 18,
+            left: 18,
+            zIndex: 3,
+          }}
+        >
+          <p
+            style={{
+              fontFamily: "var(--font-heading)",
+              fontSize: "clamp(1rem, 1.6vw, 1.3rem)",
+              letterSpacing: "-0.02em",
+              color: "#f5f4f0",
+              lineHeight: 1.2,
+              marginBottom: 5,
+            }}
+          >
+            {founder.name}
+          </p>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: 8,
+            }}
+          >
+            <motion.div
+              animate={{ width: hovered ? 20 : 0 }}
+              transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+              style={{
+                height: 1,
+                backgroundColor: "rgba(245,244,240,0.5)",
+                overflow: "hidden",
+              }}
+            />
+            <p
+              style={{
+                fontFamily: "'DM Mono', monospace",
+                fontSize: "0.56rem",
+                letterSpacing: "0.22em",
+                color: "rgba(245,244,240,0.55)",
+                textTransform: "uppercase",
+              }}
+            >
+              {founder.title}
+            </p>
+          </div>
+        </motion.div>
+      </div>
+
+      {/* ── Below image: name row ── */}
+      <div
+        style={{
+          paddingTop: 14,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          borderBottom: "1px solid rgba(10,10,10,0.1)",
+          paddingBottom: 14,
+        }}
+      >
+        <p
+          style={{
+            fontFamily: "var(--font-heading)",
+            fontSize: "clamp(0.9rem, 1.3vw, 1.1rem)",
+            letterSpacing: "-0.02em",
+            color: "#0a0a0a",
+          }}
+        >
+          {founder.name}
+        </p>
+
+        {/* Animated arrow on hover */}
+        <motion.svg
+          animate={{ x: hovered ? 4 : 0, opacity: hovered ? 1 : 0.3 }}
+          transition={{ duration: 0.3 }}
+          width="16"
+          height="16"
+          viewBox="0 0 16 16"
+          fill="none"
+        >
+          <path
+            d="M3 8h10M9 4l4 4-4 4"
+            stroke="#0a0a0a"
+            strokeWidth="1.2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </motion.svg>
+      </div>
+
+      <p
+        style={{
+          fontFamily: "'DM Mono', monospace",
+          fontSize: "0.56rem",
+          letterSpacing: "0.2em",
+          color: "rgba(10,10,10,0.35)",
+          textTransform: "uppercase",
+          paddingTop: 10,
+        }}
+      >
+        {founder.title}
+      </p>
+    </motion.div>
+  );
+}
 
 export default function Founder() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -70,218 +273,88 @@ export default function Founder() {
           />
         </div>
 
-        {/* ── Section Heading ── */}
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
+        {/* ── Heading ── */}
+        <div
           style={{
-            fontFamily: "var(--font-heading)",
-            fontSize: "clamp(2rem, 4vw, 3.6rem)",
-            fontWeight: 400,
-            lineHeight: 1.08,
-            letterSpacing: "-0.04em",
-            color: "#0a0a0a",
+            display: "flex",
+            flexWrap: "wrap",
+            alignItems: "flex-end",
+            justifyContent: "space-between",
+            gap: 16,
             marginBottom: "clamp(32px, 5vw, 56px)",
           }}
         >
-          Designing beyond
-          <br />
-          <span style={{ color: "rgba(10,10,10,0.3)", fontStyle: "italic" }}>
-            visual boundaries
-          </span>
-        </motion.h2>
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
+            style={{
+              fontFamily: "var(--font-heading)",
+              fontSize: "clamp(2rem, 4vw, 3.6rem)",
+              fontWeight: 400,
+              lineHeight: 1.08,
+              letterSpacing: "-0.04em",
+              color: "#0a0a0a",
+              margin: 0,
+            }}
+          >
+            The minds
+            <br />
+            <span style={{ color: "rgba(10,10,10,0.28)", fontStyle: "italic" }}>
+              behind the studio
+            </span>
+          </motion.h2>
+
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={inView ? { opacity: 1 } : {}}
+            transition={{ duration: 0.7, delay: 0.3 }}
+            style={{
+              fontFamily: "'DM Mono', monospace",
+              fontSize: "0.58rem",
+              letterSpacing: "0.2em",
+              color: "rgba(10,10,10,0.3)",
+              textTransform: "uppercase",
+              alignSelf: "flex-end",
+            }}
+          >
+            Est. 2020 — UAE
+          </motion.p>
+        </div>
 
         {/* ── Founders Grid ── */}
         <div
+          className="founders-grid"
           style={{
             display: "grid",
-            gridTemplateColumns:
-              "repeat(auto-fit, minmax(min(100%, 280px), 1fr))",
-            gap: "clamp(24px, 4vw, 48px)",
+            gridTemplateColumns: "repeat(3, 1fr)",
+            gap: "clamp(20px, 3vw, 40px)",
           }}
         >
           {founders.map((founder, index) => (
-            <motion.div
+            <FounderCard
               key={founder.name}
-              initial={{ opacity: 0, y: 32 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{
-                duration: 1,
-                ease: [0.16, 1, 0.3, 1],
-                delay: 0.15 + index * 0.12,
-              }}
-              style={{ display: "flex", flexDirection: "column", gap: 16 }}
-            >
-              {/* Image */}
-              <div
-                style={{
-                  position: "relative",
-                  width: "100%",
-                  aspectRatio: "3 / 3.5",
-                  overflow: "hidden",
-                }}
-              >
-                <Image
-                  src="/images/founder.jpg"
-                  alt={`${founder.name} – TEAL CULTURE`}
-                  fill
-                  sizes="(max-width: 768px) 100vw, 33vw"
-                  priority={index === 0}
-                  style={{ objectFit: "cover", objectPosition: "top center" }}
-                />
-
-                {/* Bottom fade */}
-                <div
-                  style={{
-                    position: "absolute",
-                    inset: 0,
-                    background:
-                      "linear-gradient(to top, rgba(255,255,255,0.15), transparent 60%)",
-                  }}
-                />
-
-                {/* Name badge */}
-                <motion.div
-                  initial={{ opacity: 0, y: 12 }}
-                  animate={inView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ duration: 0.7, delay: 0.5 + index * 0.12 }}
-                  style={{
-                    position: "absolute",
-                    bottom: 14,
-                    left: 14,
-                    backgroundColor: "rgba(245,244,240,0.92)",
-                    backdropFilter: "blur(12px)",
-                    padding: "10px 14px",
-                    borderRadius: 4,
-                  }}
-                >
-                  <p
-                    style={{
-                      fontFamily: "var(--font-heading)",
-                      fontSize: "1rem",
-                      letterSpacing: "-0.02em",
-                      color: "#0a0a0a",
-                    }}
-                  >
-                    {founder.name}
-                  </p>
-                  <p
-                    style={{
-                      fontFamily: "'DM Mono', monospace",
-                      fontSize: "0.58rem",
-                      letterSpacing: "0.2em",
-                      color: "rgba(10,10,10,0.4)",
-                      marginTop: 4,
-                      textTransform: "uppercase",
-                    }}
-                  >
-                    {founder.title}
-                  </p>
-                </motion.div>
-              </div>
-            </motion.div>
+              founder={founder}
+              inView={inView}
+              delay={0.15 + index * 0.14}
+            />
           ))}
         </div>
-
-        {/* ── Pull Quote + Stats ── */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.55 }}
-          style={{
-            marginTop: "clamp(40px, 6vw, 64px)",
-            paddingTop: "clamp(32px, 4vw, 48px)",
-            borderTop: "1px solid rgba(10,10,10,0.08)",
-            display: "flex",
-            flexWrap: "wrap",
-            gap: "clamp(24px, 4vw, 48px)",
-            alignItems: "flex-start",
-            justifyContent: "space-between",
-          }}
-        >
-          {/* Description + Quote */}
-          <div
-            style={{
-              flex: "1 1 320px",
-              display: "flex",
-              flexDirection: "column",
-              gap: 16,
-            }}
-          >
-            <p
-              style={{
-                fontSize: "clamp(0.88rem, 1.2vw, 1rem)",
-                lineHeight: 1.85,
-                color: "rgba(10,10,10,0.52)",
-              }}
-            >
-              TEAL Culture was founded with a singular vision — to redefine how
-              spaces are experienced. Not through visual spectacle alone, but
-              through a deep understanding of how environments shape feeling,
-              behaviour, and memory.
-            </p>
-
-            <div
-              style={{
-                borderLeft: "2px solid #0a0a0a",
-                paddingLeft: 14,
-              }}
-            >
-              <p
-                style={{
-                  fontFamily: "var(--font-heading)",
-                  fontSize: "clamp(1rem, 1.5vw, 1.2rem)",
-                  fontStyle: "italic",
-                  letterSpacing: "-0.01em",
-                  color: "rgba(10,10,10,0.7)",
-                  lineHeight: 1.5,
-                }}
-              >
-                "Driven by intuition, tone and reality."
-              </p>
-            </div>
-          </div>
-
-          {/* Stats */}
-          <div
-            style={{
-              display: "flex",
-              gap: 36,
-              flexShrink: 0,
-              alignItems: "flex-start",
-            }}
-          >
-            {stats.map((stat) => (
-              <div key={stat.label}>
-                <p
-                  style={{
-                    fontFamily: "var(--font-heading)",
-                    fontSize: "clamp(1.8rem, 3vw, 2.6rem)",
-                    letterSpacing: "-0.04em",
-                    color: "#0a0a0a",
-                    lineHeight: 1,
-                  }}
-                >
-                  {stat.value}
-                </p>
-                <p
-                  style={{
-                    fontFamily: "'DM Mono', monospace",
-                    fontSize: "0.58rem",
-                    letterSpacing: "0.22em",
-                    textTransform: "uppercase",
-                    color: "rgba(10,10,10,0.3)",
-                    marginTop: 4,
-                  }}
-                >
-                  {stat.label}
-                </p>
-              </div>
-            ))}
-          </div>
-        </motion.div>
       </div>
+
+      <style>{`
+        @media (max-width: 720px) {
+          .founders-grid {
+            grid-template-columns: 1fr !important;
+            gap: 40px !important;
+          }
+        }
+        @media (min-width: 721px) and (max-width: 1000px) {
+          .founders-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
+          }
+        }
+      `}</style>
     </section>
   );
 }

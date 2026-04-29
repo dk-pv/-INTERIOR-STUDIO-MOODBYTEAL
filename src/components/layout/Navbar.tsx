@@ -457,17 +457,25 @@ export default function Navbar() {
           <Link
             href="/"
             style={{
-              fontFamily: "var(--font-heading)",
-              fontSize: "0.74rem",
-              letterSpacing: "0.18em",
-              textTransform: "uppercase",
-              color: isLight ? "#0a0a0a" : "#f5f4f0",
-              cursor: "pointer",
-              transition: "color 0.3s ease",
+              display: "flex",
+              alignItems: "center",
               flexShrink: 0,
             }}
           >
-            Teal Culture
+            <img
+              src="/logo-white.png"
+              alt="Teal Culture Logo"
+              style={{
+                height: "clamp(32px, 4vw, 52px)", 
+                width: "auto",
+                objectFit: "contain",
+
+                filter: isLight ? "invert(1)" : "none",
+                transition: "filter 0.3s ease",
+
+                transform: "translateY(1px)",
+              }}
+            />
           </Link>
 
           {/* Desktop: nav links + CTA */}
