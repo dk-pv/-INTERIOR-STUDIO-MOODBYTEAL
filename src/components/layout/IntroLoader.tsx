@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
 
 const EXPO = [0.16, 1, 0.3, 1] as const;
 
@@ -58,59 +59,31 @@ export default function IntroLoader({
             />
 
             {/* Brand wordmark */}
-            <div style={{ position: "relative", overflow: "hidden" }}>
-              <motion.h1
-                initial={{ y: "100%", opacity: 0 }}
-                animate={
-                  phase === "loading"
-                    ? { y: "0%", opacity: 1 }
-                    : { y: "-105%", opacity: 0 }
-                }
-                transition={
-                  phase === "loading"
-                    ? { duration: 0.9, ease: EXPO, delay: 0.15 }
-                    : { duration: 0.55, ease: EXPO }
-                }
+            <motion.div
+              initial={{ y: "100%", opacity: 0 }}
+              animate={
+                phase === "loading"
+                  ? { y: "0%", opacity: 1 }
+                  : { y: "-105%", opacity: 0 }
+              }
+              transition={
+                phase === "loading"
+                  ? { duration: 0.9, ease: EXPO, delay: 0.2 }
+                  : { duration: 0.55, ease: EXPO }
+              }
+            >
+              <Image
+                src="/logo-white.png"
+                alt="Teal Culture Logo"
+                width={280}
+                height={120}
                 style={{
-                  fontFamily: "var(--font-heading)",
-                  fontSize: "clamp(2rem, 6vw, 4.5rem)",
-                  letterSpacing: "-0.04em",
-                  fontWeight: 400,
-                  color: "#f5f4f0",
-                  lineHeight: 1,
+                  width: "clamp(140px, 18vw, 280px)",
+                  height: "auto",
                 }}
-              >
-                TEAL
-              </motion.h1>
-            </div>
-
-            <div style={{ position: "relative", overflow: "hidden" }}>
-              <motion.h1
-                initial={{ y: "100%", opacity: 0 }}
-                animate={
-                  phase === "loading"
-                    ? { y: "0%", opacity: 1 }
-                    : { y: "-105%", opacity: 0 }
-                }
-                transition={
-                  phase === "loading"
-                    ? { duration: 0.9, ease: EXPO, delay: 0.27 }
-                    : { duration: 0.55, ease: EXPO, delay: 0.06 }
-                }
-                style={{
-                  fontFamily: "var(--font-heading)",
-                  fontSize: "clamp(2rem, 6vw, 4.5rem)",
-                  letterSpacing: "-0.04em",
-                  fontWeight: 400,
-                  color: "rgba(245,244,240,0.28)",
-                  fontStyle: "italic",
-                  lineHeight: 1,
-                }}
-              >
-                CULTURE
-              </motion.h1>
-            </div>
-
+                priority
+              />
+            </motion.div>
             {/* Progress line */}
             <motion.div
               style={{

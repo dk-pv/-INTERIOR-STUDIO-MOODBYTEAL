@@ -60,7 +60,62 @@ export default function Hero() {
             />
           </div>
         </div>
+        {/* ── Corner Labels ── */}
+        {[
+          { text: "Interior Design", pos: "top-left" },
+          { text: "Turnkey Fit-out Construction", pos: "top-right" },
+          { text: "Furniture Manufacturing", pos: "bottom-left" },
+          { text: "Interior Styling", pos: "bottom-right" },
+        ].map((item, i) => {
+          const baseStyle = {
+            position: "absolute" as const,
+            zIndex: 20,
+            fontFamily: "'DM Mono', monospace",
+            fontSize: "clamp(0.55rem, 1vw, 0.7rem)",
+            letterSpacing: "0.32em",
+            textTransform: "uppercase" as const,
+            color: "rgba(245,244,240,0.65)",
+            fontWeight: 500, // ✅ slightly bold
+            pointerEvents: "none" as const,
 
+            // ✅ premium effects
+            textShadow: "0 0 18px rgba(255,255,255,0.12)",
+            backdropFilter: "blur(2px)",
+          };
+
+          const spacing = "clamp(20px, 3vw, 48px)"; // ✅ responsive distance
+
+          const positionStyles =
+            item.pos === "top-left"
+              ? { top: spacing, left: spacing }
+              : item.pos === "top-right"
+                ? { top: spacing, right: spacing, textAlign: "right" as const }
+                : item.pos === "bottom-left"
+                  ? { bottom: spacing, left: spacing }
+                  : {
+                      bottom: spacing,
+                      right: spacing,
+                      textAlign: "right" as const,
+                    };
+
+          return (
+            <motion.div
+              key={item.text}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{
+                delay: 0.5 + i * 0.2,
+                duration: 0.8,
+                ease: [0.16, 1, 0.3, 1],
+              }}
+              whileHover={{ opacity: 1 }} // future-proof (if interactive later)
+              style={{ ...baseStyle, ...positionStyles }}
+            >
+              {item.text}
+            </motion.div>
+          );
+        })}
+        
         {/* ── TOP ROW ── */}
         <div
           style={{
@@ -69,32 +124,16 @@ export default function Hero() {
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
-            padding:"clamp(14px, 3vw, 28px) clamp(20px, 5vw, 64px)",
+            padding: "clamp(14px, 3vw, 28px) clamp(20px, 5vw, 64px)",
           }}
-        >
-          <motion.p
-            initial={{ opacity: 0, y: -8 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.2 }}
-            style={{
-              fontFamily: "'DM Mono', monospace",
-              fontSize: "clamp(0.45rem, 1vw, 0.58rem)",
-              letterSpacing: "0.30em",
-              textTransform: "uppercase",
-              color: "rgba(245,244,240,0.40)",
-              margin: 0,
-            }}
-          >
-            Interior Architecture Studio
-          </motion.p>
-        </div>
+        ></div>
 
         {/* ── BOTTOM CONTENT ── */}
         <div
           style={{
             position: "relative",
             zIndex: 10,
-            padding:"0 clamp(20px, 5vw, 64px) clamp(20px, 4vh, 48px)",
+            padding: "0 clamp(20px, 5vw, 64px) clamp(20px, 4vh, 48px)",
           }}
         >
           {/* Thin rule */}
@@ -113,32 +152,9 @@ export default function Hero() {
           <div
             style={{
               display: "flex",
-              alignItems: "flex-end",
-              justifyContent: "space-between",
-              gap: "clamp(12px, 3vw, 32px)",
+              justifyContent: "flex-end", // push scroll to right
             }}
-            className="flex-col sm:flex-row"
           >
-            {/* Tagline */}
-            <motion.p
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.7, duration: 0.9 }}
-              style={{
-                fontFamily: "var(--font-body)",
-                fontSize: "clamp(0.78rem, 1.4vw, 0.92rem)",
-                color: "rgba(245,244,240,0.40)",
-                letterSpacing: "0.04em",
-                maxWidth: "min(320px, 70vw)",
-                lineHeight: 1.75,
-                margin: 0,
-              }}
-            >
-              We design spaces that carry emotion — where architecture meets
-              identity.
-            </motion.p>
-
-            {/* Scroll indicator */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -188,7 +204,7 @@ export default function Hero() {
         data-theme="light"
         style={{
           backgroundColor: "#f5f4f0",
-          padding:"clamp(40px, 7vw, 70px) clamp(20px, 5vw, 64px)",
+          padding: "clamp(40px, 7vw, 70px) clamp(20px, 5vw, 64px)",
         }}
       >
         <div
@@ -197,7 +213,7 @@ export default function Hero() {
             margin: "0 auto",
             display: "flex",
             flexDirection: "column",
-             gap: "clamp(28px, 5vw, 64px)",
+            gap: "clamp(28px, 5vw, 64px)",
           }}
           className="md:flex-row md:items-start"
         >
@@ -250,7 +266,7 @@ export default function Hero() {
               whileHover={{ x: 6 }}
               transition={{ duration: 0.25 }}
               className="btn btn-outline inline-flex"
-              style={{ cursor: "pointer",marginTop: "clamp(24px, 4vw, 48px)" }}
+              style={{ cursor: "pointer", marginTop: "clamp(24px, 4vw, 48px)" }}
             >
               Our Story
               <span style={{ opacity: 0.5, fontSize: "0.8em" }}>→</span>

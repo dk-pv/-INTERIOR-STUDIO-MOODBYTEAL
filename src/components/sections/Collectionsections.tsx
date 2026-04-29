@@ -148,24 +148,12 @@ function DesignerFurniture() {
               />
             </div>
           </FadeUp>
-
-          {/* Brand block */}
-          <FadeUp delay={0.32}>
-            <div className="tc-fur-brand-block">
-              <span className="tc-fur-brand">
-                TEAL<strong>CULTURE</strong>
-              </span>
-            </div>
-          </FadeUp>
         </div>
       </div>
     </section>
   );
 }
 
-// ════════════════════════════════════════════════════════════════
-//  GLOBAL STYLES
-// ════════════════════════════════════════════════════════════════
 const styles = `
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 

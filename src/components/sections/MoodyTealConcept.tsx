@@ -5,14 +5,11 @@ import { motion } from "framer-motion";
 export default function MoodyTealConcept() {
   return (
     <>
-      {/* ═══════════════════════════════════════════
-          MOODY TEAL CONCEPT — Dark contrast strip
-      ═══════════════════════════════════════════ */}
       <section
         data-theme="dark"
         style={{
           backgroundColor: "#0a0a0a",
-          padding: "clamp(40px, 6vw, 80px) clamp(24px, 6vw, 96px)", // ↓ reduced
+          padding: "clamp(32px, 4vw, 60px) clamp(24px, 6vw, 96px)", // ↓ height reduced
           position: "relative",
           overflow: "hidden",
         }}
@@ -25,7 +22,7 @@ export default function MoodyTealConcept() {
             left: "50%",
             transform: "translate(-50%, -50%)",
             fontFamily: "var(--font-heading)",
-            fontSize: "clamp(6rem, 16vw, 18rem)", // ↓ slightly reduced
+            fontSize: "clamp(6rem, 16vw, 18rem)",
             letterSpacing: "-0.06em",
             color: "rgba(255,255,255,0.03)",
             whiteSpace: "nowrap",
@@ -41,11 +38,11 @@ export default function MoodyTealConcept() {
         <motion.div
           className="concept-grid"
           style={{
-            maxWidth: 960,
-            margin: "0 auto",
+            maxWidth: 1100,
+            margin: "0 auto 0 0", // ← flush left, not centered
             display: "grid",
             gridTemplateColumns: "1fr 1fr",
-            gap: "clamp(32px, 6vw, 64px)", // ↓ reduced
+            gap: "clamp(32px, 6vw, 64px)",
             alignItems: "center",
             position: "relative",
           }}
@@ -55,7 +52,13 @@ export default function MoodyTealConcept() {
           viewport={{ once: true, margin: "-80px" }}
         >
           {/* LEFT */}
-          <div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "flex-start",
+            }}
+          >
             <motion.p
               style={{
                 fontFamily: "'DM Mono', monospace",
@@ -63,7 +66,7 @@ export default function MoodyTealConcept() {
                 letterSpacing: "0.3em",
                 textTransform: "uppercase",
                 color: "rgba(245,244,240,0.3)",
-                marginBottom: 20, // ↓ reduced
+                marginBottom: 16,
               }}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -73,25 +76,25 @@ export default function MoodyTealConcept() {
               The Studio
             </motion.p>
 
-            <motion.h2
-              style={{
-                fontFamily: "var(--font-heading)",
-                fontSize: "clamp(2.2rem, 4vw, 4rem)",
-                letterSpacing: "-0.04em",
-                lineHeight: 1.05,
-                color: "#f5f4f0",
-                fontWeight: 400,
-              }}
+            {/* Logo — now correctly below "The Studio" with no stray + */}
+            <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.25, duration: 0.8 }}
               viewport={{ once: true }}
             >
-              MOODby
-              <span style={{ color: "rgba(245,244,240,0.28)" }}>
-                TEAL
-              </span>
-            </motion.h2>
+              <img
+                src="/logo-white.png"
+                alt="MoodbyTeal Logo"
+                style={{
+                  width: "clamp(180px, 22vw, 300px)", // ↑ slightly larger
+                  height: "auto",
+                  objectFit: "contain",
+                  filter: "drop-shadow(0 0 12px rgba(255,255,255,0.08))",
+                  display: "block",
+                }}
+              />
+            </motion.div>
           </div>
 
           {/* RIGHT */}
@@ -107,20 +110,22 @@ export default function MoodyTealConcept() {
               transition={{ delay: 0.35, duration: 0.8 }}
               viewport={{ once: true }}
             >
-              moodyTEAL is not just a name — it is a state of mind. The teal hue
-              exists between blue and green, between calm and depth. It
-              represents the emotional register we seek in every project:
-              quietly powerful, never loud.
+              MoodbyTEAL is a boutique interior design and fit-out studio based
+              in the United Arab Emirates, creating spaces defined by clarity,
+              proportion, and material integrity. Founded by Sahil Haneefa, with
+              co-founders Rashid EK and Amritha Priya, the studio approaches
+              each project with restraint and precision—delivering environments
+              that are refined, purposeful, and quietly luxurious.
             </motion.p>
 
             <motion.div
               className="stats-row"
               style={{
-                marginTop: 20, // ↓ reduced
-                paddingTop: 18, // ↓ reduced
+                marginTop: 20,
+                paddingTop: 18,
                 borderTop: "1px solid rgba(245,244,240,0.1)",
                 display: "flex",
-                gap: 32, // ↓ reduced
+                gap: 32,
               }}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -128,9 +133,9 @@ export default function MoodyTealConcept() {
               viewport={{ once: true }}
             >
               {[
-                { label: "Founded", value: "2020" },
-                { label: "Projects", value: "48+" },
-                { label: "Awards", value: "12" },
+                { label: "Years", value: "4+" },
+                { label: "Projects", value: "25+" },
+                { label: "Awards", value: "4" },
               ].map((stat) => (
                 <div key={stat.label}>
                   <p
