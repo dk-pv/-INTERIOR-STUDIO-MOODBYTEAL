@@ -7,8 +7,8 @@ const ease = [0.16, 1, 0.3, 1] as [number, number, number, number];
 const fadeUp = (delay = 0) => ({
   initial: { opacity: 0, y: 24 },
   whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true, margin: "-20px" },
-  transition: { delay, duration: 0.45, ease },
+  viewport: { once: true, margin: "0px 0px -120px 0px" },
+  transition: { delay, duration: 0.3, ease },
 });
 
 export default function Hero() {
@@ -211,7 +211,6 @@ export default function Hero() {
           <motion.div
             initial={{ scaleX: 0 }}
             whileInView={{ scaleX: 1 }}
-            viewport={{ once: true, margin: "-80px" }}
             transition={{ duration: 0.9, delay: 0.05, ease }}
             style={{
               height: 1,
@@ -223,7 +222,7 @@ export default function Hero() {
 
           {/* ── About + Logo row — ✅ spread ── */}
           <motion.div
-            {...fadeUp(0.12)}
+            {...fadeUp(0.05)}
             style={{
               display: "flex",
               alignItems: "center",
@@ -257,14 +256,13 @@ export default function Hero() {
                 alt="Teal Culture Logo"
                 width={340}
                 height={90}
-                priority
                 style={{ objectFit: "contain" }}
               />
             </motion.div>
           </motion.div>
 
           {/* ── Body + CTA — ✅ spread ── */}
-          <motion.div {...fadeUp(0.22)} style={{ maxWidth: 900 }}>
+          <motion.div {...fadeUp(0.1)} style={{ maxWidth: 900 }}>
             <p
               style={{
                 fontSize: "clamp(0.85rem, 1.35vw, 0.95rem)",

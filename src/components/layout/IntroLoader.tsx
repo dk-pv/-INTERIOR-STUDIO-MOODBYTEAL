@@ -78,7 +78,7 @@ export default function IntroLoader({
                 width={280}
                 height={120}
                 style={{
-                  width: "clamp(140px, 18vw, 280px)",
+                  width: "clamp(240px, 32vw, 520px)",
                   height: "auto",
                 }}
                 priority

@@ -409,7 +409,7 @@ function HeroDarkPanel({ inView }: { inView: boolean }) {
             color: "rgba(245,244,240,0.18)",
           }}
         >
-          Kerala · UAE
+          Dubai, United Arab Emirates
         </p>
       </motion.div>
     </motion.div>
@@ -485,43 +485,6 @@ export default function ContactPage() {
           CONTACT
         </motion.p>
 
-        {/* Grain */}
-        <div className="grain" />
-
-        {/* Top bar label */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={heroInView ? { opacity: 1 } : {}}
-          transition={{ duration: 0.7 }}
-          style={{
-            position: "absolute",
-            top: "clamp(24px, 4vw, 48px)",
-            right: "clamp(24px, 6vw, 96px)",
-            display: "flex",
-            alignItems: "center",
-            gap: 10,
-          }}
-        >
-          <div
-            style={{
-              width: 20,
-              height: 1,
-              backgroundColor: "rgba(10,10,10,0.3)",
-            }}
-          />
-          <span
-            style={{
-              fontFamily: "'DM Mono', monospace",
-              fontSize: "0.58rem",
-              letterSpacing: "0.28em",
-              textTransform: "uppercase",
-              color: "rgba(10,10,10,0.3)",
-            }}
-          >
-            04 / Step In
-          </span>
-        </motion.div>
-
         {/* ── DARK PANEL RIGHT ── */}
         <HeroDarkPanel inView={heroInView} />
 
@@ -554,7 +517,7 @@ export default function ContactPage() {
                   ease: EXPO,
                 }}
                 style={{
-                  fontFamily: "var(--font-heading)",
+                  fontFamily: "var(--font-bitcount)",
                   fontSize: "clamp(3rem, 9vw, 9rem)",
                   fontWeight: 400,
                   lineHeight: 1.0,
@@ -892,7 +855,7 @@ export default function ContactPage() {
               value: "@tealculture",
               href: "https://instagram.com",
             },
-            { label: "Location", value: "Kerala · UAE", href: undefined },
+            { label: "Location", value: "Dubai, United Arab Emirates", href: undefined },
           ].map((item) => (
             <div key={item.label}>
               <p
