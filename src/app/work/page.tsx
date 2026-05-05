@@ -126,11 +126,11 @@ export default function WorkPage() {
                     ease: EXPO,
                   }}
                   style={{
-                    fontFamily: "var(--font-heading)",
+                    fontFamily: "var(--font-bitcount)",
                     fontSize: "clamp(2.5rem, 6.5vw, 6rem)",
                     fontWeight: 400,
-                    lineHeight: 1.0,
-                    letterSpacing: "-0.04em",
+                    lineHeight: 1.08,
+                    letterSpacing: "-0.015em",
                     margin: 0,
                     color:
                       i === 0
@@ -146,24 +146,6 @@ export default function WorkPage() {
               </div>
             ))}
           </div>
-
-          {/* Subtle sub-line */}
-          <motion.p
-            initial={{ opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.6, ease: EXPO }}
-            style={{
-              fontFamily: "'DM Mono', monospace",
-              fontSize: "0.58rem",
-              letterSpacing: "0.22em",
-              textTransform: "uppercase",
-              color: "rgba(10,10,10,0.22)",
-              marginTop: 14,
-              marginBottom: 0,
-            }}
-          >
-            12 projects — Interiors &amp; Spaces
-          </motion.p>
         </div>
 
         {/* Bottom rule */}
@@ -182,7 +164,6 @@ export default function WorkPage() {
           }}
         />
       </section>
-
       <ProjectShowcase />
     </main>
   );

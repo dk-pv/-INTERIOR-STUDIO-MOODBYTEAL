@@ -17,7 +17,7 @@ export default function StudioPage() {
           display: "flex",
           flexDirection: "column",
           justifyContent: "flex-end",
-         padding: "0 clamp(24px, 5vw, 72px) clamp(36px, 6vw, 60px)",
+          padding: "0 clamp(24px, 5vw, 72px) clamp(36px, 6vw, 60px)",
           position: "relative",
           overflow: "hidden",
           backgroundColor: "#f5f4f0",
@@ -48,43 +48,6 @@ export default function StudioPage() {
         >
           STUDIO
         </motion.p>
-
-        {/* Grain overlay */}
-        <div className="grain" />
-
-        {/* Top bar */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.7, ease: EXPO }}
-          style={{
-            position: "absolute",
-            top: "clamp(24px, 4vw, 48px)",
-            right: "clamp(24px, 6vw, 96px)",
-            display: "flex",
-            alignItems: "center",
-            gap: 10,
-          }}
-        >
-          <div
-            style={{
-              width: 20,
-              height: 1,
-              backgroundColor: "rgba(10,10,10,0.25)",
-            }}
-          />
-          <span
-            style={{
-              fontFamily: "'DM Mono', monospace",
-              fontSize: "0.58rem",
-              letterSpacing: "0.28em",
-              textTransform: "uppercase",
-              color: "rgba(10,10,10,0.3)",
-            }}
-          >
-            02 / Studio
-          </span>
-        </motion.div>
 
         {/* Main content grid */}
         <div
@@ -129,7 +92,7 @@ export default function StudioPage() {
                     ease: EXPO,
                   }}
                   style={{
-                    fontFamily: "var(--font-heading)",
+                    fontFamily: "var(--font-bitcount)", // ✅ changed
                     fontSize: "clamp(2.2rem, 6vw, 5.2rem)",
                     fontWeight: 400,
                     lineHeight: 1.04,
@@ -193,7 +156,7 @@ export default function StudioPage() {
                 color: "rgba(10,10,10,0.22)",
               }}
             >
-              Based in Kerala, India · UAE
+              Based in UAE
             </motion.p>
           </div>
         </div>
@@ -268,7 +231,7 @@ export default function StudioPage() {
       </section>
 
       {/* MoodyTeal concept */}
-      <MoodyTealConcept/>
+      <MoodyTealConcept />
 
       {/* Founder story */}
       <Founder />

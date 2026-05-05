@@ -273,8 +273,8 @@ export default function Footer() {
           <Image
             src="/logo-white.png"
             alt="moodyTEAL"
-            width={100}
-            height={32}
+            width={90}
+            height={24}
             style={{ opacity: 0.9 }}
           />
         </div>
@@ -501,6 +501,12 @@ export default function Footer() {
           justify-content: flex-end;
           margin-top: 4px;
         }
+
+        .tc-bottom-left,
+        .tc-bottom-center,
+        .tc-bottom-right {
+          line-height: 1.2;
+        }
         .tc-soc-icon {
           color: rgba(255,255,255,0.35);
           display: flex;
@@ -512,12 +518,12 @@ export default function Footer() {
         /* ─── Bottom bar ─── */
         .tc-bottom-bar {
           border-top: 0.5px solid rgba(255,255,255,0.06);
-          padding: 8px clamp(24px, 4vw, 56px);
+           padding: 4px clamp(20px, 4vw, 40px);
           display: flex;
           justify-content: space-between;
           align-items: center;
           flex-wrap: wrap;
-          gap: 8px;
+          gap: 4px;
           position: relative;
         }
         .tc-bottom-left,
@@ -525,7 +531,7 @@ export default function Footer() {
         .tc-bottom-right {
           font-family: 'DM Mono','Courier New',monospace;
           font-size: 0.5rem;
-          letter-spacing: 0.18em;
+          letter-spacing: 0.12em;
           color: rgba(255,255,255,0.28);
           text-transform: uppercase;
         }
