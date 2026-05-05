@@ -26,10 +26,11 @@ export default function MoodyTealConcept() {
         <div
           style={{
             position: "absolute",
-            top: "50%", left: "50%",
+            top: "50%",
+            left: "50%",
             transform: "translate(-50%, -50%)",
             fontFamily: "var(--font-heading)",
-            fontSize: "clamp(5rem, 14vw, 16rem)",
+            fontSize: "clamp(4rem, 12vw, 14rem)",
             letterSpacing: "-0.06em",
             color: "rgba(255,255,255,0.025)",
             whiteSpace: "nowrap",
@@ -38,7 +39,7 @@ export default function MoodyTealConcept() {
             lineHeight: 1,
           }}
         >
-          TEAL
+          MOOD
         </div>
 
         <div
@@ -54,7 +55,13 @@ export default function MoodyTealConcept() {
           }}
         >
           {/* LEFT */}
-          <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-start" }}>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "flex-start",
+            }}
+          >
             <motion.p
               {...fadeUp(0)}
               style={{
@@ -74,7 +81,7 @@ export default function MoodyTealConcept() {
                 src="/logo-white.png"
                 alt="MoodbyTeal Logo"
                 style={{
-                  width: "clamp(160px, 20vw, 260px)", // ↓ slightly smaller
+                  width: "clamp(220px, 28vw, 360px)",
                   height: "auto",
                   objectFit: "contain",
                   filter: "drop-shadow(0 0 12px rgba(255,255,255,0.08))",
@@ -106,36 +113,40 @@ export default function MoodyTealConcept() {
               className="stats-row"
               {...fadeUp(0.34)}
               style={{
-                marginTop: 16,       // ↓ was 20
-                paddingTop: 14,      // ↓ was 18
+                marginTop: 16, // ↓ was 20
+                paddingTop: 14, // ↓ was 18
                 borderTop: "1px solid rgba(245,244,240,0.08)",
                 display: "flex",
-                gap: 28,             // ↓ was 32
+                gap: 28, // ↓ was 32
               }}
             >
               {[
-                { label: "Years",    value: "4+" },
+                { label: "Years", value: "4+" },
                 { label: "Projects", value: "25+" },
-                { label: "Awards",   value: "4" },
+                { label: "Awards", value: "4" },
               ].map((stat) => (
                 <div key={stat.label}>
-                  <p style={{
-                    fontFamily: "var(--font-heading)",
-                    fontSize: "clamp(1.4rem, 2.6vw, 2.4rem)", // ↓ was 2.8rem
-                    letterSpacing: "-0.04em",
-                    color: "#f5f4f0",
-                    lineHeight: 1,
-                  }}>
+                  <p
+                    style={{
+                      fontFamily: "var(--font-heading)",
+                      fontSize: "clamp(1.4rem, 2.6vw, 2.4rem)", // ↓ was 2.8rem
+                      letterSpacing: "-0.04em",
+                      color: "#f5f4f0",
+                      lineHeight: 1,
+                    }}
+                  >
                     {stat.value}
                   </p>
-                  <p style={{
-                    fontFamily: "'DM Mono', monospace",
-                    fontSize: "0.52rem",
-                    letterSpacing: "0.22em",
-                    color: "rgba(245,244,240,0.28)",
-                    marginTop: 5,
-                    textTransform: "uppercase",
-                  }}>
+                  <p
+                    style={{
+                      fontFamily: "'DM Mono', monospace",
+                      fontSize: "0.52rem",
+                      letterSpacing: "0.22em",
+                      color: "rgba(245,244,240,0.28)",
+                      marginTop: 5,
+                      textTransform: "uppercase",
+                    }}
+                  >
                     {stat.label}
                   </p>
                 </div>
