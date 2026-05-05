@@ -1,6 +1,14 @@
 @import "../styles/variables.css";
 @import "tailwindcss";
 
+@font-face {
+  font-family: "Bitcount";
+  src: url("/fonts/Bitcount_Grid_Double.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* ─── RESET ───────────────────────────────────── */
 *,
 *::before,
@@ -31,11 +39,18 @@ body {
 }
 
 /* ─── TYPOGRAPHY ─────────────────────────────── */
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: var(--font-heading);
-  letter-spacing: var(--tracking-heading);
-  color: var(--foreground);
-  line-height: 1.02;
+}
+
+/* Special font */
+.font-bitcount {
+  font-family: "Bitcount", serif;
 }
 
 p {
@@ -74,9 +89,15 @@ section {
 }
 
 /* ─── BACKGROUNDS ─────────────────────────── */
-.bg-base { background: var(--background); }
-.bg-white-pure { background: var(--background-pure); }
-.bg-alt { background: var(--background-alt); }
+.bg-base {
+  background: var(--background);
+}
+.bg-white-pure {
+  background: var(--background-pure);
+}
+.bg-alt {
+  background: var(--background-alt);
+}
 
 .bg-dark {
   background: var(--dark-bg);
@@ -96,7 +117,7 @@ section {
 
 /* ─── LABEL ───────────────────────────────── */
 .label {
-  font-family: 'DM Mono', monospace;
+  font-family: "DM Mono", monospace;
   font-size: 0.58rem;
   letter-spacing: 0.28em;
   text-transform: uppercase;
@@ -109,7 +130,9 @@ section {
   border: 1px solid var(--border);
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-soft);
-  transition: box-shadow 0.35s ease, transform 0.35s ease;
+  transition:
+    box-shadow 0.35s ease,
+    transform 0.35s ease;
 }
 
 .card:hover {
@@ -122,7 +145,7 @@ section {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  font-family: 'DM Mono', monospace;
+  font-family: "DM Mono", monospace;
   font-size: 0.62rem;
   letter-spacing: 0.22em;
   text-transform: uppercase;
@@ -177,7 +200,7 @@ section {
   position: absolute;
   inset: 0;
   opacity: 0.018;
-  background-image: url('/noise.jpg');
+  background-image: url("/noise.jpg");
   pointer-events: none;
   z-index: 1;
 }
@@ -202,14 +225,23 @@ section {
 
 /* ─── WHATSAPP ANIMATION ─────────────────── */
 @keyframes whatsappPulse {
-  0%   { transform: scale(1); opacity: 1; }
-  50%  { transform: scale(1.04); opacity: 0.9; }
-  100% { transform: scale(1); opacity: 1; }
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.04);
+    opacity: 0.9;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 
-
 @keyframes waZoom {
-  0%, 100% {
+  0%,
+  100% {
     transform: scale(1);
   }
   50% {
@@ -218,7 +250,8 @@ section {
 }
 
 @keyframes waGlow {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 0.5;
     transform: scale(1);
   }

@@ -7,8 +7,8 @@ const ease = [0.16, 1, 0.3, 1] as [number, number, number, number];
 const fadeUp = (delay = 0) => ({
   initial: { opacity: 0, y: 24 },
   whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true, margin: "-80px" },
-  transition: { delay, duration: 0.75, ease },
+  viewport: { once: true, margin: "-20px" },
+  transition: { delay, duration: 0.45, ease },
 });
 
 export default function Hero() {
@@ -87,9 +87,9 @@ export default function Hero() {
               style={{
                 position: "absolute",
                 zIndex: 20,
-                fontFamily: "'DM Mono', monospace",
-                fontSize: "clamp(0.7rem, 1.2vw, 0.95rem)",
-                letterSpacing: "0.22em",
+                fontFamily: "var(--font-heading)",
+                fontSize: "clamp(0.7rem, 1vw, 0.85rem)",
+                letterSpacing: "0.18em",
                 textTransform: "uppercase",
                 color: "rgba(255,255,255,0.9)",
                 fontWeight: 500,
@@ -227,7 +227,7 @@ export default function Hero() {
             style={{
               display: "flex",
               alignItems: "center",
-              gap: "18px",
+              gap: "24px",
               flexWrap: "wrap",
               marginBottom: "clamp(10px, 2vw, 18px)",
             }}
@@ -255,31 +255,16 @@ export default function Hero() {
               <Image
                 src="/teal-culture-logo.png"
                 alt="Teal Culture Logo"
-                width={200}
-                height={52}
+                width={340}
+                height={90}
                 priority
                 style={{ objectFit: "contain" }}
               />
             </motion.div>
           </motion.div>
 
-          {/* ── Tagline — ✅ spread ── */}
-          <motion.p
-            {...fadeUp(0.24)}
-            style={{
-              fontFamily: "var(--font-heading)",
-              fontSize: "clamp(1.7rem, 3.6vw, 2.8rem)",
-              color: "rgba(10,10,10,0.18)",
-              lineHeight: 1.15,
-              fontWeight: 400,
-              margin: "0 0 clamp(16px, 3vw, 32px) 0",
-            }}
-          >
-            Where Space Becomes Experience
-          </motion.p>
-
           {/* ── Body + CTA — ✅ spread ── */}
-          <motion.div {...fadeUp(0.36)} style={{ maxWidth: 900 }}>
+          <motion.div {...fadeUp(0.22)} style={{ maxWidth: 900 }}>
             <p
               style={{
                 fontSize: "clamp(0.85rem, 1.35vw, 0.95rem)",
@@ -293,12 +278,12 @@ export default function Hero() {
               a convergence of architecture, interiors, and Artificial
               Intelligence. Built form is experienced as a continuous spatial
               journey rather than a fixed object. Spaces unfold through
-              reduction and precision. Matter is guided by silence, weight, and
-              light — revealing itself gradually through movement and
-              perception. Founded by Sahil Haneefa, Teal Culture is an ongoing
-              exploration of how construction becomes experience where
-              architecture, intelligence, and human perception flow into a
-              single evolving field.
+              reduction and precision, where matter is guided by silence,
+              weight, and light—revealing itself gradually through movement and
+              perception. Teal Culture continues as an ongoing exploration of
+              how construction becomes experience, where architecture,
+              intelligence, and human perception flow into a single evolving
+              field.
             </p>
 
             <motion.a

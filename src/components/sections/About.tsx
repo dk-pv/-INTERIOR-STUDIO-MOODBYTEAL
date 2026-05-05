@@ -1,29 +1,11 @@
 "use client";
 
-import { useRef, useEffect } from "react";
+import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 
 export default function About() {
   const sectionRef = useRef<HTMLDivElement>(null);
-  const beamRef = useRef<HTMLDivElement>(null);
   const inView = useInView(sectionRef, { once: true, margin: "-100px" });
-
-  useEffect(() => {
-    const beam = beamRef.current;
-    if (!beam || !inView) return;
-
-    beam.animate(
-      [
-        { height: "0%", opacity: 0 },
-        { height: "100%", opacity: 1 },
-      ],
-      {
-        duration: 900,
-        easing: "cubic-bezier(0.16,1,0.3,1)",
-        fill: "forwards",
-      },
-    );
-  }, [inView]);
 
   return (
     <>
@@ -41,28 +23,6 @@ export default function About() {
           padding: "clamp(48px, 7vw, 90px) clamp(24px, 5vw, 72px)",
         }}
       >
-        {/* Vertical beam — dark on white bg */}
-        <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            display: "flex",
-            justifyContent: "center",
-            pointerEvents: "none",
-          }}
-        >
-          <div
-            ref={beamRef}
-            style={{
-              width: 1,
-              height: "0%",
-              background:
-                "linear-gradient(to bottom, transparent, #0a0a0a 30%, rgba(10,10,10,0.3) 80%, transparent)",
-              boxShadow: "0 0 32px rgba(10,10,10,0.08)",
-            }}
-          />
-        </div>
-
         {/* Main content */}
         <div style={{ position: "relative", maxWidth: 960, width: "100%" }}>
           {/* Label */}
@@ -85,28 +45,25 @@ export default function About() {
 
           {/* Main headline */}
           <motion.h2
+            className="font-bitcount"
             initial={{ opacity: 0, y: 48 }}
             animate={inView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 1, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
             style={{
-              fontFamily: "var(--font-heading)",
-              fontSize: "clamp(2.8rem, 6vw, 6rem)",
-              letterSpacing: "-0.04em",
-              lineHeight: 1.0,
+              fontSize: "clamp(3rem, 6.5vw, 6.5rem)",
+              lineHeight: 1.12,
               color: "#0a0a0a",
               fontWeight: 400,
               textAlign: "center",
-              marginBottom: 20,
+              marginBottom: 24,
             }}
           >
-            Driven by{" "}
-            <span style={{ color: "rgba(10,10,10,0.25)" }}>intuition.</span>
+            Driven by <span style={{ opacity: 0.25 }}>intuition.</span>
             <br />
             Tone and{" "}
             <span
               style={{
-                fontStyle: "italic",
-                color: "rgba(10,10,10,0.55)",
+                opacity: 0.6,
               }}
             >
               reality.
