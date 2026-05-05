@@ -64,37 +64,44 @@ export default function Hero() {
           { text: "Furniture Manufacturing", pos: "bottom-left" },
           { text: "Interior Styling", pos: "bottom-right" },
         ].map((item, i) => {
-          const spacing = "clamp(20px, 3vw, 48px)";
+          const edge = "clamp(20px, 3vw, 48px)";
+          const topOffset = "clamp(70px, 10vh, 120px)";
           const pos =
             item.pos === "top-left"
-              ? { top: spacing, left: spacing }
+              ? { top: topOffset, left: edge }
               : item.pos === "top-right"
-                ? { top: spacing, right: spacing, textAlign: "right" as const }
+                ? { top: topOffset, right: edge, textAlign: "right" as const }
                 : item.pos === "bottom-left"
-                  ? { bottom: spacing, left: spacing }
+                  ? { bottom: edge, left: edge }
                   : {
-                      bottom: spacing,
-                      right: spacing,
+                      bottom: edge,
+                      right: edge,
                       textAlign: "right" as const,
                     };
           return (
             <motion.div
               key={item.text}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, y: 20, scale: 0.95 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
               transition={{ delay: 0.5 + i * 0.2, duration: 0.8, ease }}
               style={{
                 position: "absolute",
                 zIndex: 20,
                 fontFamily: "'DM Mono', monospace",
-                fontSize: "clamp(0.55rem, 1vw, 0.7rem)",
-                letterSpacing: "0.32em",
+                fontSize: "clamp(0.7rem, 1.2vw, 0.95rem)",
+                letterSpacing: "0.22em",
                 textTransform: "uppercase",
-                color: "rgba(245,244,240,0.65)",
+                color: "rgba(255,255,255,0.9)",
                 fontWeight: 500,
-                pointerEvents: "none",
-                textShadow: "0 0 18px rgba(255,255,255,0.12)",
-                backdropFilter: "blur(2px)",
+
+                padding: "6px 10px",
+                background: "rgba(0,0,0,0.25)",
+                border: "1px solid rgba(255,255,255,0.08)",
+                borderRadius: "6px",
+                backdropFilter: "blur(6px)",
+
+                textShadow: "0 2px 12px rgba(0,0,0,0.35)",
+
                 ...pos,
               }}
             >
