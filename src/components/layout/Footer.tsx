@@ -214,8 +214,8 @@ export default function Footer() {
                 <polyline points="22,6 12,13 2,6" />
               </svg>
             </div>
-            <a href="mailto:tealculturestudio@gmail.com" className="tc-email">
-              tealculturestudio@gmail.com
+            <a href="mailto:hello@moodbyteal.com" className="tc-email">
+              hello@moodbyteal.com
             </a>
           </div>
         </div>
@@ -242,14 +242,7 @@ export default function Footer() {
             <br />
             United Arab Emirates
           </p>
-          <a
-            href="mailto:hello@moodbyteal.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="tc-www"
-          >
-            hello@moodbyteal.com
-          </a>
+
           <div className="tc-socials">
             {socials.map((s) => (
               <a
