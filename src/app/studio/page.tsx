@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+
 import Founder from "@/components/sections/Founder";
 // import Team from "@/components/sections/Team";
 import MoodyTealConcept from "@/components/sections/MoodyTealConcept";
