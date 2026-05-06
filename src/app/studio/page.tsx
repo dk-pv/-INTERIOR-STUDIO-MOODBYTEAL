@@ -13,10 +13,10 @@ export default function StudioPage() {
       <section
         data-theme="light"
         style={{
-          minHeight: "85vh",
+          minHeight: "100vh",
           display: "flex",
           flexDirection: "column",
-          justifyContent: "flex-end",
+          justifyContent: "center",
           padding: "0 clamp(24px, 5vw, 72px) clamp(36px, 6vw, 60px)",
           position: "relative",
           overflow: "hidden",
@@ -31,7 +31,7 @@ export default function StudioPage() {
           aria-hidden
           style={{
             position: "absolute",
-            top: "50%",
+            top: "30%",
             left: "50%",
             transform: "translate(-50%, -50%)",
             fontFamily: "var(--font-heading)",
@@ -60,104 +60,74 @@ export default function StudioPage() {
           }}
         >
           {/* Heading block */}
-          <div>
+          <div
+            style={{
+              width: "100%",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              justifyContent: "flex-end",
+              paddingBottom: "0px",
+              marginTop: "45vh",
+            }}
+          >
             <motion.p
               initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, ease: EXPO }}
               style={{
                 fontFamily: "'DM Mono', monospace",
-                fontSize: "0.6rem",
-                letterSpacing: "0.36em",
+                fontSize: "0.58rem",
+                letterSpacing: "0.34em",
                 textTransform: "uppercase",
-                color: "rgba(10,10,10,0.32)",
-                marginBottom: 16,
+                color: "rgba(10,10,10,0.28)",
+                marginBottom: 22,
+                marginLeft: "0.4vw",
               }}
             >
-              A Design + Curation Studio
+              STUDIO EXPERIENCE
             </motion.p>
 
-            {[
-              { text: "We design spaces", italic: false },
-              { text: "that feel", italic: true, muted: false },
-              { text: "before they function", italic: false, muted: true },
-            ].map((line, i) => (
-              <div key={i} style={{ overflow: "hidden" }}>
-                <motion.h1
-                  initial={{ y: "105%", opacity: 0 }}
-                  animate={{ y: "0%", opacity: 1 }}
-                  transition={{
-                    delay: 0.15 + i * 0.12,
-                    duration: 1.1,
-                    ease: EXPO,
-                  }}
-                  style={{
-                    fontFamily: "var(--font-bitcount)", // ✅ changed
-                    fontSize: "clamp(2.2rem, 6vw, 5.2rem)",
-                    fontWeight: 400,
-                    lineHeight: 1.04,
-                    letterSpacing: "-0.04em",
-                    fontStyle: line.italic ? "italic" : "normal",
-                    color: line.muted ? "rgba(10,10,10,0.28)" : "#0a0a0a",
-                    transform: "translateZ(0)",
-                  }}
-                >
-                  {line.text}
-                </motion.h1>
-              </div>
-            ))}
-          </div>
-
-          {/* Descriptor */}
-          <div
-            style={{
-              maxWidth: 300,
-              display: "flex",
-              flexDirection: "column",
-              gap: 12,
-            }}
-          >
-            <motion.div
-              initial={{ scaleY: 0 }}
-              animate={{ scaleY: 1 }}
-              transition={{ delay: 0.8, duration: 1, ease: EXPO }}
+            <div
               style={{
-                width: 1,
-                height: 32,
-                backgroundColor: "rgba(10,10,10,0.18)",
-                transformOrigin: "top",
-              }}
-            />
-
-            <motion.p
-              initial={{ opacity: 0, y: 14 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1, duration: 0.9, ease: EXPO }}
-              style={{
-                fontFamily: "var(--font-body)",
-                fontSize: "clamp(0.82rem, 1.1vw, 0.95rem)",
-                lineHeight: 1.7,
-                color: "rgba(10,10,10,0.45)",
+                overflow: "hidden",
+                width: "100%",
+                position: "relative",
+                zIndex: 2,
+                display: "flex",
+                justifyContent: "center",
               }}
             >
-              TEAL CULTURE blends emotion, architecture, and minimal luxury —
-              crafting environments that resonate on a deeper level.
-            </motion.p>
+              <motion.h1
+                initial={{ y: "110%", opacity: 0 }}
+                animate={{ y: "0%", opacity: 1 }}
+                transition={{
+                  delay: 0.12,
+                  duration: 1,
+                  ease: EXPO,
+                }}
+                style={{
+                  fontFamily: "var(--font-bitcount)",
+                  fontSize: "clamp(3rem, 5.8vw, 6.5rem)",
+                  lineHeight: 0.95,
+                  letterSpacing: "-0.05em",
+                  fontWeight: 400,
+                  textTransform: "uppercase",
+                  transform: "translateZ(0)",
+                  display: "flex",
+                  alignItems: "baseline",
+                  gap: "0.18em",
+                  flexWrap: "nowrap",
+                  whiteSpace: "nowrap",
+                }}
+              >
+                <span style={{ color: "#0a0a0a" }}>Making</span>
 
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 1.3, duration: 0.7 }}
-              style={{
-                fontFamily: "'DM Mono', monospace",
-                fontSize: "0.56rem",
-                letterSpacing: "0.28em",
-                textTransform: "uppercase",
-                color: "rgba(10,10,10,0.22)",
-              }}
-            >
-              Based in UAE
-            </motion.p>
+                <span style={{ color: "#0a0a0a" }}>things</span>
+
+                <span style={{ color: "rgba(10,10,10,0.32)" }}>matter.</span>
+              </motion.h1>
+            </div>
           </div>
         </div>
 
