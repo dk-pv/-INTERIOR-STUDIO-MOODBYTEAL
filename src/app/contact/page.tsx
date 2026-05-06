@@ -842,8 +842,8 @@ export default function ContactPage() {
           {[
             {
               label: "Email",
-              value: "hello@tealculture.in",
-              href: "mailto:hello@tealculture.in",
+              value: "hello@moodbyteal.com",
+              href: "mailto:hello@moodbyteal.com",
             },
             {
               label: "Phone",
@@ -852,8 +852,8 @@ export default function ContactPage() {
             },
             {
               label: "Instagram",
-              value: "@tealculture",
-              href: "https://instagram.com",
+              value: "@moodbyteal",
+              href: "https://www.instagram.com/moodbyteal?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw%3D%3D",
             },
             { label: "Location", value: "Dubai, United Arab Emirates", href: undefined },
           ].map((item) => (
