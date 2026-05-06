@@ -99,6 +99,7 @@ export default function StudioPage() {
                 justifyContent: "center",
               }}
             >
+              
               <motion.h1
                 initial={{ y: "110%", opacity: 0 }}
                 animate={{ y: "0%", opacity: 1 }}
@@ -108,7 +109,7 @@ export default function StudioPage() {
                   ease: EXPO,
                 }}
                 style={{
-                  fontFamily: "var(--font-bitcount)",
+                  fontFamily: "v",
                   fontSize: "clamp(3rem, 5.8vw, 6.5rem)",
                   lineHeight: 0.95,
                   letterSpacing: "-0.05em",
@@ -122,11 +123,13 @@ export default function StudioPage() {
                   whiteSpace: "nowrap",
                 }}
               >
-                <span style={{ color: "#0a0a0a" }}>Making</span>
+                <span style={{ color: "#0a0a0a" }}>We design spaces</span>
 
-                <span style={{ color: "#0a0a0a" }}>things</span>
+                <span style={{ color: "#0a0a0a" }}>that feel before </span>
 
-                <span style={{ color: "rgba(10,10,10,0.32)" }}>matter.</span>
+                <span style={{ color: "rgba(10,10,10,0.32)" }}>
+                  they function.
+                </span>
               </motion.h1>
             </div>
           </div>

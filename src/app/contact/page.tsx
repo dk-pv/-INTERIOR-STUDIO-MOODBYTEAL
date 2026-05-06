@@ -545,23 +545,6 @@ export default function ContactPage() {
               </motion.h1>
             </div>
           ))}
-
-          <motion.p
-            initial={{ opacity: 0, y: 16 }}
-            animate={heroInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ delay: 0.55, duration: 0.9, ease: EXPO }}
-            style={{
-              fontFamily: "var(--font-body)",
-              fontSize: "clamp(0.88rem, 1.2vw, 1rem)",
-              color: "rgba(10,10,10,0.45)",
-              lineHeight: 1.75,
-              maxWidth: 380,
-              marginTop: 18,
-            }}
-          >
-            Share your vision with us. We'll translate it into a refined,
-            emotionally resonant space that carries your identity.
-          </motion.p>
         </div>
 
         {/* Bottom rule */}
