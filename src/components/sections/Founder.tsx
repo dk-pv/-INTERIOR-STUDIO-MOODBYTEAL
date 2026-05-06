@@ -173,19 +173,6 @@ function FounderCard({
           </div>
         </motion.div>
       </div>
-
-      <p
-        style={{
-          fontFamily: "'DM Mono', monospace",
-          fontSize: "0.56rem",
-          letterSpacing: "0.2em",
-          color: "rgba(10,10,10,0.35)",
-          textTransform: "uppercase",
-          paddingTop: 10,
-        }}
-      >
-        {founder.title}
-      </p>
     </motion.div>
   );
 }
