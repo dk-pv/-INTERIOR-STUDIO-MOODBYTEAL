@@ -108,6 +108,7 @@ export default function WorkPage() {
             </motion.span>
           ))}{" "}
         </motion.div>{" "}
+        
         {/* Bottom heading block */}{" "}
         <div style={{ position: "relative", zIndex: 2 }}>
           {" "}
