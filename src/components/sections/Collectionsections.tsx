@@ -61,9 +61,8 @@ export default function CollectionSections() {
             <motion.div {...fadeUp(0)} className="tc-text-cell">
               <p className="tc-eyebrow">Selected Work</p>
               <h2 className="tc-heading">
-                INTERIOR
-                <br />
-                DESIGN
+                Interior Design
+                <br />& Fit-Out Studio
               </h2>
               <p className="tc-sub">REAL ESTATE OFFICE · UAE</p>
             </motion.div>

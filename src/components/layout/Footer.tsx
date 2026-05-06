@@ -243,12 +243,12 @@ export default function Footer() {
             United Arab Emirates
           </p>
           <a
-            href="https://www.moodbyteal.com"
+            href="mailto:hello@moodbyteal.com"
             target="_blank"
             rel="noopener noreferrer"
             className="tc-www"
           >
-            www.moodbyteal.com
+            hello@moodbyteal.com
           </a>
           <div className="tc-socials">
             {socials.map((s) => (

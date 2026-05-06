@@ -35,11 +35,6 @@ export default function About() {
           padding: "clamp(56px, 8vw, 100px) clamp(24px, 5vw, 72px)",
         }}
       >
-        {/*
-         * ── Dot grid background ──────────────────────────────────────────
-         * A subtle CSS dot pattern echoes the Bitcount font's own dot matrix,
-         * tying the typography to the surface it sits on.
-         */}
         <div
           aria-hidden
           style={{
@@ -52,11 +47,6 @@ export default function About() {
           }}
         />
 
-        {/*
-         * ── Horizontal scan-line ─────────────────────────────────────────
-         * Animates once on reveal — like a CRT or dot-matrix printer head
-         * sweeping across the section before the text "prints".
-         */}
         <motion.div
           aria-hidden
           initial={{ top: "0%", opacity: 0 }}
@@ -74,7 +64,6 @@ export default function About() {
           }}
         />
 
-        {/* ── Main content ─────────────────────────────────────────────── */}
         <div
           style={{
             position: "relative",
@@ -93,7 +82,7 @@ export default function About() {
               fontSize: "0.6rem",
               letterSpacing: "0.32em",
               textTransform: "uppercase",
-              color: "rgba(10,10,10,0.3)",
+              color: "rgba(10,10,10,0.75)",
               marginBottom: 36,
               textAlign: "center",
             }}
@@ -101,16 +90,6 @@ export default function About() {
             Our Identity
           </motion.p>
 
-          {/*
-           * ── Dot-matrix headline ──────────────────────────────────────
-           *
-           * LEGIBILITY FIX for light bg:
-           *   • Pure white (#fff) bg + pure black (#0a0a0a) text =
-           *     maximum dot-to-gap contrast.
-           *   • Muted lines use mid-grays, NOT near-invisible 0.25 opacity.
-           *   • Each line clips in left→right (printer reveal) then fades up.
-           *   • Slightly smaller size keeps the individual dots tight.
-           */}
           <h2
             style={{
               fontFamily: "'Bitcount Grid Double', monospace",
@@ -137,11 +116,6 @@ export default function About() {
                 style={{
                   display: "block",
                   color,
-                  /*
-                   * text-shadow trick: adds a faint glow around the dots
-                   * to enhance crispness on white — works like anti-aliasing
-                   * in reverse, giving each dot a sharper edge.
-                   */
                   textShadow:
                     color === "#0a0a0a" ? "0 0 1px rgba(0,0,0,0.15)" : "none",
                 }}
