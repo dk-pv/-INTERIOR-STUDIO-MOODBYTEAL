@@ -110,47 +110,78 @@ export default function StudioPage() {
             </motion.span>
           ))}{" "}
         </motion.div>{" "}
-        {/* Bottom heading block */}{" "}
-        <div style={{ position: "relative", zIndex: 2 }}>
-          {" "}
+        <div
+          style={{
+            position: "relative",
+            zIndex: 2,
+            width: "100%",
+            display: "flex",
+            justifyContent: "center",
+            marginTop: "34vh",
+          }}
+        >
           <div
-            style={{ display: "flex", alignItems: "flex-end", gap: "0.12em" }}
+            style={{
+              display: "flex",
+              flexWrap: "wrap",
+              alignItems: "flex-end",
+              justifyContent: "center",
+              rowGap: "0.02em",
+              columnGap: "0px",
+              maxWidth: "1500px",
+              textAlign: "center",
+            }}
           >
-            {" "}
-            {["We design spaces", " that feel", " before they function."].map((word, i) => (
-              <div key={i} style={{ overflow: "hidden" }}>
-                {" "}
+            {[
+              {
+                text: "We design spaces , ",
+                color: "#0a0a0a",
+              },
+
+              {
+                text: "that feel",
+                color: "rgba(10,10,10,0.42)",
+              },
+
+              {
+                text: "before they function.",
+                color: "rgba(10,10,10,0.18)",
+                italic: true,
+              },
+            ].map((item, i) => (
+              <div
+                key={i}
+                style={{
+                  overflow: "hidden",
+                  marginRight: "0.18em",
+                }}
+              >
                 <motion.h1
                   initial={{ y: "108%", opacity: 0 }}
                   animate={{ y: "0%", opacity: 1 }}
                   transition={{
                     duration: 1,
-                    delay: 0.1 + i * 0.12,
+                    delay: 0.08 + i * 0.08,
                     ease: EXPO,
                   }}
                   style={{
                     fontFamily: "var(--font-bitcount)",
-                    fontSize: "clamp(2.5rem, 6.5vw, 6rem)",
+                    fontSize: "clamp(2.8rem, 6vw, 6.8rem)",
                     fontWeight: 400,
-                    lineHeight: 1.08,
-                    letterSpacing: "-0.015em",
+                    lineHeight: 0.92,
+                    letterSpacing: "-0.025em",
                     margin: 0,
-                    color:
-                      i === 0
-                        ? "#0a0a0a"
-                        : i === 1
-                          ? "rgba(10,10,10,0.45)"
-                          : "rgba(10,10,10,0.18)",
-                    fontStyle: i === 2 ? "italic" : "normal",
+                    color: item.color,
+                    fontStyle: item.italic ? "italic" : "normal",
+                    whiteSpace: "nowrap",
                   }}
                 >
-                  {" "}
-                  {word}{" "}
-                </motion.h1>{" "}
+                  {item.text}
+                </motion.h1>
               </div>
-            ))}{" "}
-          </div>{" "}
-        </div>{" "}
+            ))}
+          </div>
+        </div>
         {/* Bottom rule */}{" "}
         <motion.div
           initial={{ scaleX: 0 }}
