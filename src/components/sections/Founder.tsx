@@ -7,18 +7,21 @@ import { motion, useInView, AnimatePresence } from "framer-motion";
 const founders = [
   {
     name: "Sahil Haneefa",
-    title: "Founder & CEO",
+    title: "Founder, CEO",
     index: "01",
+    image: "/founders/sahil-haneefa.jpeg",
   },
   {
     name: "Muhammed Rashid",
     title: "Co-Founder, Execution Director",
     index: "02",
+    image: "/founders/muhammed-rashid.jpeg",
   },
   {
     name: "Amrithapriya",
     title: "Co-Founder, Creative Director",
     index: "03",
+    image: "/founders/Amritha-priya.jpeg",
   },
 ];
 
@@ -81,7 +84,7 @@ function FounderCard({
           style={{ position: "absolute", inset: 0 }}
         >
           <Image
-            src="/images/founder.jpg"
+            src={founder.image}
             alt={`${founder.name} – MoodbyTEAL`}
             fill
             sizes="(max-width: 768px) 100vw, 33vw"
@@ -169,47 +172,6 @@ function FounderCard({
             </p>
           </div>
         </motion.div>
-      </div>
-
-      {/* ── Below image: name row ── */}
-      <div
-        style={{
-          paddingTop: 14,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          borderBottom: "1px solid rgba(10,10,10,0.1)",
-          paddingBottom: 14,
-        }}
-      >
-        <p
-          style={{
-            fontFamily: "var(--font-heading)",
-            fontSize: "clamp(0.9rem, 1.3vw, 1.1rem)",
-            letterSpacing: "-0.02em",
-            color: "#0a0a0a",
-          }}
-        >
-          {founder.name}
-        </p>
-
-        {/* Animated arrow on hover */}
-        <motion.svg
-          animate={{ x: hovered ? 4 : 0, opacity: hovered ? 1 : 0.3 }}
-          transition={{ duration: 0.3 }}
-          width="16"
-          height="16"
-          viewBox="0 0 16 16"
-          fill="none"
-        >
-          <path
-            d="M3 8h10M9 4l4 4-4 4"
-            stroke="#0a0a0a"
-            strokeWidth="1.2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </motion.svg>
       </div>
 
       <p
