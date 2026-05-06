@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import Founder from "@/components/sections/Founder";
-import Team from "@/components/sections/Team";
+// import Team from "@/components/sections/Team";
 import MoodyTealConcept from "@/components/sections/MoodyTealConcept";
 
 const EXPO = [0.16, 1, 0.3, 1] as const;
@@ -237,7 +237,7 @@ export default function StudioPage() {
       <Founder />
 
       {/* Team grid */}
-      <Team />
+      {/* <Team /> */}
     </main>
   );
 }
