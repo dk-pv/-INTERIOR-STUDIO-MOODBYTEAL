@@ -4,10 +4,10 @@ import { useRef, useEffect, useState } from "react";
 import { motion, useInView } from "framer-motion";
 
 const lines = [
-  { text: "Driven by", color: "#0a0a0a", delay: 0.1 },
-  { text: "intuition.", color: "#c0bdb5", delay: 0.55 },
-  { text: "Tone and", color: "#0a0a0a", delay: 1.0 },
-  { text: "reality.", color: "#8a8880", delay: 1.45 },
+  { text: "DRIVEN BY", color: "#0a0a0a", delay: 0.1 },
+  { text: "INTUITION.", color: "#c0bdb5", delay: 0.55 },
+  { text: "TONE AND", color: "#0a0a0a", delay: 1.0 },
+  { text: "REALITY.", color: "#8a8880", delay: 1.45 },
 ];
 
 export default function About() {
