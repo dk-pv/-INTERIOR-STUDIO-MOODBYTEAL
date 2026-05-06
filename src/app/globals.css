@@ -1,13 +1,8 @@
+@import url("https://fonts.googleapis.com/css2?family=Bitcount+Grid+Double:wght@400&display=swap");
+
+
 @import "../styles/variables.css";
 @import "tailwindcss";
-
-@font-face {
-  font-family: "Bitcount";
-  src: url("/fonts/Bitcount_Grid_Double.woff2") format("woff2");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
 
 /* ─── RESET ───────────────────────────────────── */
 *,
@@ -50,7 +45,8 @@ h6 {
 
 /* Special font */
 .font-bitcount {
-  font-family: "Bitcount", serif;
+  font-family: "Bitcount Grid Double", sans-serif !important;
+  letter-spacing: 0.06em;
 }
 
 p {
