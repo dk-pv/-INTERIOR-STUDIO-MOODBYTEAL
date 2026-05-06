@@ -6,6 +6,12 @@ import Image from "next/image";
 
 const EXPO = [0.16, 1, 0.3, 1] as const;
 
+const contactImages = [
+  "/images/contact.png",
+  "/images/contact2.jpg",
+  "/images/contact3.jpg",
+];
+
 // ─── Input Field ──────────────────────────────────────────
 function Field({
   label,
@@ -422,6 +428,7 @@ export default function ContactPage() {
   const formRef = useRef<HTMLDivElement>(null);
   const heroInView = useInView(heroRef, { once: true });
   const formInView = useInView(formRef, { once: true, margin: "-60px" });
+  const [currentImage, setCurrentImage] = useState(0);
 
   const [form, setForm] = useState({
     name: "",
@@ -430,6 +437,14 @@ export default function ContactPage() {
     message: "",
   });
   const [sent, setSent] = useState(false);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImage((prev) => (prev + 1) % contactImages.length);
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -633,12 +648,25 @@ export default function ContactPage() {
         <div
           style={{ position: "relative", overflow: "hidden", minHeight: 480 }}
         >
-          <Image
-            src="/images/contact.png"
-            alt="TEAL CULTURE Interior"
-            fill
-            style={{ objectFit: "cover" }}
-          />
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={currentImage}
+              initial={{ opacity: 0, scale: 1.04 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 1.2, ease: EXPO }}
+              style={{ position: "absolute", inset: 0 }}
+            >
+              <Image
+                src={contactImages[currentImage]}
+                alt="TEAL CULTURE Interior"
+                fill
+                style={{
+                  objectFit: "cover",
+                }}
+              />
+            </motion.div>
+          </AnimatePresence>
           <div
             style={{
               position: "absolute",
@@ -855,7 +883,11 @@ export default function ContactPage() {
               value: "@moodbyteal",
               href: "https://www.instagram.com/moodbyteal?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw%3D%3D",
             },
-            { label: "Location", value: "Dubai, United Arab Emirates", href: undefined },
+            {
+              label: "Location",
+              value: "Dubai, United Arab Emirates",
+              href: undefined,
+            },
           ].map((item) => (
             <div key={item.label}>
               <p
