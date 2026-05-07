@@ -21,8 +21,8 @@ function WipeReveal({
   return (
     <motion.div
       style={{ overflow: "hidden" }}
-      initial={{ clipPath: "inset(100% 0 0 0)" }}
-      whileInView={{ clipPath: "inset(0% 0 0 0)" }}
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
       transition={{ delay, duration: 0.85, ease }}
     >
@@ -43,7 +43,7 @@ function ImgCard({
   return (
     <WipeReveal delay={delay}>
       <div className="tc-img-cell">
-        <img src={src} alt={alt} loading="lazy" className="tc-img" />
+       <img src={src} alt={alt} className="tc-img" />
         <div className="tc-img-overlay" />
       </div>
     </WipeReveal>
@@ -213,19 +213,25 @@ const css = `
   }
 
   /* ── Image cells ── */
-  .tc-img-cell {
-    position: relative;
-    aspect-ratio: 4/5;
-    overflow: hidden;
-    background: #d8d5cf;
-  }
+ .tc-img-cell {
+  position: relative;
+  aspect-ratio: 4/5;
+  overflow: hidden;
+  background: #d8d5cf;
+  transform: translateZ(0);
+}
   .tc-img {
-    width: 100%; height: 100%;
-    object-fit: cover;
-    display: block;
-    object-position: center;
-    transition: transform 0.8s cubic-bezier(0.76,0,0.24,1);
-  }
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  object-position: center;
+  transition: transform 0.8s cubic-bezier(0.76,0,0.24,1);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
   .tc-img-cell:hover .tc-img { transform: scale(1.05); }
   .tc-img-overlay {
     position: absolute;

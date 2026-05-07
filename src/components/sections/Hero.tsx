@@ -11,32 +11,252 @@ const fadeUp = (delay = 0) => ({
   transition: { delay, duration: 0.3, ease },
 });
 
+const CORNER_LABELS = [
+  { text: "Interior Design", pos: "top-left" },
+  { text: "Turnkey Fit-out Construction", pos: "top-right" },
+  { text: "Furniture Manufacturing", pos: "bottom-left" },
+  { text: "Interior Styling", pos: "bottom-right" },
+];
+
 export default function Hero() {
   return (
     <>
-      <section
-        data-theme="dark"
-        style={{
-          position: "relative",
-          width: "100%",
-          height: "100svh",
-          minHeight: 560,
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "space-between",
-          overflow: "hidden",
-          backgroundColor: "#050505",
-        }}
-      >
-        <div
-          style={{
-            position: "absolute",
-            inset: 0,
-            width: "100%",
-            height: "100%",
-          }}
-        >
-          <div className="hidden sm:block w-full h-full">
+      <style>{`
+        /* ── Hero section ─────────────────────────────────────── */
+        .hero-section {
+          position: relative;
+          width: 100%;
+          height: 100svh;
+          min-height: 560px;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          overflow: hidden;
+          background-color: #050505;
+        }
+
+        /* ── Image layers ─────────────────────────────────────── */
+        .hero-img-wrap {
+          position: absolute;
+          inset: 0;
+          width: 100%;
+          height: 100%;
+        }
+        .hero-img-desktop { display: block; }
+        .hero-img-mobile  { display: none;  }
+
+        @media (max-width: 640px) {
+          .hero-img-desktop { display: none;  }
+          .hero-img-mobile  { display: block; }
+        }
+
+        /* ── Corner labels base ───────────────────────────────── */
+        .hero-corner-label {
+          position: absolute;
+          z-index: 20;
+          font-family: var(--font-heading);
+          font-size: clamp(0.6rem, 1.1vw, 0.85rem);
+          letter-spacing: 0.18em;
+          text-transform: uppercase;
+          color: rgba(255,255,255,0.9);
+          font-weight: 500;
+          padding: 6px 10px;
+          background: rgba(0,0,0,0.25);
+          border: 1px solid rgba(255,255,255,0.08);
+          border-radius: 6px;
+          backdrop-filter: blur(6px);
+          text-shadow: 0 2px 12px rgba(0,0,0,0.35);
+          white-space: nowrap;
+        }
+
+        /* ── Corner positions — desktop ───────────────────────── */
+        .hero-corner-label[data-pos="top-left"]     { top: clamp(70px,10vh,120px); left:  clamp(20px,3vw,48px); }
+        .hero-corner-label[data-pos="top-right"]    { top: clamp(70px,10vh,120px); right: clamp(20px,3vw,48px); text-align: right; }
+        .hero-corner-label[data-pos="bottom-left"]  { bottom: clamp(20px,3vw,48px); left:  clamp(20px,3vw,48px); }
+        .hero-corner-label[data-pos="bottom-right"] { bottom: clamp(20px,3vw,48px); right: clamp(20px,3vw,48px); text-align: right; }
+
+        /*
+         * ── Mobile corner labels ─────────────────────────────────
+         * On narrow screens the 4 corners can overlap each other.
+         * Solution: collapse to a 2×2 pill strip at the bottom.
+         */
+        @media (max-width: 540px) {
+          /* hide all corner variants */
+          .hero-corner-label { display: none; }
+
+          /* show the pill strip container */
+          .hero-labels-strip { display: flex !important; }
+        }
+
+        /* ── Mobile pill strip (hidden by default) ────────────── */
+        .hero-labels-strip {
+          display: none;
+          position: absolute;
+          bottom: clamp(56px, 12vh, 80px);
+          left: 50%;
+          transform: translateX(-50%);
+          z-index: 20;
+          flex-wrap: wrap;
+          justify-content: center;
+          gap: 6px;
+          width: calc(100% - 36px);
+          max-width: 380px;
+        }
+        .hero-labels-strip span {
+          font-family: var(--font-heading);
+          font-size: 0.52rem;
+          letter-spacing: 0.16em;
+          text-transform: uppercase;
+          color: rgba(255,255,255,0.85);
+          font-weight: 500;
+          padding: 5px 10px;
+          background: rgba(0,0,0,0.3);
+          border: 1px solid rgba(255,255,255,0.1);
+          border-radius: 20px;
+          backdrop-filter: blur(6px);
+          white-space: nowrap;
+        }
+
+        /* ── Scroll indicator ─────────────────────────────────── */
+        .hero-bottom-bar {
+          position: relative;
+          z-index: 10;
+          padding: 0 clamp(20px,5vw,64px) clamp(20px,4vh,48px);
+        }
+        .hero-rule {
+          height: 1px;
+          background: rgba(245,244,240,0.12);
+          margin-bottom: clamp(14px,2.5vh,24px);
+          transform-origin: left;
+        }
+        .hero-scroll {
+          display: flex;
+          justify-content: flex-end;
+        }
+        .hero-scroll-inner {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 8px;
+          flex-shrink: 0;
+        }
+        .hero-scroll-line {
+          width: 1px;
+          height: 28px;
+          background: rgba(245,244,240,0.35);
+          transform-origin: top;
+        }
+        .hero-scroll-text {
+          font-family: 'DM Mono', monospace;
+          font-size: 0.45rem;
+          letter-spacing: 0.26em;
+          text-transform: uppercase;
+          color: rgba(245,244,240,0.22);
+        }
+
+        /* ══════════════════════════════════════════════════════
+           INTRO / PHILOSOPHY STRIP
+        ══════════════════════════════════════════════════════ */
+        .intro-section {
+          background-color: #f5f4f0;
+          padding: clamp(32px,5vw,60px) clamp(20px,6vw,80px);
+          overflow: hidden;
+        }
+        .intro-inner {
+          max-width: 1100px;
+          margin: 0 auto;
+        }
+        .intro-label {
+          font-family: 'DM Mono', monospace;
+          font-size: 0.55rem;
+          letter-spacing: 0.28em;
+          text-transform: uppercase;
+          color: rgba(10,10,10,0.35);
+          margin-bottom: 18px;
+        }
+        .intro-rule {
+          height: 1px;
+          background: rgba(10,10,10,0.08);
+          margin-bottom: 20px;
+          transform-origin: left;
+        }
+
+        /* About + logo row */
+        .intro-heading-row {
+          display: flex;
+          align-items: center;
+          gap: 24px;
+          flex-wrap: wrap;
+          margin-bottom: clamp(10px,2vw,18px);
+        }
+        .intro-heading {
+          font-family: var(--font-heading);
+          font-size: clamp(2.4rem, 5.5vw, 4rem);
+          letter-spacing: -0.025em;
+          line-height: 1.0;
+          color: #0a0a0a;
+          font-weight: 400;
+          margin: 0;
+        }
+        .intro-logo img {
+          object-fit: contain;
+          width: clamp(160px, 28vw, 340px);
+          height: auto;
+        }
+
+        /* Body copy */
+        .intro-body {
+          max-width: 900px;
+        }
+        .intro-body p {
+          font-size: clamp(0.85rem, 1.35vw, 0.95rem);
+          color: rgba(10,10,10,0.50);
+          line-height: 1.9;
+          letter-spacing: 0.01em;
+          margin: 0 0 clamp(20px,3vw,36px);
+        }
+
+        /* ── Tablet (≤ 768px) ─────────────────────────────────── */
+        @media (max-width: 768px) {
+          .intro-heading {
+            font-size: clamp(2rem, 7vw, 3rem);
+          }
+          .intro-body p {
+            font-size: 0.9rem;
+            line-height: 1.8;
+          }
+        }
+
+        /* ── Mobile (≤ 480px) ─────────────────────────────────── */
+        @media (max-width: 480px) {
+          .intro-section {
+            padding: 40px 20px 48px;
+          }
+          .intro-heading-row {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 12px;
+          }
+          .intro-heading {
+            font-size: clamp(1.9rem, 9vw, 2.6rem);
+          }
+          .intro-body p {
+            font-size: 0.88rem;
+            line-height: 1.75;
+          }
+        }
+      `}</style>
+
+      {/* ══════════════════════════════════════
+          HERO
+      ══════════════════════════════════════ */}
+      <section data-theme="dark" className="hero-section">
+        {/* Background images */}
+        <div className="hero-img-wrap">
+          <div
+            className="hero-img-desktop"
+            style={{ width: "100%", height: "100%", position: "relative" }}
+          >
             <Image
               src="/hero-desktop.png"
               alt="MOODbyTEAL interior"
@@ -46,7 +266,10 @@ export default function Hero() {
               style={{ objectFit: "cover", objectPosition: "center center" }}
             />
           </div>
-          <div className="block sm:hidden w-full h-full">
+          <div
+            className="hero-img-mobile"
+            style={{ width: "100%", height: "100%", position: "relative" }}
+          >
             <Image
               src="/hero-mobile.png"
               alt="MOODbyTEAL interior mobile"
@@ -58,123 +281,66 @@ export default function Hero() {
           </div>
         </div>
 
-        {[
-          { text: "Interior Design", pos: "top-left" },
-          { text: "Turnkey Fit-out Construction", pos: "top-right" },
-          { text: "Furniture Manufacturing", pos: "bottom-left" },
-          { text: "Interior Styling", pos: "bottom-right" },
-        ].map((item, i) => {
-          const edge = "clamp(20px, 3vw, 48px)";
-          const topOffset = "clamp(70px, 10vh, 120px)";
-          const pos =
-            item.pos === "top-left"
-              ? { top: topOffset, left: edge }
-              : item.pos === "top-right"
-                ? { top: topOffset, right: edge, textAlign: "right" as const }
-                : item.pos === "bottom-left"
-                  ? { bottom: edge, left: edge }
-                  : {
-                      bottom: edge,
-                      right: edge,
-                      textAlign: "right" as const,
-                    };
-          return (
-            <motion.div
-              key={item.text}
-              initial={{ opacity: 0, y: 20, scale: 0.95 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              transition={{ delay: 0.5 + i * 0.2, duration: 0.8, ease }}
-              style={{
-                position: "absolute",
-                zIndex: 20,
-                fontFamily: "var(--font-heading)",
-                fontSize: "clamp(0.7rem, 1vw, 0.85rem)",
-                letterSpacing: "0.18em",
-                textTransform: "uppercase",
-                color: "rgba(255,255,255,0.9)",
-                fontWeight: 500,
+        {/* ── Corner labels — desktop/tablet ── */}
+        {CORNER_LABELS.map((item, i) => (
+          <motion.div
+            key={item.text}
+            data-pos={item.pos}
+            className="hero-corner-label"
+            initial={{ opacity: 0, y: 20, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ delay: 0.5 + i * 0.2, duration: 0.8, ease }}
+          >
+            {item.text}
+          </motion.div>
+        ))}
 
-                padding: "6px 10px",
-                background: "rgba(0,0,0,0.25)",
-                border: "1px solid rgba(255,255,255,0.08)",
-                borderRadius: "6px",
-                backdropFilter: "blur(6px)",
+        {/* ── Labels pill strip — mobile only ── */}
+        <motion.div
+          className="hero-labels-strip"
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.6, duration: 0.8, ease }}
+        >
+          {CORNER_LABELS.map((item) => (
+            <span key={item.text}>{item.text}</span>
+          ))}
+        </motion.div>
 
-                textShadow: "0 2px 12px rgba(0,0,0,0.35)",
-
-                ...pos,
-              }}
-            >
-              {item.text}
-            </motion.div>
-          );
-        })}
-
+        {/* Spacer top */}
         <div
           style={{
             position: "relative",
             zIndex: 10,
-            display: "flex",
-            padding: "clamp(14px, 3vw, 28px) clamp(20px, 5vw, 64px)",
+            padding: "clamp(14px,3vw,28px) clamp(20px,5vw,64px)",
           }}
         />
 
-        <div
-          style={{
-            position: "relative",
-            zIndex: 10,
-            padding: "0 clamp(20px, 5vw, 64px) clamp(20px, 4vh, 48px)",
-          }}
-        >
+        {/* Bottom scroll indicator */}
+        <div className="hero-bottom-bar">
           <motion.div
+            className="hero-rule"
             initial={{ scaleX: 0 }}
             animate={{ scaleX: 1 }}
             transition={{ duration: 1.1, delay: 0.4, ease }}
-            style={{
-              height: 1,
-              background: "rgba(245,244,240,0.12)",
-              marginBottom: "clamp(14px, 2.5vh, 24px)",
-              transformOrigin: "left",
-            }}
           />
-          <div style={{ display: "flex", justifyContent: "flex-end" }}>
+          <div className="hero-scroll">
             <motion.div
+              className="hero-scroll-inner"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 1.1 }}
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                gap: 8,
-                flexShrink: 0,
-              }}
             >
               <motion.div
+                className="hero-scroll-line"
                 animate={{ scaleY: [0, 1, 0] }}
                 transition={{
                   repeat: Infinity,
                   duration: 1.8,
                   ease: "easeInOut",
                 }}
-                style={{
-                  width: 1,
-                  height: 28,
-                  background: "rgba(245,244,240,0.35)",
-                  transformOrigin: "top",
-                }}
               />
-              <span
-                style={{
-                  fontFamily: "'DM Mono', monospace",
-                  fontSize: "0.45rem",
-                  letterSpacing: "0.26em",
-                  textTransform: "uppercase",
-                  color: "rgba(245,244,240,0.22)",
-                }}
-              >
-                Scroll
-              </span>
+              <span className="hero-scroll-text">Scroll</span>
             </motion.div>
           </div>
         </div>
@@ -183,69 +349,27 @@ export default function Hero() {
       {/* ══════════════════════════════════════
           INTRO / PHILOSOPHY STRIP
       ══════════════════════════════════════ */}
-      <section
-        data-theme="light"
-        style={{
-          backgroundColor: "#f5f4f0",
-          padding: "clamp(32px, 5vw, 60px) clamp(20px, 6vw, 80px)",
-          overflow: "hidden",
-        }}
-      >
-        <div style={{ maxWidth: 1100, margin: "0 auto" }}>
-          {/* ── OUR PHILOSOPHY label — ✅ spread, no variants prop ── */}
-          <motion.p
-            {...fadeUp(0)}
-            style={{
-              fontFamily: "'DM Mono', monospace",
-              fontSize: "0.55rem",
-              letterSpacing: "0.28em",
-              textTransform: "uppercase",
-              color: "rgba(10,10,10,0.35)",
-              marginBottom: 18,
-            }}
-          >
+      <section data-theme="light" className="intro-section">
+        <div className="intro-inner">
+          {/* Label */}
+          <motion.p className="intro-label" {...fadeUp(0)}>
             Our Philosophy
           </motion.p>
 
-          {/* ── Animated rule ── */}
+          {/* Animated rule */}
           <motion.div
+            className="intro-rule"
             initial={{ scaleX: 0 }}
             whileInView={{ scaleX: 1 }}
             transition={{ duration: 0.9, delay: 0.05, ease }}
-            style={{
-              height: 1,
-              background: "rgba(10,10,10,0.08)",
-              marginBottom: 20,
-              transformOrigin: "left",
-            }}
           />
 
-          {/* ── About + Logo row — ✅ spread ── */}
-          <motion.div
-            {...fadeUp(0.05)}
-            style={{
-              display: "flex",
-              alignItems: "center",
-              gap: "24px",
-              flexWrap: "wrap",
-              marginBottom: "clamp(10px, 2vw, 18px)",
-            }}
-          >
-            <h2
-              style={{
-                fontFamily: "var(--font-heading)",
-                fontSize: "clamp(2.4rem, 5.5vw, 4rem)",
-                letterSpacing: "-0.025em",
-                lineHeight: 1.0,
-                color: "#0a0a0a",
-                fontWeight: 400,
-                margin: 0,
-              }}
-            >
-              About
-            </h2>
+          {/* About + Logo row */}
+          <motion.div className="intro-heading-row" {...fadeUp(0.05)}>
+            <h2 className="intro-heading">About</h2>
 
             <motion.div
+              className="intro-logo"
               initial={{ opacity: 0, x: -12 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
@@ -256,22 +380,18 @@ export default function Hero() {
                 alt="Teal Culture Logo"
                 width={340}
                 height={90}
-                style={{ objectFit: "contain" }}
+                style={{
+                  objectFit: "contain",
+                  width: "clamp(160px, 28vw, 340px)",
+                  height: "auto",
+                }}
               />
             </motion.div>
           </motion.div>
 
-          {/* ── Body + CTA — ✅ spread ── */}
-          <motion.div {...fadeUp(0.1)} style={{ maxWidth: 900 }}>
-            <p
-              style={{
-                fontSize: "clamp(0.85rem, 1.35vw, 0.95rem)",
-                color: "rgba(10,10,10,0.50)",
-                lineHeight: 1.9,
-                letterSpacing: "0.01em",
-                margin: "0 0 clamp(20px, 3vw, 36px) 0",
-              }}
-            >
+          {/* Body + CTA */}
+          <motion.div className="intro-body" {...fadeUp(0.1)}>
+            <p>
               Teal Culture emerges within India and the United Arab Emirates as
               a convergence of architecture, interiors, and Artificial
               Intelligence. Built form is experienced as a continuous spatial
@@ -300,4 +420,3 @@ export default function Hero() {
     </>
   );
 }
-
