@@ -5,7 +5,7 @@ import { motion, useInView } from "framer-motion";
 
 const lines = [
   { text: "DRIVEN BY", color: "#0a0a0a", delay: 0.1 },
-  { text: "INTUITION.", color: "#c0bdb5", delay: 0.55 },
+  { text: "INTUITION", color: "#c0bdb5", delay: 0.55 },
   { text: "TONE AND", color: "#0a0a0a", delay: 1.0 },
   { text: "REALITY.", color: "#8a8880", delay: 1.45 },
 ];
