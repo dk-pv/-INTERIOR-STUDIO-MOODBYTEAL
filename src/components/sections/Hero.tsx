@@ -81,41 +81,59 @@ export default function Hero() {
          * Solution: collapse to a 2×2 pill strip at the bottom.
          */
         @media (max-width: 540px) {
-          /* hide all corner variants */
-          .hero-corner-label { display: none; }
+  .hero-corner-label {
+    display: none;
+  }
 
-          /* show the pill strip container */
-          .hero-labels-strip { display: flex !important; }
-        }
+  .hero-labels-strip {
+    display: flex;
+  }
+}
 
         /* ── Mobile pill strip (hidden by default) ────────────── */
-        .hero-labels-strip {
-          display: none;
-          position: absolute;
-          bottom: clamp(56px, 12vh, 80px);
-          left: 50%;
-          transform: translateX(-50%);
-          z-index: 20;
-          flex-wrap: wrap;
-          justify-content: center;
-          gap: 6px;
-          width: calc(100% - 36px);
-          max-width: 380px;
-        }
-        .hero-labels-strip span {
-          font-family: var(--font-heading);
-          font-size: 0.52rem;
-          letter-spacing: 0.16em;
-          text-transform: uppercase;
-          color: rgba(255,255,255,0.85);
-          font-weight: 500;
-          padding: 5px 10px;
-          background: rgba(0,0,0,0.3);
-          border: 1px solid rgba(255,255,255,0.1);
-          border-radius: 20px;
-          backdrop-filter: blur(6px);
-          white-space: nowrap;
-        }
+        /* ── Mobile pill strip ───────────────────────────── */
+.hero-labels-strip {
+  display: none;
+  position: absolute;
+  bottom: clamp(52px, 10vh, 74px);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 20;
+
+  width: calc(100% - 28px);
+  max-width: 420px;
+
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+
+  gap: 8px;
+  padding: 0 6px;
+}
+
+.hero-labels-strip span {
+  font-family: var(--font-heading);
+  font-size: 0.5rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.88);
+  font-weight: 500;
+
+  padding: 7px 12px;
+
+  background: rgba(0,0,0,0.34);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 999px;
+
+  backdrop-filter: blur(8px);
+
+  white-space: normal;
+  text-align: center;
+  line-height: 1.35;
+
+  max-width: 48%;
+}
 
         /* ── Scroll indicator ─────────────────────────────────── */
         .hero-bottom-bar {
