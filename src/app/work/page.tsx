@@ -93,7 +93,7 @@ export default function WorkPage() {
           overflow: hidden;
         }
         .work-headline-h1 {
-          font-family: var(--font-bitcount);
+          font-family: var(--font-heading);
           font-size: clamp(2.4rem, 6vw, 6rem);
           font-weight: 400;
           line-height: 1.08;

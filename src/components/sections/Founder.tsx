@@ -9,7 +9,7 @@ const founders = [
     name: "Sahil Haneefa",
     title: "Founder, CEO",
     index: "01",
-    image: "/founders/sahil-haneefa.jpeg",
+    image: "/founders/sahil-haneefa.png",
   },
   {
     name: "Muhammed Rashid",

@@ -466,13 +466,11 @@ export default function Navbar() {
               src="/logo-white.png"
               alt="Teal Culture Logo"
               style={{
-                height: "clamp(32px, 4vw, 52px)", 
+                height: "15px",
                 width: "auto",
                 objectFit: "contain",
-
                 filter: isLight ? "invert(1)" : "none",
                 transition: "filter 0.3s ease",
-
                 transform: "translateY(1px)",
               }}
             />

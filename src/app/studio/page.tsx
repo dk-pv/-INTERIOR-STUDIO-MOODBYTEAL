@@ -102,7 +102,7 @@ export default function StudioPage() {
           overflow: hidden;
         }
         .studio-headline-h1 {
-          font-family: var(--font-bitcount);
+          font-family: var(--font-heading);
           font-size: clamp(2.2rem, 5.5vw, 6.8rem);
           font-weight: 400;
           line-height: 0.92;
