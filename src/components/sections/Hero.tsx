@@ -13,10 +13,10 @@ const fadeUp = (delay = 0) => ({
 });
 
 const SERVICES = [
-  { num: "01", label: "Interior\nDesign" },
-  { num: "02", label: "Turnkey\nFit-out Construction" },
+  { num: "01", label: "Interior Design" },
+  { num: "02", label: "Turnkey  Fit-out \n Construction" },
   { num: "03", label: "Furniture\nManufacturing" },
-  { num: "04", label: "Interior\nStyling" },
+  { num: "04", label: "Interior Styling" },
 ];
 
 export default function Hero() {
@@ -171,19 +171,35 @@ export default function Hero() {
         }
         .svc-label {
           font-family: var(--font-heading);
-          font-size: clamp(0.7rem, 1vw, 0.88rem);
-          letter-spacing: 0.16em;
+          font-size: clamp(0.95rem, 1.35vw, 1.35rem);
+          letter-spacing: -0.03em;
           text-transform: uppercase;
-          font-weight: 400;
-          line-height: 1.6;
+          font-weight: 700;
+          line-height: 1.08;
           white-space: pre-line;
-          position: relative; z-index: 1;
-          animation: cardGlow 4.2s ease-in-out infinite;
+          position: relative;
+          z-index: 1;
+
+          color: rgba(255,255,255,0.92);
+
+          text-shadow:
+            0 0 18px rgba(255,255,255,0.10),
+            0 0 42px rgba(255,255,255,0.05);
+
+          transition:
+            transform 0.45s cubic-bezier(0.16,1,0.3,1),
+            color 0.45s ease,
+            text-shadow 0.45s ease;
         }
-        .svc-card:nth-child(1) .svc-label { animation-delay: 0s;    }
-        .svc-card:nth-child(2) .svc-label { animation-delay: 1.05s; }
-        .svc-card:nth-child(3) .svc-label { animation-delay: 2.1s;  }
-        .svc-card:nth-child(4) .svc-label { animation-delay: 3.15s; }
+                .svc-card:hover .svc-label {
+         transform: translateY(-1px) scale(1.01);
+
+          color: rgba(255,255,255,1);
+
+          text-shadow:
+            0 0 24px rgba(255,255,255,0.22),
+            0 0 60px rgba(255,255,255,0.12);
+        }
 
         @keyframes cardGlow {
           0%,  100% {
