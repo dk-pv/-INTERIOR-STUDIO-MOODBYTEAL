@@ -2,14 +2,19 @@
 
 import { useRef, useState, useEffect } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
+
 import Image from "next/image";
+import emailjs from "@emailjs/browser";
 
 const EXPO = [0.16, 1, 0.3, 1] as const;
 
 const contactImages = [
-  "/images/contact.png",
-  "/images/contact2.jpg",
-  "/images/contact3.jpg",
+  "/projects/Private-Interior/Green-View-3/1.png",
+  "/projects/Private-Interior/Green-View-3/main.png",
+  "/projects/Commercial-Interior/Aspin-Commercial-Tower/1.webp",
+  "/projects/Commercial-Interior/CULT-THRIFT-STORE/1.webp",
+  "/projects/Apartment-Interior/Hive-JVC/1.webp",
+  "/projects/Villa-Interior/Club-Villas-at-Dubai/1.png",
 ];
 
 // ─── Input Field ──────────────────────────────────────────
@@ -370,12 +375,14 @@ export default function ContactPage() {
   const formInView = useInView(formRef, { once: true, margin: "-60px" });
   const [currentImage, setCurrentImage] = useState(0);
   const [form, setForm] = useState({
-    name: "",
-    email: "",
-    type: "",
+    from_name: "",
+    from_email: "",
+    phone: "",
     message: "",
   });
   const [sent, setSent] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     const id = setInterval(
@@ -385,11 +392,39 @@ export default function ContactPage() {
     return () => clearInterval(id);
   }, []);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const mailto = `mailto:hello@tealculture.in?subject=Project Inquiry from ${form.name}&body=Name: ${form.name}%0AEmail: ${form.email}%0AProject Type: ${form.type}%0A%0A${form.message}`;
-    window.location.href = mailto;
-    setSent(true);
+
+    setLoading(true);
+    setError(false);
+
+    try {
+      await emailjs.send(
+        "service_6uslaco",
+        "template_iryo5tt",
+        {
+          from_name: form.from_name,
+          from_email: form.from_email,
+          phone: form.phone,
+          message: form.message,
+        },
+        "LrX8-Y_dvWZcG3Aop",
+      );
+
+      setSent(true);
+
+      setForm({
+        from_name: "",
+        from_email: "",
+        phone: "",
+        message: "",
+      });
+    } catch (err) {
+      console.log(err);
+      setError(true);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -879,21 +914,21 @@ export default function ContactPage() {
                   <Field
                     label="Full Name"
                     placeholder="Your name"
-                    value={form.name}
-                    onChange={(v) => setForm({ ...form, name: v })}
+                    value={form.from_name}
+                    onChange={(v) => setForm({ ...form, from_name: v })}
                   />
                   <Field
                     label="Email Address"
                     type="email"
                     placeholder="you@example.com"
-                    value={form.email}
-                    onChange={(v) => setForm({ ...form, email: v })}
+                    value={form.from_email}
+                    onChange={(v) => setForm({ ...form, from_email: v })}
                   />
                   <Field
-                    label="Project Type"
-                    placeholder="Villa / Apartment / Commercial..."
-                    value={form.type}
-                    onChange={(v) => setForm({ ...form, type: v })}
+                    label="Phone Number"
+                    placeholder="+971..."
+                    value={form.phone}
+                    onChange={(v) => setForm({ ...form, phone: v })}
                   />
                   <Field
                     label="Project Details"
@@ -920,8 +955,18 @@ export default function ContactPage() {
                       width: "100%",
                     }}
                   >
-                    Send Enquiry →
+                    {loading ? "Sending..." : "Send Enquiry →"}
                   </motion.button>
+                  {error && (
+                    <p
+                      style={{
+                        color: "#dc2626",
+                        fontSize: "0.85rem",
+                      }}
+                    >
+                      Failed to send enquiry. Please try again.
+                    </p>
+                  )}
                 </motion.form>
               )}
             </div>
